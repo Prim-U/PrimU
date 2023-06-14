@@ -1,8 +1,31 @@
-import React from 'react'
-import NavbarAuth from '../common/NavbarAuth'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import NavbarAuth from '../../common/NavbarAuth'
+import { Link, useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase/firebase';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  async function onFormSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const userCred = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(userCred);
+      navigate('/');
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
@@ -17,7 +40,7 @@ export default function Login() {
         <div className="card p-5 mx-5">
           <h1 className='mb-3'>Login to your account</h1>
 
-          <form>
+          <form onSubmit={onFormSubmit}>
 
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
@@ -30,6 +53,8 @@ export default function Login() {
                 aria-describedby="emailHelp"
                 placeholder="Email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -42,6 +67,8 @@ export default function Login() {
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>

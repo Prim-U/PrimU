@@ -26,29 +26,30 @@ export default function NavbarAuth() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="http://localhost:3000/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Products
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Book Services
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  FAQ/Customer Support
-                </a>
-              </li>
+            <ul className="navbar-nav ms-auto">
+              <Link className="nav-link active" to="/">
+                Home
+              </Link>
+              <Link className="nav-link active">Products</Link>
+              <Link className="nav-link active">Book Services</Link>
+              <Link className="nav-link active" to="/profile">
+                Account
+              </Link>
+              <Link className="nav-link active">FAQ/Customer Support</Link>
             </ul>
           </div>
+
+          <form className="d-flex ms-2">
+            <button className="search-button me-1" type="submit">
+              <i className="bi bi-search"></i>
+            </button>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search products"
+              aria-label="Search"
+            />
+          </form>
         </div>
       </nav>
     </div>

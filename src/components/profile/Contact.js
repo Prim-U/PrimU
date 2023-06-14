@@ -1,7 +1,7 @@
 import React from "react";
-import NavbarAuth from "../common/NavbarAuth";
+import NavbarAuth from "../../common/NavbarAuth";
 
-export default function Register() {
+export default function Contact() {
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
@@ -14,8 +14,6 @@ export default function Register() {
           alt=""
         />
         <div className="card p-5 mx-5">
-          <h1 className="mb-3">Create an account</h1>
-
           <form>
             <div className="mb-3">
               <label className="form-label">Name</label>
@@ -76,14 +74,10 @@ export default function Register() {
 
             <div className="d-grid gap-2">
               <button type="submit" className="btn btn-dark mt-3">
-                Continue
+                Update
               </button>
             </div>
           </form>
-
-          <p className="mt-3 text-center">
-            Already have an account with us? Register <a href="http://localhost:3000/login">here!</a>
-          </p>
         </div>
       </div>
     </div>
