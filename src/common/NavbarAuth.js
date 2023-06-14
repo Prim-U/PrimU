@@ -25,7 +25,7 @@ export default function NavbarAuth() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse" id="navbar">
             <ul className="navbar-nav ms-auto">
               <Link className="nav-link active" to="/">
                 Home
