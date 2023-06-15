@@ -1,12 +1,8 @@
 import React, {useState} from "react";
-
-// Functions/methods
+import NavbarAuth from "../../common/NavbarAuth";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-
-// Components
-import NavbarAuth from "../../common/Navbar";
 
 export default function Register() {
 
@@ -35,7 +31,7 @@ export default function Register() {
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container my-5 p-3">
+      <div className="container my-5">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"

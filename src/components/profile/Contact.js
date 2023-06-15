@@ -1,41 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
+import NavbarAuth from "../../common/NavbarAuth";
 
-// Functions/methods
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
-
-// Components
-import NavbarAuth from "../../common/Navbar";
-
-export default function Register() {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const navigate = useNavigate();
-
-  async function onFormSubmit(e) {
-    e.preventDefault();
-
-    try {
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCred);
-      navigate('/');
-      document.getElementById('registerButton').disabled = true;
-    } catch (err) {
-      alert(err.message);
-    }
-  }
-
+export default function Contact() {
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container my-5 p-3">
+      <div className="container my-5">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -44,9 +14,26 @@ export default function Register() {
           alt=""
         />
         <div className="card p-5 mx-5">
-          <h1 className="mb-3">Create an account</h1>
+          <form>
+            <div className="mb-3">
+              <label className="form-label">Name</label>
+              <input
+                type="name"
+                className="form-control"
+                placeholder="Name"
+                required
+              />
+            </div>
 
-          <form onSubmit={onFormSubmit} autoComplete="false">
+            <div className="mb-3">
+              <label className="form-label">Phone Number</label>
+              <input
+                type="n"
+                className="form-control"
+                placeholder="Phone Number"
+                required
+              />
+            </div>
 
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
@@ -58,8 +45,6 @@ export default function Register() {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -73,8 +58,6 @@ export default function Register() {
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -90,15 +73,11 @@ export default function Register() {
             </div>
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3" id="registerButton">
-                Continue
+              <button type="submit" className="btn btn-dark mt-3">
+                Update
               </button>
             </div>
           </form>
-
-          <p className="mt-3 text-center">
-            Already have an account with us? Register <a href="http://localhost:3000/login">here!</a>
-          </p>
         </div>
       </div>
     </div>

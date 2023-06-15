@@ -1,15 +1,10 @@
-import React, {useState} from "react";
+import React, {useState} from 'react'
+import NavbarAuth from '../../common/NavbarAuth'
+import { Link, useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase/firebase';
 
-// Functions/methods
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
-
-// Components
-import NavbarAuth from "../../common/Navbar";
-
-export default function Register() {
-
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,14 +14,13 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const userCred = await createUserWithEmailAndPassword(
+      const userCred = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
       console.log(userCred);
       navigate('/');
-      document.getElementById('registerButton').disabled = true;
     } catch (err) {
       alert(err.message);
     }
@@ -35,7 +29,7 @@ export default function Register() {
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container my-5 p-3">
+      <div className="container my-5">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -44,9 +38,9 @@ export default function Register() {
           alt=""
         />
         <div className="card p-5 mx-5">
-          <h1 className="mb-3">Create an account</h1>
+          <h1 className='mb-3'>Login to your account</h1>
 
-          <form onSubmit={onFormSubmit} autoComplete="false">
+          <form onSubmit={onFormSubmit}>
 
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
@@ -58,9 +52,9 @@ export default function Register() {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Email"
+                required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
               />
             </div>
 
@@ -79,28 +73,19 @@ export default function Register() {
               />
             </div>
 
-            <div className="mb-3">
-              <label className="form-label">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Confirm Password"
-                required
-              />
-            </div>
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3" id="registerButton">
+              <button type="submit" className="btn btn-dark mt-3">
                 Continue
               </button>
             </div>
           </form>
 
           <p className="mt-3 text-center">
-            Already have an account with us? Register <a href="http://localhost:3000/login">here!</a>
+            Don't have an account? Create one <Link to="/register">here!</Link>
           </p>
         </div>
       </div>
     </div>
-  );
+  )
 }
