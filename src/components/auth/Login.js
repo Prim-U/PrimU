@@ -1,5 +1,10 @@
+// React
 import React, {useState} from 'react'
-import NavbarAuth from '../../common/NavbarAuth'
+
+// Common
+import NavbarAuth from '../../common/Navbar'
+
+// Functions/methods
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebase';

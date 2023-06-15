@@ -1,7 +1,12 @@
 import React from "react";
+
+// Functions/methods
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { Link } from "react-router-dom";
+
+// Stylesheet
+import './TopBar.css'
 
 export default function TopBar(props) {
   async function onLogoutClicked() {
@@ -14,7 +19,7 @@ export default function TopBar(props) {
           {props.user ? (
             <>
               <div className="align-middle me-auto">
-                <p className="align-middle"><i class="bi bi-person-fill"></i> {props.user.email}</p>
+                <p className="align-middle"><i class="bi bi-person-fill"></i> {props.user.displayName}</p>
               </div>
               <button className="btn btn-dark" onClick={onLogoutClicked}>
                 Logout

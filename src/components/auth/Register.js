@@ -1,8 +1,12 @@
 import React, {useState} from "react";
-import NavbarAuth from "../../common/NavbarAuth";
+
+// Functions/methods
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+
+// Components
+import NavbarAuth from "../../common/Navbar";
 
 export default function Register() {
 
