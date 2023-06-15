@@ -8,7 +8,7 @@ import './Navbar.css';
 
 export default function NavbarAuth() {
   return (
-    <div className="p-3 bg-light">
+    <div className="bg-light" id="nav-padding">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="http://localhost:3000/">
@@ -20,7 +20,7 @@ export default function NavbarAuth() {
             />
           </a>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler bg-light"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -41,11 +41,11 @@ export default function NavbarAuth() {
                 <Link className="nav-link active">Products</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active">Book Services</Link>
+                <Link className="nav-link active" to='/make-booking'>Make a Booking</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link active" to="/account">
-                  Account
+                  My Account
                 </Link>
               </li>
               <li className="nav-item">
@@ -54,17 +54,6 @@ export default function NavbarAuth() {
             </ul>
           </div>
 
-          <form className="d-flex ms-2">
-            <button className="search-button me-1" type="submit">
-              <i className="bi bi-search"></i>
-            </button>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search products"
-              aria-label="Search"
-            />
-          </form>
         </div>
       </nav>
     </div>

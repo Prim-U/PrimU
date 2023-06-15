@@ -34,10 +34,12 @@ export default function Contact() {
     console.log(user.password);
   }
 
+  console.log(user);
+
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container mt-5">
+      <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -58,8 +60,6 @@ export default function Contact() {
                 onChange={(e) => setUpdateName(e.target.value)}
               />
             </div>
-
-            <button onClick={TestUser}>Test</button>
 
             <div className="mb-3">
               <label className="form-label">Phone Number</label>
