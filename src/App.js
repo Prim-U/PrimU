@@ -1,26 +1,32 @@
+// Dependencies
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import 'font-awesome/css/font-awesome.min.css';
+
+
+// Compenents
 import HomePage from "./components/HomePage";
 import Register from "./components/auth/Register";
-import Navbar from "./common/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/auth/Login";
-import Profile from "./components/profile/Profile";
+import TopBar from "./common/TopBar";import Login from "./components/auth/Login";
+import Account from "./components/profile/Account";
 import Contact from "./components/profile/Contact";
+
+// Import functions/methods
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
-import TopBar from "./common/TopBar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BookingPage from "./components/booking/BookingPage";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [isUserUpdated, setIsUserUpdated] = useState(false);
+  // const [isUserUpdated, setIsUserUpdated] = useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setIsUserUpdated(true);
+      // setIsUserUpdated(true);
     });
   }, []);
 
@@ -31,8 +37,9 @@ function App() {
         <Route path="/" element={<HomePage user={user} />}></Route>
         <Route path="/register" element={<Register user={user} />}></Route>
         <Route path="/login" element={<Login user={user} />}></Route>
-        <Route path="/profile" element={<Profile user={user} />}></Route>
-        <Route path="/contact-info" element={<Contact user={user} />}></Route>
+        <Route path="/account" element={<Account user={user} />}></Route>
+        <Route path="/account/contact-info" element={<Contact user={user} />}></Route>
+        <Route path="/make-booking" element={<BookingPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
