@@ -2,6 +2,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import 'font-awesome/css/font-awesome.min.css';
+
 
 // Compenents
 import HomePage from "./components/HomePage";
@@ -15,7 +17,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import BookingPage from "./components/booking/BookingPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,6 +39,7 @@ function App() {
         <Route path="/login" element={<Login user={user} />}></Route>
         <Route path="/account" element={<Account user={user} />}></Route>
         <Route path="/account/contact-info" element={<Contact user={user} />}></Route>
+        <Route path="/make-booking" element={<BookingPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
