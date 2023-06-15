@@ -30,10 +30,10 @@ export default function Navbar() {
               <Link className="nav-link active" to="/">
                 Home
               </Link>
-              <Link className="nav-link active">Products</Link>
-              <Link className="nav-link active">Book Services</Link>
+              <Link className="nav-link active">Producs</Link>
+              <Link className="nav-link active">Book Service</Link>
               <Link className="nav-link active" to="/profile">
-                Profile
+                Profiles
               </Link>
               <Link className="nav-link active">FAQ/Customer Support</Link>
             </ul>
