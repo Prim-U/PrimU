@@ -8,13 +8,16 @@ import { auth } from "../../firebase/firebase";
 import { updateEmail, updatePhoneNumber, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+// Services
+import UserService from "../../services/user-service";
+
 export default function Contact() {
   const [changeEmail, setChangeEmail] = useState("");
   const [updateName, setUpdateName] = useState("");
   //const [updatePhone, setUpdatePhone] = useState("");
 
-  const user = auth.currentUser;
   const navigate = useNavigate();
+  const user = auth.currentUser
 
   async function onFormSubmit(e) {
     e.preventDefault();
@@ -22,19 +25,14 @@ export default function Contact() {
       await updateEmail(user, changeEmail);
       await updateProfile(user, { displayName: updateName });
       //await updatePhoneNumber(user, updatePhone );
-      navigate("/profile");
-      window.location.reload();
+      await UserService.updateProfile(user);
+
+      navigate("/account");
     } catch (error) {
       alert(error.message);
     }
   }
 
-  function TestUser() {
-    console.log(user);
-    console.log(user.password);
-  }
-
-  console.log(user);
 
   return (
     <div className="bg-dark">
@@ -89,7 +87,11 @@ export default function Contact() {
             </div>
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3" id="updateButton">
+              <button
+                type="submit"
+                className="btn btn-dark mt-3"
+                id="updateButton"
+              >
                 Update
               </button>
             </div>

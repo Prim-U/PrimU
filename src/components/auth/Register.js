@@ -1,17 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 // Functions/methods
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 
 // Components
 import NavbarAuth from "../../common/Navbar";
 
-export default function Register() {
+// Models
+import { User } from "../../models/Users";
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+// Services
+import UserService from "../../services/user-service";
+
+export default function Register(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
 
@@ -24,9 +31,14 @@ export default function Register() {
         email,
         password
       );
-      console.log(userCred);
-      navigate('/');
-      document.getElementById('registerButton').disabled = true;
+      const newUser = await UserService.addUser(new User(name, email, userCred.user.uid));
+      setUsers([...users, newUser])
+      console.log(users);
+      updateProfile(userCred.user, {
+        displayName: name,
+      });
+
+      navigate("/");
     } catch (err) {
       alert(err.message);
     }
@@ -47,6 +59,17 @@ export default function Register() {
           <h1 className="mb-3">Create an account</h1>
 
           <form onSubmit={onFormSubmit} autoComplete="false">
+            <div className="mb-3">
+              <label className="form-label">Name</label>
+              <input
+                type="name"
+                className="form-control"
+                placeholder="Name"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
 
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
@@ -90,14 +113,19 @@ export default function Register() {
             </div>
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3" id="registerButton">
+              <button
+                type="submit"
+                className="btn btn-dark mt-3"
+                id="registerButton"
+              >
                 Continue
               </button>
             </div>
           </form>
 
           <p className="mt-3 text-center">
-            Already have an account with us? Register <a href="http://localhost:3000/login">here!</a>
+            Already have an account with us? Login{" "}
+            <a href="http://localhost:3000/login">here!</a>
           </p>
         </div>
       </div>

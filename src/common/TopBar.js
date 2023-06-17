@@ -1,7 +1,7 @@
 import React from "react";
 
 // Functions/methods
-import { signOut } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import "./TopBar.css";
 
 export default function TopBar(props) {
+  const user = auth.currentUser;
   async function onLogoutClicked() {
     await signOut(auth);
   }
@@ -20,7 +21,7 @@ export default function TopBar(props) {
             <>
               <div className="align-middle me-auto">
                 <p className="align-middle">
-                  <i class="bi bi-person-fill"></i> Welcome, {props.user.displayName}
+                  <i class="bi bi-person-fill"></i> Welcome, {user.displayName}
                 </p>
               </div>
               <button className="btn btn-dark" onClick={onLogoutClicked}>
@@ -42,7 +43,6 @@ export default function TopBar(props) {
 
       <div className="middle-bar">
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          
           <form className="d-flex ms-2">
             <button className="search-button me-1" type="submit">
               <i className="bi bi-search"></i>
@@ -58,7 +58,6 @@ export default function TopBar(props) {
           <button className="bag-button me-3" id="bag-btn">
             <i class="bi bi-bag"></i>
           </button>
-
         </div>
       </div>
     </div>
