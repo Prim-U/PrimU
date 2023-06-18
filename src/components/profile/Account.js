@@ -32,7 +32,10 @@ export default function Account() {
         </button>
       </Link>
 
-      <Link className="text-decoration-none d-grid gap-2 col-6 mx-auto">
+      <Link
+        to="/account/payment"
+        className="text-decoration-none d-grid gap-2 col-6 mx-auto"
+      >
         <button className="btn btn-dark mx-2 mt-2" id="payment-btn">
           <h3 className="text-start">
             Payment <i class="bi bi-credit-card-2-back-fill"></i>
@@ -42,8 +45,11 @@ export default function Account() {
           </p>
         </button>
       </Link>
-      
-      <Link to="/account/addresses" className="text-decoration-none d-grid gap-2 col-6 mx-auto">
+
+      <Link
+        to="/account/addresses"
+        className="text-decoration-none d-grid gap-2 col-6 mx-auto"
+      >
         <button className="btn btn-dark mx-2 mt-2" id="payment-btn">
           <h3 className="text-start">
             Addresses <i class="bi bi-house-fill"></i>

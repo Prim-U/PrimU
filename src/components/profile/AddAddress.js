@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import NavbarAuth from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { Address } from "../../models/AddressModel";
-import { async } from "@firebase/util";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 
-export default function AddAddress() {
+export default function AddAddress(props) {
   const [loading, setLoading] = useState(false);
   const [street, setStreet] = useState("");
+  const [apt, setApt] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zipcode, setZipcode] = useState("");
+  const [zipcode, setZipcode] = useState("");  
+  const [phone, setPhone] = useState("");  
+  const [shipName, setShipName] = useState("");
+
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
     setLoading(true);
     try {
-      await UserService.addAddress(
-        new Address(country, street, city, state, zipcode)
-      );
-      alert("Address Added! Returning to Previous Page . . .");
+      const address = new Address(shipName, country, street, apt, city, state, zipcode, phone);
+      props.createAddress(address);
+      await UserService.addAddress(address);
+      alert("Address Added! Returning to Previous Page. ..");
       navigate("/account/addresses");
     } catch (error) {
       alert(error.message);
@@ -42,6 +45,20 @@ export default function AddAddress() {
         />
         <div className="card p-5 mx-5">
           <form onSubmit={onFormSubmit}>
+
+          <div className="mb-3">
+              <label className="form-label">Name</label>
+
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Please enter name for shipping"
+                required
+                value={shipName}
+                onChange={(e) => setShipName(e.target.value)}
+              />
+            </div>
+
             <div className="mb-3">
               <label className="form-label">Country/Region</label>
 
@@ -56,15 +73,23 @@ export default function AddAddress() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Address</label>
+              <label className="form-label">Street Address</label>
 
               <input
                 type="text"
-                className="form-control"
+                className="form-control mb-1"
                 placeholder="Street address or PO Box"
                 required
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
+              />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Apartment, suite, building, unit, floor, etc."
+                required
+                value={apt}
+                onChange={(e) => setApt(e.target.value)}
               />
             </div>
 
@@ -81,11 +106,11 @@ export default function AddAddress() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">State</label>
+              <label className="form-label">State/Province/Region</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="State"
+                placeholder="State/Province/Region"
                 required
                 value={state}
                 onChange={(e) => setState(e.target.value)}
@@ -101,6 +126,18 @@ export default function AddAddress() {
                 required
                 value={zipcode}
                 onChange={(e) => setZipcode(e.target.value)}
+              />
+            </div>
+            
+            <div className="mb-3">
+              <label className="form-label">Phone Number</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter preferred number to contact you with"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
 

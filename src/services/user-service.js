@@ -1,4 +1,4 @@
-import { updateDoc, doc, setDoc, getDoc, collection } from "@firebase/firestore";
+import { updateDoc, doc, setDoc, collection } from "@firebase/firestore";
 
 import { db, auth } from "../firebase/firebase";
 
@@ -25,6 +25,14 @@ class UserService {
     //const docu = await getDoc(docRef);
     //const data = docu.data();
     await setDoc(docRef, address.intoJson())
+  }
+
+  async addPayment(payment) {
+    const currentUser = auth.currentUser;
+    const docRef = doc(collection(db, this.collection, currentUser.uid, currentUser.displayName +  "'s Payment Methods"))    
+    //const docu = await getDoc(docRef);
+    //const data = docu.data();
+    await setDoc(docRef, payment.forJson())
   }
 }
 

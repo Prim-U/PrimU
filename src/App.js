@@ -21,10 +21,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResetPassword from "./components/auth/ResetPassword";
 import Addresses from "./components/profile/Addresses";
 import AddAddress from "./components/profile/AddAddress";
+import PaymentPage from "./components/profile/PaymentPage";
+import AddPayment from "./components/profile/AddPayment";
 
 function App() {
   const [user, setUser] = useState(null);
   // const [isUserUpdated, setIsUserUpdated] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  console.log(addresses);
+
+  function createAddress(address) {
+    setAddresses([...addresses, address]);
+  }
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -45,8 +53,11 @@ function App() {
 
         <Route path="/account" element={<Account user={user} />}></Route>
         <Route path="/account/contact-info" element={<Contact user={user}/>}></Route>
-        <Route path="/account/addresses" element={<Addresses />}></Route>
-        <Route path="account/addresses/address-default" element={<AddAddress />}></Route>
+        <Route path="/account/addresses" element={<Addresses addresses={addresses}/>}></Route>
+        <Route path="account/addresses/address-default" element={<AddAddress createAddress={createAddress} />}></Route>
+        <Route path="/account/payment" element={<PaymentPage />}></Route>
+        <Route path="/account/payment/payment-details" element={<AddPayment />}></Route>
+
         
         <Route path="/make-booking" element={<BookingPage />}></Route>
        
