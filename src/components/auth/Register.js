@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // Functions/methods
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Components
 import NavbarAuth from "../../common/Navbar";
@@ -13,41 +13,49 @@ import { User } from "../../models/Users";
 
 // Services
 import UserService from "../../services/user-service";
+import Spinner from "../../common/Spinner";
 
 export default function Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassowrd, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
-  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  // const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
 
-    try {
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const newUser = await UserService.addUser(new User(name, email, userCred.user.uid));
-      setUsers([...users, newUser])
-      console.log(users);
-      updateProfile(userCred.user, {
-        displayName: name,
-      });
-
-      navigate("/");
-    } catch (err) {
-      alert(err.message);
+    setLoading(true)
+    if (password === confirmPassowrd) {
+      try {
+        const userCred = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const newUser = new User(name, email, userCred.user.uid);
+        await UserService.addUser(newUser);
+        updateProfile(userCred.user, {
+          displayName: name,
+        });
+        navigate("/");
+        alert("Register Successful!");
+      } catch (err) {
+        alert(err.message);
+      }
+    } else {
+      alert("Passwords do not match.");
     }
+    setLoading(false);
   }
 
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container my-5 p-3">
+      <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -59,12 +67,13 @@ export default function Register(props) {
           <h1 className="mb-3">Create an account</h1>
 
           <form onSubmit={onFormSubmit} autoComplete="false">
+            
             <div className="mb-3">
-              <label className="form-label">Name</label>
+              <label className="form-label">Full Name</label>
               <input
                 type="name"
                 className="form-control"
-                placeholder="Name"
+                placeholder="Full Name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -108,6 +117,8 @@ export default function Register(props) {
                 type="password"
                 className="form-control"
                 placeholder="Confirm Password"
+                value={confirmPassowrd}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
             </div>
@@ -118,7 +129,7 @@ export default function Register(props) {
                 className="btn btn-dark mt-3"
                 id="registerButton"
               >
-                Continue
+                {loading ? <Spinner extraClass="change-size" /> : 'Register'}
               </button>
             </div>
           </form>
@@ -126,6 +137,10 @@ export default function Register(props) {
           <p className="mt-3 text-center">
             Already have an account with us? Login{" "}
             <a href="http://localhost:3000/login">here!</a>
+          </p>
+
+          <p className='text-center'>
+            <Link to="/login/reset-password">Forgot password?</Link>
           </p>
         </div>
       </div>

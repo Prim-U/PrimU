@@ -42,6 +42,17 @@ export default function Account() {
           </p>
         </button>
       </Link>
+      
+      <Link to="/account/addresses" className="text-decoration-none d-grid gap-2 col-6 mx-auto">
+        <button className="btn btn-dark mx-2 mt-2" id="payment-btn">
+          <h3 className="text-start">
+            Addresses <i class="bi bi-house-fill"></i>
+          </h3>
+          <p className="text-white text-start">
+            Set, edit, or remove default addresses.
+          </p>
+        </button>
+      </Link>
 
       <Link className="text-decoration-none d-grid gap-2 col-6 mx-auto">
         <button className="btn btn-dark mx-2 mt-2">

@@ -1,7 +1,7 @@
 import React from "react";
 
 // Functions/methods
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function TopBar(props) {
             <>
               <div className="align-middle me-auto">
                 <p className="align-middle">
-                  <i class="bi bi-person-fill"></i> Welcome, {user.displayName}
+                  <i class="bi bi-person-fill"></i> Welcome, {user.displayName}!
                 </p>
               </div>
               <button className="btn btn-dark" onClick={onLogoutClicked}>
@@ -30,6 +30,11 @@ export default function TopBar(props) {
             </>
           ) : (
             <>
+              <div className="align-middle me-auto">
+                <p className="align-middle">
+                  <i class="bi bi-person-fill"></i> Welcome!
+                </p>
+              </div>
               <Link to="/register">
                 <button className="btn btn-dark">Register</button>
               </Link>

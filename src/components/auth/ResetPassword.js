@@ -1,20 +1,13 @@
-// React
-import React, {useState} from 'react'
+import React, { useState } from "react";
+import NavbarAuth from "../../common/Navbar";
+import Spinner from "../../common/Spinner";
+import { Link, useNavigate } from "react-router-dom";
+import { sendPasswordResetEmail } from "@firebase/auth";
+import { auth } from "../../firebase/firebase";
 
-// Common
-import NavbarAuth from '../../common/Navbar'
-
-// Functions/methods
-import { Link, useNavigate } from 'react-router-dom'
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase/firebase';
-import Spinner from '../../common/Spinner';
-
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function ResetPassword() {
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
@@ -22,20 +15,14 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const userCred = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCred);
+      await sendPasswordResetEmail(auth, email);
       navigate('/');
-      alert('Login Successful!');
-    } catch (err) {
-      alert(err.message);
+      alert('Reset Password email has been sent.')
+    } catch (error) {
+      alert(error.message);
     }
     setLoading(false);
   }
-
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
@@ -47,11 +34,10 @@ export default function Login() {
           height="80"
           alt=""
         />
-        <div className="card p-5 mx-5">
-          <h1 className='mb-3'>Login to your account</h1>
+        <div className="card p-5 mx-5 mb-5">
+          <h1 className="mb-3">Password Reset</h1>
 
           <form onSubmit={onFormSubmit}>
-
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
                 Email address
@@ -68,25 +54,13 @@ export default function Login() {
               />
             </div>
 
-            <div className="mb-3">
-              <label for="exampleInputPassword1" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-
-
             <div className="d-grid gap-2">
               <button type="submit" className="btn btn-dark mt-3">
-              {loading ? <Spinner extraClass="change-size" /> : 'Login'}
+                {loading ? (
+                  <Spinner extraClass="change-size" />
+                ) : (
+                  "Reset Password"
+                )}
               </button>
             </div>
           </form>
@@ -95,11 +69,12 @@ export default function Login() {
             Don't have an account? Create one <Link to="/register">here!</Link>
           </p>
 
-          <p className='text-center'>
-            <Link to="/login/reset-password">Forgot password?</Link>
+          <p className="text-center">
+            Already have an account? Login{" "}
+            <Link to="/login">here!</Link>
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }
