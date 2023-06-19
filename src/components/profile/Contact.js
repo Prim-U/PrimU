@@ -43,7 +43,7 @@ export default function Contact() {
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container mt-5 p-3">
+      <div className="container my-5" id="Navbar">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
