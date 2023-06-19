@@ -30,8 +30,8 @@ export default function NavbarAuth() {
               <Link className="nav-link active" to="/">
                 Home
               </Link>
-              <Link className="nav-link active">Products</Link>
-              <Link className="nav-link active">Book Services</Link>
+              <Link className="nav-link active" to="/">Products</Link>
+              <Link className="nav-link active" to ="/">Book Services</Link>
               <Link className="nav-link active" to="/profile">
                 Account
               </Link>
