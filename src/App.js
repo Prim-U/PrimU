@@ -1,4 +1,4 @@
-// Push change
+// Push to main
 
 // Dependencies
 import "./App.css";
