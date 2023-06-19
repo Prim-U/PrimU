@@ -1,10 +1,17 @@
 import React from "react";
-import './ServiceCards.css'
+import "./ServiceCards.css";
 
 export default function ServiceCards() {
   return (
     <div>
-      <div class="conatiner">
+
+      <div className="conatiner">
+
+        <p className="p service-header">
+          Treat Yourself with
+          <span className="purple-header"> Our Services</span>
+        </p>
+
         <div class="wrap">
           <div class="box one">
             <a
