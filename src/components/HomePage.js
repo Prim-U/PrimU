@@ -5,7 +5,7 @@ import NavbarAuth from '../common/NavbarAuth'
 export default function HomePage(props) {
   return (
     <div>
-        <NavbarAuth></NavbarAuth>
+        <Navbar></Navbar>
     </div>
   )
 }
