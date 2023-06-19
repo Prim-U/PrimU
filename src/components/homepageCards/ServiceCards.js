@@ -16,7 +16,7 @@ export default function ServiceCards() {
           <div class="box one">
             <a
               className="text-decoration-none"
-              href="/male-grooming-link" //add male grooming link here
+              href="/male-grooming-service" //add male grooming link here
             >
               <h1>Male Grooming</h1>
             </a>
@@ -25,7 +25,7 @@ export default function ServiceCards() {
           <div class="box two">
             <a
               className="text-decoration-none"
-              href="/waxing-link" //add waxing link here
+              href="/waxing-service" //add waxing link here
             >
               <h1>Waxing</h1>
             </a>
@@ -34,7 +34,7 @@ export default function ServiceCards() {
           <div class="box three">
             <a
               className="text-decoration-none"
-              href="/Makeup-link" //add makeup link here
+              href="/makeup-service" //add makeup link here
             >
               <h1>Makeup</h1>
             </a>
@@ -43,7 +43,7 @@ export default function ServiceCards() {
           <div class="box four">
             <a
               className="text-decoration-none"
-              href="/manicure-link" //add manicure link here
+              href="/manicure-service" //add manicure link here
             >
               <h1>Manicure</h1>
             </a>
@@ -52,7 +52,7 @@ export default function ServiceCards() {
           <div class="box five">
             <a
               className="text-decoration-none"
-              href="/hair-link" //add hair link here
+              href="/hair-service" //add hair link here
             >
               <h1>Hair</h1>
             </a>
@@ -61,7 +61,7 @@ export default function ServiceCards() {
           <div class="box six">
             <a
               className="text-decoration-none"
-              href="/massage-link" //add massage link here
+              href="/massage-service" //add massage link here
             >
               <h1>Massage</h1>
             </a>
