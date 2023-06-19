@@ -1,0 +1,99 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	background: #fff;
+}
+
+.conatiner {
+	width: 100%;
+	height: 500px;
+}
+.wrap {
+	display: flex;
+    flex-wrap: wrap;
+    gap: 3vw;
+	justify-content: center;
+	align-items: center;
+}
+
+.box {
+	margin: 15px;
+	width: 300px; 
+	height: 290px;
+    /* width:30vw;
+    height:25vw; */
+    row-gap: 3vw;
+    column-gap: 3vw;
+	text-align: center;
+	border-radius: 15px;
+    filter: brightness(70%);
+}
+.box:hover {
+    filter: brightness(100%);
+	box-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+.box h1 {
+	color: #fff;
+    filter: brightness(100%);
+	padding: 30px;
+	margin-top: 100px;
+	text-align: center;
+	font-weight: 800;
+    text-transform: uppercase;
+    font-size:1.6rem;
+    text-decoration: none;
+}
+
+.one {
+	background: url('https://www.prim-u.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fudvzxn7no754%2F75ajR22isqLIPHuLlyGgfr%2F5fb815c383a7e003e740eb392149e52c%2FMaleGroomingB.jpg&w=2048&q=100');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.two {
+	background: url('https://www.prim-u.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fudvzxn7no754%2F6bq5UeeVL2Fu37zYcCb83S%2Fb38c7f6ef607e4f171a606e23e08428e%2FWaxing.png&w=2048&q=100');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.three {
+	background: url('https://www.prim-u.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fudvzxn7no754%2F6Gl7izmILtQ11E6zRK7fUI%2Ffa5b05a848edb3b7a3069bf4f1708ae6%2FMakeup.png&w=2048&q=100');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.four {
+	background: url('https://www.prim-u.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fudvzxn7no754%2F509d3uMPHSSfqfIliYDcSz%2F01efe1f84fe6120f10b7af97580b453b%2FManicure.png&w=2048&q=100');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+.five {
+	background: url('https://www.prim-u.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fudvzxn7no754%2F6N5CPazjiZWoNhl1kTctJY%2F923a65f3c447da0a0739339867548725%2FHair.png&w=2048&q=100');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+.six {
+	background: url('https://www.prim-u.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fudvzxn7no754%2F24WbOyNMCjPcX02SI0g6bf%2F86b7b91e5c926d40c46cb0f98023e632%2FMassage.png&w=2048&q=100');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .wrap {
+        gap: 3vw;
+    }
+}
+@media only screen and (max-width: 767.9px) {
+    .wrap {
+        gap: 10.5px;
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 30px;
+    }
+}
+
