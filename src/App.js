@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Profile from "./components/profile/Profile";
 import Contact from "./components/profile/Contact";
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
@@ -16,6 +17,30 @@ import TopBar from "./common/TopBar";
 function App() {
   const [user, setUser] = useState(null);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
+=======
+import BookingPage from "./components/booking/BookingPage";
+
+// Import functions/methods
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ResetPassword from "./components/auth/ResetPassword";
+import Addresses from "./components/profile/Addresses";
+import AddAddress from "./components/profile/AddAddress";
+import PaymentPage from "./components/profile/PaymentPage";
+import AddPayment from "./components/profile/AddPayment";
+
+function App() {
+  const [user, setUser] = useState(null);
+  // const [isUserUpdated, setIsUserUpdated] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  console.log(addresses);
+
+  function createAddress(address) {
+    setAddresses([...addresses, address]);
+  }
+>>>>>>> 6e19787713028d4035d7fd3ce390576b8706edb9
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -29,10 +54,26 @@ function App() {
       <TopBar user={user}></TopBar>
       <Routes>
         <Route path="/" element={<HomePage user={user} />}></Route>
-        <Route path="/register" element={<Register user={user} />}></Route>
+
+        <Route path="/register" element={<Register user={user}/>}></Route>
         <Route path="/login" element={<Login user={user} />}></Route>
+<<<<<<< HEAD
         <Route path="/profile" element={<Profile user={user} />}></Route>
         <Route path="/contact-info" element={<Contact user={user} />}></Route>
+=======
+        <Route path="/login/reset-password" element={<ResetPassword />}></Route>
+
+        <Route path="/account" element={<Account user={user} />}></Route>
+        <Route path="/account/contact-info" element={<Contact user={user}/>}></Route>
+        <Route path="/account/addresses" element={<Addresses addresses={addresses}/>}></Route>
+        <Route path="account/addresses/address-default" element={<AddAddress createAddress={createAddress} />}></Route>
+        <Route path="/account/payment" element={<PaymentPage />}></Route>
+        <Route path="/account/payment/payment-details" element={<AddPayment />}></Route>
+
+        
+        <Route path="/make-booking" element={<BookingPage />}></Route>
+       
+>>>>>>> 6e19787713028d4035d7fd3ce390576b8706edb9
       </Routes>
     </BrowserRouter>
   );
