@@ -1,18 +1,21 @@
 import React, {useState} from 'react'
 import NavbarAuth from '../../common/NavbarAuth'
 import { Link, useNavigate } from 'react-router-dom'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebase';
+import Spinner from '../../common/Spinner';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
 
+    setLoading(true);
     try {
       const userCred = await signInWithEmailAndPassword(
         auth,
@@ -21,15 +24,17 @@ export default function Login() {
       );
       console.log(userCred);
       navigate('/');
+      alert('Login Successful!');
     } catch (err) {
       alert(err.message);
     }
+    setLoading(false);
   }
 
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container my-5">
+      <div className="container my-5 p-3">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -76,13 +81,17 @@ export default function Login() {
 
             <div className="d-grid gap-2">
               <button type="submit" className="btn btn-dark mt-3">
-                Continue
+              {loading ? <Spinner extraClass="change-size" /> : 'Login'}
               </button>
             </div>
           </form>
 
           <p className="mt-3 text-center">
             Don't have an account? Create one <Link to="/register">here!</Link>
+          </p>
+
+          <p className='text-center'>
+            <Link to="/login/reset-password">Forgot password?</Link>
           </p>
         </div>
       </div>

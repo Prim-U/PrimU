@@ -1,0 +1,31 @@
+.search-button {
+  border: none;
+  background-color: transparent;
+}
+
+.search-button:hover {
+    color: #d390e0;
+    transition: 0.3s;
+}
+
+#bag-btn {
+  border: none;
+  background-color: transparent;
+}
+
+#bag-btn:hover {
+  color: #d390e0;
+  transition: 0.3s;
+}
+
+.top-bar {
+  padding: 10px;
+  background: #64306e;
+  color: white;
+}
+
+.middle-bar {
+  padding: 10px;
+  background: white;
+  color: black;
+}

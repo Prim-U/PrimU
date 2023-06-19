@@ -1,37 +1,61 @@
-import React, {useState} from "react";
-import NavbarAuth from "../../common/NavbarAuth";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+
+// Functions/methods
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Register() {
+// Components
+import NavbarAuth from "../../common/Navbar";
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+// Models
+import { User } from "../../models/Users";
+
+// Services
+import UserService from "../../services/user-service";
+import Spinner from "../../common/Spinner";
+
+export default function Register(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassowrd, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
+  // const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
 
-    try {
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(userCred);
-      navigate('/');
-      document.getElementById('registerButton').disabled = true;
-    } catch (err) {
-      alert(err.message);
+    setLoading(true)
+    if (password === confirmPassowrd) {
+      try {
+        const userCred = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const newUser = new User(name, email, userCred.user.uid);
+        await UserService.addUser(newUser);
+        updateProfile(userCred.user, {
+          displayName: name,
+        });
+        navigate("/");
+        alert("Register Successful!");
+      } catch (err) {
+        alert(err.message);
+      }
+    } else {
+      alert("Passwords do not match.");
     }
+    setLoading(false);
   }
 
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container my-5">
+      <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -43,6 +67,18 @@ export default function Register() {
           <h1 className="mb-3">Create an account</h1>
 
           <form onSubmit={onFormSubmit} autoComplete="false">
+            
+            <div className="mb-3">
+              <label className="form-label">Full Name</label>
+              <input
+                type="name"
+                className="form-control"
+                placeholder="Full Name"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
 
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">
@@ -81,19 +117,30 @@ export default function Register() {
                 type="password"
                 className="form-control"
                 placeholder="Confirm Password"
+                value={confirmPassowrd}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
             </div>
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3" id="registerButton">
-                Continue
+              <button
+                type="submit"
+                className="btn btn-dark mt-3"
+                id="registerButton"
+              >
+                {loading ? <Spinner extraClass="change-size" /> : 'Register'}
               </button>
             </div>
           </form>
 
           <p className="mt-3 text-center">
-            Already have an account with us? Register <a href="http://localhost:3000/login">here!</a>
+            Already have an account with us? Login{" "}
+            <a href="http://localhost:3000/login">here!</a>
+          </p>
+
+          <p className='text-center'>
+            <Link to="/login/reset-password">Forgot password?</Link>
           </p>
         </div>
       </div>

@@ -1,23 +1,16 @@
+// Dependencies
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import 'font-awesome/css/font-awesome.min.css';
+
+
+// Compenents
 import HomePage from "./components/HomePage";
 import Register from "./components/auth/Register";
-import Navbar from "./common/Navbar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/auth/Login";
-import Profile from "./components/profile/Profile";
+import TopBar from "./common/TopBar";import Login from "./components/auth/Login";
+import Account from "./components/profile/Account";
 import Contact from "./components/profile/Contact";
-<<<<<<< HEAD
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase/firebase";
-import TopBar from "./common/TopBar";
-
-function App() {
-  const [user, setUser] = useState(null);
-  const [isUserUpdated, setIsUserUpdated] = useState(false);
-=======
 import BookingPage from "./components/booking/BookingPage";
 
 // Import functions/methods
@@ -40,12 +33,11 @@ function App() {
   function createAddress(address) {
     setAddresses([...addresses, address]);
   }
->>>>>>> 6e19787713028d4035d7fd3ce390576b8706edb9
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setIsUserUpdated(true);
+      // setIsUserUpdated(true);
     });
   }, []);
 
@@ -57,10 +49,6 @@ function App() {
 
         <Route path="/register" element={<Register user={user}/>}></Route>
         <Route path="/login" element={<Login user={user} />}></Route>
-<<<<<<< HEAD
-        <Route path="/profile" element={<Profile user={user} />}></Route>
-        <Route path="/contact-info" element={<Contact user={user} />}></Route>
-=======
         <Route path="/login/reset-password" element={<ResetPassword />}></Route>
 
         <Route path="/account" element={<Account user={user} />}></Route>
@@ -73,7 +61,6 @@ function App() {
         
         <Route path="/make-booking" element={<BookingPage />}></Route>
        
->>>>>>> 6e19787713028d4035d7fd3ce390576b8706edb9
       </Routes>
     </BrowserRouter>
   );
