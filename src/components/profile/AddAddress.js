@@ -22,10 +22,10 @@ export default function AddAddress(props) {
     e.preventDefault();
     setLoading(true);
     try {
-      const address = new Address(shipName, country, street, apt, city, state, zipcode, phone);
-      props.createAddress(address);
+      const address = new Address(shipName, country, street, apt, city, state, zipcode, phone, null);
+      // props.createAddress(address);
       await UserService.addAddress(address);
-      alert("Address Added! Returning to Previous Page. ..");
+      alert("Address Added! Returning to Previous Page. . .");
       navigate("/account/addresses");
     } catch (error) {
       alert(error.message);
@@ -141,11 +141,13 @@ export default function AddAddress(props) {
               />
             </div>
 
+            
+
             <div className="d-grid gap-2">
               <button
                 type="submit"
                 className="btn btn-dark mt-3"
-                id="updateButton"
+                id="submitBtn"
               >
                 {loading ? <Spinner extraClass="change-size" /> : "Add Address"}
               </button>
