@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 /* .container {
     width:100%;
     margin:none;
@@ -101,13 +102,16 @@
     .bg-image {
         background-position:top center;
         background-size:700px;
+        justify-content: center;
         /* height:80vh; */
     }
     .bg-image::after {
         text-align: center;
-        font-size: 30px;
-        left:20%;
-        top: 280px;
+        line-height:normal;
+        font-size: 35px;
+        left:30%;
+        top: 50%;
+        float:center;
         justify-content: center;
 
     }
