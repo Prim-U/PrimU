@@ -5,45 +5,36 @@ import NavbarAuth from "../../common/Navbar";
 
 // Functions/methods
 import { auth } from "../../firebase/firebase";
-import { updateEmail, updatePhoneNumber, updateProfile } from "firebase/auth";
+import { updateEmail, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
-// Services
-import UserService from "../../services/user-service";
-import Spinner from "../../common/Spinner";
 
 export default function Contact() {
   const [changeEmail, setChangeEmail] = useState("");
   const [updateName, setUpdateName] = useState("");
   //const [updatePhone, setUpdatePhone] = useState("");
-  const [loading, setLoading] = useState(false);
 
+  const user = auth.currentUser;
   const navigate = useNavigate();
-  const user = auth.currentUser
 
   async function onFormSubmit(e) {
     e.preventDefault();
-
-    setLoading(true);
     try {
       await updateEmail(user, changeEmail);
       await updateProfile(user, { displayName: updateName });
       //await updatePhoneNumber(user, updatePhone );
-      await UserService.updateUser(user);
-
-      navigate("/account");
-      alert("Update Successful!");
+      navigate("/profile");
+      window.location.reload();
     } catch (error) {
       alert(error.message);
     }
-    setLoading(false)
   }
 
+  console.log(user);
 
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
-      <div className="container mt-5 p-3" id="Navbar">
+      <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
           src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
@@ -93,12 +84,8 @@ export default function Contact() {
             </div>
 
             <div className="d-grid gap-2">
-              <button
-                type="submit"
-                className="btn btn-dark mt-3"
-                id="updateButton"
-              >
-                {loading ? <Spinner extraClass="change-size" /> : 'Update'}
+              <button type="submit" className="btn btn-dark mt-3" id="updateButton">
+                Update
               </button>
             </div>
           </form>

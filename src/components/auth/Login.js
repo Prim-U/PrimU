@@ -6,7 +6,7 @@ import NavbarAuth from '../../common/Navbar'
 
 // Functions/methods
 import { Link, useNavigate } from 'react-router-dom'
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebase';
 import Spinner from '../../common/Spinner';
 

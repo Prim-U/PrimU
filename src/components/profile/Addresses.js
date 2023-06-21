@@ -3,7 +3,6 @@ import NavbarAuth from "../../common/Navbar";
 
 // Stylesheet
 import "./Addresses.css";
-import { auth } from "../../firebase/firebase";
 
 import UserService from "../../services/user-service";
 import { Link } from "react-router-dom";
