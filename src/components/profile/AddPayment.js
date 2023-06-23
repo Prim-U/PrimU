@@ -87,7 +87,7 @@ export default function AddPayment() {
                 className="btn btn-dark mt-3"
                 id="updateButton"
               >
-                {loading ? <Spinner extraClass="change-size" /> : "Add Address"}
+                {loading ? <Spinner extraClass="change-size" /> : "Add Payment Method"}
               </button>
             </div>
           </form>

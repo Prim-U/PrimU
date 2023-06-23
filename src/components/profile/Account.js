@@ -60,7 +60,7 @@ export default function Account() {
         </button>
       </Link>
 
-      <Link className="text-decoration-none d-grid gap-2 col-6 mx-auto">
+      <Link to="/account/profile" className="text-decoration-none d-grid gap-2 col-6 mx-auto">
         <button className="btn btn-dark mx-2 mt-2">
           <h3 className="text-start">
             Profiles <i class="bi bi-pencil-fill"></i>

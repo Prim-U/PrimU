@@ -27,6 +27,8 @@ import PaymentPage from "./components/profile/PaymentPage";
 import AddPayment from "./components/profile/AddPayment";
 import RequireAuth from "./common/RequireAuth";
 import Spinner from "./common/Spinner";
+import ProfilePage from "./components/profile/ProfilePage";
+import AddProfile from "./components/profile/AddProfile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -105,6 +107,22 @@ function App() {
             element={
               <RequireAuth user={user}>
                 <AddPayment />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/account/profile"
+            element={
+              <RequireAuth user={user}>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/account/profile/add-profile"
+            element={
+              <RequireAuth user={user}>
+                <AddProfile />
               </RequireAuth>
             }
           ></Route>

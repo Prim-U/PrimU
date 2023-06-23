@@ -12,4 +12,9 @@ export class User {
         userId: this.userId
     }
   }
+
+  static fromFirebase(doc) {
+    const data = doc.data();
+    return new User(data.email, data.name, data.userId)
+  }
 }
