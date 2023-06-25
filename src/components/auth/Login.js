@@ -14,12 +14,14 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
 
+    setButtonDisabled(true);
     setLoading(true);
     try {
       const userCred = await signInWithEmailAndPassword(
@@ -34,6 +36,7 @@ export default function Login() {
       alert(err.message);
     }
     setLoading(false);
+    setButtonDisabled(false);
   }
 
   return (
@@ -85,7 +88,7 @@ export default function Login() {
 
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3">
+              <button type="submit" disabled={buttonDisabled} className="btn btn-dark mt-3">
               {loading ? <Spinner extraClass="change-size" /> : 'Login'}
               </button>
             </div>

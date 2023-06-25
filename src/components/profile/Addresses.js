@@ -25,18 +25,12 @@ export default function Addresses(props) {
     }
   }
 
-  async function logData(address) {
-    console.log(address);
-  }
-
-  async function removeAddress(address) {
+  async function removeAddress(addressId) {
     try {
-      // delete Movie from firebase firestore
-      await UserService.deleteAddress(address.id);
+      await UserService.deleteAddress(addressId);
 
-      // update the movies array
-      setAddresses(addresses.filter((address) => address.id !== addressToRemove.id));
-      alert('Successfully Deleted.')
+      setAddresses(addresses.filter((address) => address.id !== addressId));
+      alert("Successfully Deleted.");
     } catch (err) {
       console.log(err.message);
     }
@@ -54,7 +48,7 @@ export default function Addresses(props) {
             id="add-card"
           >
             <a
-              href="http://localhost:3000/account/addresses/address-default"
+              href="http://localhost:3000/account/addresses/add-address"
               alt="add"
               className="text-decoration-none text-black text-center"
             >
@@ -70,7 +64,11 @@ export default function Addresses(props) {
 
           {addresses.map((address) => {
             return (
-              <div className="card p-3 me-2" id="address-card" key={address.id}>
+              <div
+                className="card p-3 me-2 mb-2"
+                id="address-card"
+                key={address.id}
+              >
                 <h5>{address.shipname}</h5>
                 <h5>
                   {address.street} {address.apt}
@@ -82,20 +80,20 @@ export default function Addresses(props) {
                 <h5>{address.phone}</h5>
                 <div className="d-grid gap-2 d-md-flex">
                   <button
-                    className="remove-button btn btn-danger"
+                    className="btn btn-danger"
                     onClick={() => {
-                      setAddressToRemove(address)
-                      removeAddress(address)
+                      setAddressToRemove(address);
+                      removeAddress(address.id);
                     }}
                   >
                     <i className="bi bi-trash"></i>
                   </button>
 
-                  <Link to="/account/addresses/address-default">
+                  <Link to="/account/address/update-address">
                     <button
-                      className="remove-button btn btn-secondary"
+                      className="edit-button btn btn-secondary"
                       onClick={() => {
-                        logData(address)
+                        props.setAddressList(address);
                       }}
                     >
                       <i className="bi bi-pencil"></i>

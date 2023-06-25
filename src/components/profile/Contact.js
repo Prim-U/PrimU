@@ -2,15 +2,19 @@ import React, { useState } from "react";
 
 // Components
 import NavbarAuth from "../../common/Navbar";
+import UserService from '../../services/user-service';
 
 // Functions/methods
 import { auth } from "../../firebase/firebase";
 import { updateEmail, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../common/Spinner";
 
 export default function Contact() {
   const [changeEmail, setChangeEmail] = useState("");
   const [updateName, setUpdateName] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
   //const [updatePhone, setUpdatePhone] = useState("");
 
   const user = auth.currentUser;
@@ -18,15 +22,22 @@ export default function Contact() {
 
   async function onFormSubmit(e) {
     e.preventDefault();
+
+    setButtonDisabled(true);
+    setLoading(true);
     try {
       await updateEmail(user, changeEmail);
       await updateProfile(user, { displayName: updateName });
+      await UserService.updateUser(auth.currentUser);
       //await updatePhoneNumber(user, updatePhone );
-      navigate("/profile");
+      navigate("/account");
+      alert('Updated Successfully');
       window.location.reload();
     } catch (error) {
       alert(error.message);
     }
+    setButtonDisabled(false);
+    setLoading(false);
   }
 
   console.log(user);
@@ -84,8 +95,17 @@ export default function Contact() {
             </div>
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3" id="updateButton">
-                Update
+              <button
+                type="submit"
+                className="btn btn-dark mt-3"
+                id="updateButton"
+                disabled={buttonDisabled}
+              >
+                {loading ? (
+                  <Spinner extraClass="change-size" />
+                ) : (
+                  "Update"
+                )}
               </button>
             </div>
           </form>

@@ -21,6 +21,7 @@ export default function Register(props) {
   const [confirmPassowrd, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   // const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Register(props) {
   async function onFormSubmit(e) {
     e.preventDefault();
 
+    setButtonDisabled(true);
     setLoading(true)
     if (password === confirmPassowrd) {
       try {
@@ -49,6 +51,7 @@ export default function Register(props) {
     } else {
       alert("Passwords do not match.");
     }
+    setButtonDisabled(false);
     setLoading(false);
   }
 
@@ -128,6 +131,7 @@ export default function Register(props) {
                 type="submit"
                 className="btn btn-dark mt-3"
                 id="registerButton"
+                disabled={buttonDisabled}
               >
                 {loading ? <Spinner extraClass="change-size" /> : 'Register'}
               </button>

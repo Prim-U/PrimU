@@ -4,8 +4,9 @@ import NavbarAuth from "../../common/Navbar";
 import UserService from "../../services/user-service";
 import "./Addresses.css";
 import { Link } from "react-router-dom";
+import './Payment.css';
 
-export default function PaymentPage() {
+export default function PaymentPage(props) {
 
   const [payments, setPayment] = useState([]);
 
@@ -17,8 +18,20 @@ export default function PaymentPage() {
     try {
       const payments = await UserService.fetchPayment();
       setPayment(payments)
+      console.log(payments);
     } catch (error) {
       alert(error.message)
+    }
+  }
+
+  async function removePayment(paymentId) {
+    try {
+      await UserService.deletePayment(paymentId);
+
+      setPayment(payments.filter((payment) => payment.id !== paymentId));
+      alert('Successfully Deleted.')
+    } catch (error) {
+      alert(error.message);
     }
   }
 
@@ -34,7 +47,7 @@ export default function PaymentPage() {
             id="add-card"
           >
             <a
-              href="http://localhost:3000/account/payment/payment-details"
+              href="http://localhost:3000/account/payment/add-payment"
               alt="add"
               className="text-decoration-none text-black text-center"
             >
@@ -50,22 +63,26 @@ export default function PaymentPage() {
 
           {payments.map((payment) => {
             return (
-              <div className="card p-3 me-2" id="address-card" key={payment.id}>
+              <div className="card p-3 me-2" id="payment-card" key={payment.id}>
                 <h5>Debit card ending in **** {payment.card.slice(-4)}</h5>
                 <div className="d-grid gap-2 d-md-flex">
                   <button
-                    className="remove-button btn btn-danger"
+                    className="btn btn-danger"
                     onClick={() => {
-                      //setAddressToRemove(address)
-                      //removeAddress(address)
+                      // setAddressToRemove(address)
+                      removePayment(payment.id)
                     }}
                   >
                     <i className="bi bi-trash"></i>
                   </button>
 
-                  <Link to="/account/payment">
+                  <Link to="/account/payment/update-payment">
                     <button
-                      className="remove-button btn btn-secondary"
+                      className="edit-button btn btn-secondary"
+                      onClick={() => {
+                        props.setUpdatePayment(payment);
+                        console.log(props.updatePayment)
+                      }}
                     >
                       <i className="bi bi-pencil"></i>
                     </button>

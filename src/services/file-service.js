@@ -5,8 +5,6 @@ import {
     deleteObject,
   } from 'firebase/storage';
 
-  import { v4 as uuid } from 'uuid';
-
   import { storage } from '../firebase/firebase';
   
   class FileService {

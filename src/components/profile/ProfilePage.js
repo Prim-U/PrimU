@@ -47,7 +47,7 @@ export default function ProfilePage() {
           <div className="d-flex flex-wrap">
         {profiles.map((profile) => {
           return (
-            <div key={profile.id} className="card mx-2" id="profile-card">
+            <div key={profile.id} className="card me-2 mb-2" id="profile-card">
               <img
                 src={profile.imageUrl}
                 className="card-img-top movie-img"

@@ -29,10 +29,14 @@ import RequireAuth from "./common/RequireAuth";
 import Spinner from "./common/Spinner";
 import ProfilePage from "./components/profile/ProfilePage";
 import AddProfile from "./components/profile/AddProfile";
+import UpdateAddress from "./components/profile/UpdateAddress";
+import UpdatePayment from "./components/profile/UpdatePayment";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
+  const [addressList, setAddressList] = useState([]);
+  const [updatePayment, setUpdatePayment] = useState([]);
   // const [addresses, setAddresses] = useState([]);
 
   /*  function createAddress(address) {
@@ -80,36 +84,51 @@ function App() {
             path="/account/addresses"
             element={
               <RequireAuth user={user}>
-                <Addresses /* addresses={addresses} */ />
+                <Addresses setAddressList={setAddressList} /* addressList={addressList}  addresses={addresses} */ />
               </RequireAuth>
             }
           ></Route>
 
           <Route
-            path="account/addresses/address-default"
+            path="account/addresses/add-address"
             element={
               <RequireAuth user={user}>
-                <AddAddress /* createAddress={createAddress} */ />
+                <AddAddress />
               </RequireAuth>
             }
           ></Route>
+
+          <Route path="account/address/update-address" element={<RequireAuth user={user}>
+            <UpdateAddress addressList={addressList} />
+          </RequireAuth>}></Route>
 
           <Route
             path="/account/payment"
             element={
               <RequireAuth user={user}>
-                <PaymentPage />
+                <PaymentPage setUpdatePayment={setUpdatePayment} updatePayment={updatePayment}/>
               </RequireAuth>
             }
           ></Route>
+
           <Route
-            path="/account/payment/payment-details"
+            path="/account/payment/add-payment"
             element={
               <RequireAuth user={user}>
                 <AddPayment />
               </RequireAuth>
             }
           ></Route>
+
+          <Route
+            path="/account/payment/update-payment"
+            element={
+              <RequireAuth user={user}>
+                <UpdatePayment updatePayment={updatePayment} />
+              </RequireAuth>
+            }
+          ></Route>
+
           <Route
             path="/account/profile"
             element={

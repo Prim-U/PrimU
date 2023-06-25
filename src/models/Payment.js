@@ -3,6 +3,7 @@ export class Payment {
     this.card = card;
     this.date = date;
     this.cvv = cvv;
+    this.id = id;
   }
 
   forJson() {

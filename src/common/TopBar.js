@@ -21,7 +21,7 @@ export default function TopBar(props) {
             <>
               <div className="align-middle me-auto">
                 <p className="align-middle">
-                  <i class="bi bi-person-fill"></i> Welcome {user.displayName}!
+                  <i className="bi bi-person-fill"></i> Welcome {user.displayName}!
                 </p>
               </div>
               <button className="btn btn-dark" onClick={onLogoutClicked}>
@@ -32,7 +32,7 @@ export default function TopBar(props) {
             <>
               <div className="align-middle me-auto">
                 <p className="align-middle">
-                  <i class="bi bi-person-fill"></i> Welcome!
+                  <i className="bi bi-person-fill"></i> Welcome!
                 </p>
               </div>
               <Link to="/register">
@@ -61,7 +61,7 @@ export default function TopBar(props) {
           </form>
 
           <button className="bag-button me-3" id="bag-btn">
-            <i class="bi bi-bag"></i>
+            <i className="bi bi-bag"></i>
           </button>
         </div>
       </div>

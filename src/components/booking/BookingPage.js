@@ -66,7 +66,7 @@ export default function BookingPage() {
               <a href="#" className="text-decoration-none text-black">
                 <div className="row">
                   <div className="col-4">
-                    <i class="fa fa-gift fa-5x" aria-hidden="true"></i>
+                    <i className="fa fa-gift fa-5x" aria-hidden="true"></i>
                   </div>
                   <div className="col-8">
                     <h5 className="text-start">Offers</h5>
@@ -85,7 +85,7 @@ export default function BookingPage() {
               <a href="#" className="text-decoration-none text-black">
                 <div className="row">
                   <div className="col-4">
-                    <i class="fa fa-leaf fa-5x" aria-hidden="true"></i>
+                    <i className="fa fa-leaf fa-5x" aria-hidden="true"></i>
                   </div>
                   <div className="col-8">
                     <h5 className="text-start">Ingredients</h5>
@@ -105,7 +105,7 @@ export default function BookingPage() {
               <a href="#" className="text-decoration-none text-black">
                 <div className="row">
                   <div className="col-4">
-                    <i class="fa fa-user-circle fa-5x" aria-hidden="true"></i>
+                    <i className="fa fa-user-circle fa-5x" aria-hidden="true"></i>
                   </div>
                   <div className="col-8">
                     <h5 className="text-start">Treatment Services</h5>
@@ -123,7 +123,7 @@ export default function BookingPage() {
               <a href="#" className="text-decoration-none text-black">
                 <div className="row">
                   <div className="col-4">
-                    <i class="fa fa-shopping-basket fa-5x" aria-hidden="true"></i>
+                    <i className="fa fa-shopping-basket fa-5x" aria-hidden="true"></i>
                   </div>
                   <div className="col-8">
                     <h5 className="text-start">Become Seller</h5>
