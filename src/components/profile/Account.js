@@ -7,12 +7,12 @@ import "./Account.css";
 import { Link } from "react-router-dom";
 
 // Components
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 
 export default function Account() {
   return (
     <div id="account-bg">
-      <NavbarAuth></NavbarAuth>
+      <Navbar></Navbar>
       <h1 className="mt-3 text-center" id="account-management">
         Your Account
       </h1>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 
 // Stylesheet
 import "./Addresses.css";
@@ -38,7 +38,7 @@ export default function Addresses(props) {
 
   return (
     <div className="bg">
-      <NavbarAuth></NavbarAuth>
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <h1 className="mb-3 text-light">Manage Addresses</h1>
 

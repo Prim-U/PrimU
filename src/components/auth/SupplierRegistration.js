@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Spinner from "../../common/Spinner";
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 import { Seller } from "../../models/Seller";
 import UserService from "../../services/user-service";
 import FileService from "../../services/file-service";
@@ -88,8 +88,8 @@ export default function SupplierRegistration() {
   }
 
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

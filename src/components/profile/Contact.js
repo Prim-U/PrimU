@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import "./Contact.css"
 
 // Components
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 import UserService from '../../services/user-service';
 
 // Functions/methods
@@ -41,8 +42,8 @@ export default function Contact() {
   }
 
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark" id="contact-page-background">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

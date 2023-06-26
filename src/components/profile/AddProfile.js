@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { Profile } from "../../models/Profile";
 import UserService from "../../services/user-service";
@@ -43,8 +43,8 @@ export default function AddProfile() {
     }
   }
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
