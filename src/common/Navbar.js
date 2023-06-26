@@ -31,7 +31,7 @@ export default function Navbar() {
                 Home
               </Link>
               <Link className="nav-link active">Products</Link>
-              <Link className="nav-link active">Book Services</Link>
+              <Link className="nav-link active" to='/make-booking'>Book Services</Link>
               <Link className="nav-link active" to="/profile">
                 Profile
               </Link>

@@ -31,7 +31,7 @@
   
   .card-image {
     max-width: 100%; /* Limit the maximum width of the image */
-    height: 50%; /* Automatically adjust the height based on the width */
+    height: 1px; /* Automatically adjust the height based on the width */
   }
   
   .my-custom-image {

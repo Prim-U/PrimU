@@ -59,8 +59,6 @@ function App() {
         <Route path="/account/payment" element={<PaymentPage />}></Route>
         <Route path="/account/payment/payment-details" element={<AddPayment />}></Route>
         <Route path="/seller" element={<SellerPage />}></Route>
-
-        
         <Route path="/make-booking" element={<BookingPage />}></Route>
        
       </Routes>
