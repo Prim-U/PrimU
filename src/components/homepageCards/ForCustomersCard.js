@@ -11,19 +11,19 @@ export default function ForCustomersCard() {
           alt="For Customers Service"
         />
         <div className="card-img-overlay">
-          <h5 className="card-title">For Customers</h5>
-          <p className="card-text">Enjoy beauty treatments wherever U are</p>
+          <h5 className="card-title-for-cust">For Customers</h5>
+          <p className="card-text-for-cust">Enjoy beauty treatments wherever U are</p>
           <br></br>
 
           <div className="p-button">
-            <p className="card-text">
+            <p className="card-text-for-cust">
               Struggling to find the time to pamper yourself? With just one
               click, Prim-U will connect U to the right primlancer, at the right
               time, right in the comfort of your home. On holiday? Book an
               expert primlancer closest to U. Simply click, pick a treatment and
               we'll come to U.
             </p>
-            <button className="btn btn-outline-primary">Make a Booking</button>
+            <button className="btn card-btn-outline-primary">Make a Booking</button>
           </div>
         </div>
       </div>

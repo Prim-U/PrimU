@@ -20,11 +20,6 @@ body {
     gap: 3vw;
 	justify-content: center;
 	align-items: center;
-	/* margin-bottom:30%; */
-    /* margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 1em;
-    margin-inline-end: 0px; */
 }
 
 .service-header {
@@ -51,11 +46,8 @@ body {
 }
 
 .box {
-	/* margin: 15px; */
 	width: 400px; 
 	height: 390px;
-    /* width:30vw;
-    height:25vw; */
     row-gap: 3vw;
     column-gap: 3vw;
 	text-align: center;
