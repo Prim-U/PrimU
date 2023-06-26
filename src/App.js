@@ -31,6 +31,8 @@ import ProfilePage from "./components/profile/ProfilePage";
 import AddProfile from "./components/profile/AddProfile";
 import UpdateAddress from "./components/profile/UpdateAddress";
 import UpdatePayment from "./components/profile/UpdatePayment";
+import SupplierRegistration from "./components/auth/SupplierRegistration";
+import SellerPage from "./components/profile/SellerPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -72,6 +74,25 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+
+          <Route
+            path="/account/seller"
+            element={
+              <RequireAuth user={user}>
+                <SellerPage user={user} />
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/account/seller/supplier-registration"
+            element={
+              <RequireAuth user={user}>
+                <SupplierRegistration user={user} />
+              </RequireAuth>
+            }
+          ></Route>
+
           <Route
             path="/account/contact-info"
             element={
@@ -84,7 +105,11 @@ function App() {
             path="/account/addresses"
             element={
               <RequireAuth user={user}>
-                <Addresses setAddressList={setAddressList} /* addressList={addressList}  addresses={addresses} */ />
+                <Addresses
+                  setAddressList={
+                    setAddressList
+                  } /* addressList={addressList}  addresses={addresses} */
+                />
               </RequireAuth>
             }
           ></Route>
@@ -98,15 +123,23 @@ function App() {
             }
           ></Route>
 
-          <Route path="account/address/update-address" element={<RequireAuth user={user}>
-            <UpdateAddress addressList={addressList} />
-          </RequireAuth>}></Route>
+          <Route
+            path="account/address/update-address"
+            element={
+              <RequireAuth user={user}>
+                <UpdateAddress addressList={addressList} />
+              </RequireAuth>
+            }
+          ></Route>
 
           <Route
             path="/account/payment"
             element={
               <RequireAuth user={user}>
-                <PaymentPage setUpdatePayment={setUpdatePayment} updatePayment={updatePayment}/>
+                <PaymentPage
+                  setUpdatePayment={setUpdatePayment}
+                  updatePayment={updatePayment}
+                />
               </RequireAuth>
             }
           ></Route>
@@ -137,6 +170,7 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+
           <Route
             path="/account/profile/add-profile"
             element={
@@ -150,7 +184,7 @@ function App() {
             path="/make-booking"
             element={
               // <RequireAuth user={user}>
-                <BookingPage />
+              <BookingPage />
               // </RequireAuth>
             }
           ></Route>

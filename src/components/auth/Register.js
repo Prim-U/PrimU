@@ -15,7 +15,7 @@ import { User } from "../../models/Users";
 import UserService from "../../services/user-service";
 import Spinner from "../../common/Spinner";
 
-export default function Register(props) {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassowrd, setConfirmPassword] = useState("");
@@ -45,6 +45,7 @@ export default function Register(props) {
         });
         navigate("/");
         alert("Register Successful!");
+        window.location.reload()
       } catch (err) {
         alert(err.message);
       }

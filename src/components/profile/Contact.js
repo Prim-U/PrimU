@@ -40,8 +40,6 @@ export default function Contact() {
     setLoading(false);
   }
 
-  console.log(user);
-
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>

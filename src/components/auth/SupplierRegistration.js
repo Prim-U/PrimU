@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import NavbarAuth from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
-import { Address } from "../../models/AddressModel";
-import UserService from "../../services/user-service";
-import { useNavigate } from "react-router";
+import NavbarAuth from "../../common/Navbar";
+import { Seller } from "../../models/Seller";
+import UserService from '../../services/user-service';
+import FileService from '../../services/file-service'
+import { useNavigate } from "react-router-dom";
 
-export default function AddAddress() {
-  const [loading, setLoading] = useState(false);
+export default function SupplierRegistration() {
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [storeName, setStoreName] = useState("");
   const [street, setStreet] = useState("");
   const [apt, setApt] = useState("");
   const [country, setCountry] = useState("");
@@ -14,37 +18,54 @@ export default function AddAddress() {
   const [state, setState] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [phone, setPhone] = useState("");
-  const [shipName, setShipName] = useState("");
+  const [inspectionFile, setInspectionFile] = useState(null);
+  const [certificateFile, setCertificateFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
-
     setButtonDisabled(true);
     setLoading(true);
+    alert('This might take a few minutes. . .')
     try {
-      const address = new Address(
-        shipName,
-        country,
-        street,
-        apt,
-        city,
-        state,
-        zipcode,
-        phone,
-        null
-      );
-      await UserService.addAddress(address);
-      alert("Address Added! Returning to Previous Page . . .");
-      navigate("/account/addresses");
+        const inspectionUrl = await FileService.uploadImage(inspectionFile, (progress) => {
+            console.log("Upload progress: ", progress);
+          });
+
+        const certificateUrl = await FileService.uploadImage(certificateFile, (progress) => {
+            console.log("Upload progress: ", progress);
+          });
+
+        const seller = new Seller(email, firstName, lastName, storeName, country, street, apt, city, state, zipcode, phone, inspectionUrl, certificateUrl, null);
+        await UserService.addSeller(seller);
+        navigate("/");
+        alert('Seller Successfully Registered');
     } catch (error) {
-      alert(error.message);
+        alert(error.message);
     }
     setButtonDisabled(false);
     setLoading(false);
   }
+
+  function onInspectionSelected(e) {
+    if (e.target.files.length) {
+      setInspectionFile(e.target.files[0]);
+    } else {
+      setInspectionFile(null);
+    }
+  }
+
+  function onCertificateSelected(e) {
+    if (e.target.files.length) {
+      setCertificateFile(e.target.files[0]);
+    } else {
+      setCertificateFile(null);
+    }
+  }
+
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
@@ -58,16 +79,56 @@ export default function AddAddress() {
         />
         <div className="card p-5 mx-5">
           <form onSubmit={onFormSubmit}>
+
             <div className="mb-3">
-              <label className="form-label">Name</label>
+              <label className="form-label">Email</label>
+
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Please enter email address"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">First Name</label>
 
               <input
                 type="text"
                 className="form-control"
-                placeholder="Please enter name for shipping"
+                placeholder="Please enter first name"
                 required
-                value={shipName}
-                onChange={(e) => setShipName(e.target.value)}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+
+              <label className="form-label">Last Name</label>
+
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Please enter last name"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Store Name</label>
+
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Please enter store name"
+                required
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
               />
             </div>
 
@@ -142,7 +203,7 @@ export default function AddAddress() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Phone Number</label>
+              <label className="form-label">Store Phone</label>
               <input
                 type="text"
                 className="form-control"
@@ -150,6 +211,29 @@ export default function AddAddress() {
                 required
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            
+            <div className="mb-3">
+              <label className="form-label">Inspection Report</label>
+              <input
+                type="file"
+                className="form-control"
+                placeholder=""
+                onChange={onInspectionSelected}
+                multiple
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Certificate</label>
+              <input
+                type="file"
+                className="form-control"
+                placeholder=""
+                required
+                onChange={onCertificateSelected}
+                multiple
               />
             </div>
 
@@ -160,7 +244,7 @@ export default function AddAddress() {
                 id="submitBtn"
                 disabled={buttonDisabled}
               >
-                {loading ? <Spinner extraClass="change-size" /> : "Add Address"}
+                {loading ? <Spinner extraClass="change-size" /> : "Register"}
               </button>
             </div>
           </form>

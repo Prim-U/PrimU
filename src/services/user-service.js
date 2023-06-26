@@ -92,7 +92,7 @@ class UserService {
   async addAddress(address) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "user " + docId + "'s Address")
+      collection(db, this.collection, docId, "Addresses, " + docId)
     );
     //const docu = await getDoc(docRef);
     //const data = docu.data();
@@ -107,7 +107,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "user " + docId + "'s Address"
+      "Addresses, " + docId
     );
     const querySnapshot = await getDocs(query(collectionRef));
 
@@ -127,7 +127,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "user " + docId + "'s Address",
+      "Addresses, " + docId,
       addressId
     );
     await deleteDoc(docRef);
@@ -140,7 +140,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "user " + docId + "'s Address",
+      "Addresses, " + docId,
       address.id
     );
     await setDoc(docRef, address.intoJson());
@@ -152,12 +152,7 @@ class UserService {
   async addPayment(payment) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(
-        db,
-        this.collection,
-        docId,
-        "user " + docId + "'s Payment Methods"
-      )
+      collection(db, this.collection, docId, "Payment Methods, " + docId)
     );
     payment.id = docRef.id;
     //const docu = await getDoc(docRef);
@@ -172,7 +167,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "user " + docId + "'s Payment Methods"
+      "Payment Methods, " + docId
     );
     const querySnapshot = await getDocs(query(collectionRef));
 
@@ -188,15 +183,39 @@ class UserService {
   // Delete payment
   async deletePayment(paymentId) {
     const docId = auth.currentUser.uid;
-    const docRef = doc(db, this.collection, docId, "user " + docId + "'s Payment Methods", paymentId);
+    const docRef = doc(
+      db,
+      this.collection,
+      docId,
+      "Payment Methods, " + docId,
+      paymentId
+    );
     await deleteDoc(docRef);
   }
 
-  // Update payment 
+  // Update payment
   async updatePayment(payment) {
     const docId = auth.currentUser.uid;
-    const docRef = doc(db, this.collection, docId, "user " + docId + "'s Payment Methods", payment.id);
+    const docRef = doc(
+      db,
+      this.collection,
+      docId,
+      "Payment Methods, " + docId,
+      payment.id
+    );
     await setDoc(docRef, payment.forJson());
+  }
+
+  // Sellers
+  async addSeller(seller) {
+    const docId = auth.currentUser.uid;
+    const docRef = doc(
+      collection(db, this.collection, docId, "Seller " + docId)
+    );
+    seller.id = docRef.id;
+    //const docu = await getDoc(docRef);
+    //const data = docu.data();
+    await setDoc(docRef, seller.sellerJson());
   }
 }
 
