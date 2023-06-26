@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Spinner from "../../common/Spinner";
 import NavbarAuth from "../../common/Navbar";
 import { Seller } from "../../models/Seller";
-import UserService from '../../services/user-service';
-import FileService from '../../services/file-service'
+import UserService from "../../services/user-service";
+import FileService from "../../services/file-service";
 import { useNavigate } from "react-router-dom";
 
 export default function SupplierRegistration() {
@@ -29,22 +29,43 @@ export default function SupplierRegistration() {
     e.preventDefault();
     setButtonDisabled(true);
     setLoading(true);
-    alert('This might take a few minutes. . .')
+    alert("This might take a couple of seconds . . .");
     try {
-        const inspectionUrl = await FileService.uploadImage(inspectionFile, (progress) => {
-            console.log("Upload progress: ", progress);
-          });
+      const inspectionUrl = await FileService.uploadImage(
+        inspectionFile,
+        (progress) => {
+          console.log("Upload progress: ", progress);
+        }
+      );
 
-        const certificateUrl = await FileService.uploadImage(certificateFile, (progress) => {
-            console.log("Upload progress: ", progress);
-          });
+      const certificateUrl = await FileService.uploadImage(
+        certificateFile,
+        (progress) => {
+          console.log("Upload progress: ", progress);
+        }
+      );
 
-        const seller = new Seller(email, firstName, lastName, storeName, country, street, apt, city, state, zipcode, phone, inspectionUrl, certificateUrl, null);
-        await UserService.addSeller(seller);
-        navigate("/");
-        alert('Seller Successfully Registered');
+      const seller = new Seller(
+        email,
+        firstName,
+        lastName,
+        storeName,
+        country,
+        street,
+        apt,
+        city,
+        state,
+        zipcode,
+        phone,
+        inspectionUrl,
+        certificateUrl,
+        null
+      );
+      await UserService.addSeller(seller);
+      navigate("/");
+      alert("Seller Successfully Registered");
     } catch (error) {
-        alert(error.message);
+      alert(error.message);
     }
     setButtonDisabled(false);
     setLoading(false);
@@ -78,8 +99,8 @@ export default function SupplierRegistration() {
           alt=""
         />
         <div className="card p-5 mx-5">
+          <h1 className="mb-4">Supplier Registration</h1>
           <form onSubmit={onFormSubmit}>
-
             <div className="mb-3">
               <label className="form-label">Email</label>
 
@@ -106,7 +127,6 @@ export default function SupplierRegistration() {
               />
             </div>
             <div className="mb-3">
-
               <label className="form-label">Last Name</label>
 
               <input
@@ -135,14 +155,34 @@ export default function SupplierRegistration() {
             <div className="mb-3">
               <label className="form-label">Country/Region</label>
 
-              <input
+              <select
+                className="form-select"
+                id="country"
+                name="country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value="">-Select a location-</option>
+                <option value="" disabled>
+                  -----------------
+                </option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Japan">Japan</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="South Africa">South Africa</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States">United States</option>
+              </select>
+              {/* <input
                 type="text"
                 className="form-control"
                 placeholder="Country"
                 required
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-              />
+              /> */}
             </div>
 
             <div className="mb-3">
@@ -213,7 +253,7 @@ export default function SupplierRegistration() {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-            
+
             <div className="mb-3">
               <label className="form-label">Inspection Report</label>
               <input
