@@ -16,7 +16,7 @@ export default function SellerPage() {
         </h1>
         <div className="row">
           <div className="col">
-            <div className="seller-card">
+            <div className="seller-card mb-3">
               <img
                 className="supplier-image"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOq8uLc7g5srAEEZn0QLsJ4M1ZUVLYJY_FXQ&usqp=CAU"
