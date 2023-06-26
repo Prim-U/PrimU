@@ -34,6 +34,7 @@ import UpdateAddress from "./components/profile/UpdateAddress";
 import UpdatePayment from "./components/profile/UpdatePayment";
 import SupplierRegistration from "./components/auth/SupplierRegistration";
 import SellerPage from "./components/profile/SellerPage";
+import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
 
 
 function App() {
@@ -92,6 +93,15 @@ function App() {
             element={
               <RequireAuth user={user}>
                 <SupplierRegistration user={user} />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+
+            path="/account/seller/primlancer-registration"
+            element={
+              <RequireAuth user={user}>
+                <PrimlancerRegistration user={user} />
               </RequireAuth>
             }
           ></Route>

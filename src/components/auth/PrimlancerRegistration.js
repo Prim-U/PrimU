@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import Spinner from "../../common/Spinner";
 import Navbar from "../../common/Navbar";
-import { Seller } from "../../models/Seller";
+import Spinner from "../../common/Spinner";
+import { Primlancer } from "../../models/Primlancer";
 import UserService from "../../services/user-service";
-import FileService from "../../services/file-service";
 import { useNavigate } from "react-router-dom";
 
-export default function SupplierRegistration() {
+export default function PrimlancerRegistration() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [storeName, setStoreName] = useState("");
+  const [dob, setDob] = useState("");
   const [street, setStreet] = useState("");
   const [apt, setApt] = useState("");
   const [country, setCountry] = useState("");
@@ -18,8 +17,13 @@ export default function SupplierRegistration() {
   const [state, setState] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [phone, setPhone] = useState("");
-  const [inspectionFile, setInspectionFile] = useState(null);
-  const [certificateFile, setCertificateFile] = useState(null);
+  const [employmentHistory, setEmploymentHistory] = useState("");
+  const [education, setEducation] = useState("");
+  const [reference, setreference] = useState("");
+//   const [referenceFile, setReferenceFile] = useState(null);
+  const [qualifications, setQualifications] = useState("");
+//   const [qualificationFiles, setQualificationFiles] = useState(null);
+  const [availibility, setAvaibility] = useState("");
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
@@ -27,65 +31,66 @@ export default function SupplierRegistration() {
 
   async function onFormSubmit(e) {
     e.preventDefault();
-    setButtonDisabled(true);
     setLoading(true);
-    alert("This might take a couple of seconds . . .");
+    setButtonDisabled(true);
     try {
-      const inspectionUrl = await FileService.uploadImage(
-        inspectionFile,
+      /* const referenceUrl = await FileService.uploadImage(
+        referenceFile,
         (progress) => {
           console.log("Upload progress: ", progress);
         }
       );
 
-      const certificateUrl = await FileService.uploadImage(
-        certificateFile,
+      const qualificationsUrl = await FileService.uploadImage(
+        qualificationFiles,
         (progress) => {
           console.log("Upload progress: ", progress);
         }
-      );
-
-      const seller = new Seller(
+      ); */
+      const primlancer = new Primlancer(
         email,
         firstName,
         lastName,
-        storeName,
+        phone,
+        dob,
         country,
         street,
         apt,
         city,
         state,
         zipcode,
-        phone,
-        inspectionUrl,
-        certificateUrl,
+        education,
+        employmentHistory,
+        reference,
+        qualifications,
+        availibility,
         null
       );
-      await UserService.addSeller(seller);
+      await UserService.addPrimlancer(primlancer);
       navigate("/");
       alert("Your application has been submitted, thank you!");
     } catch (error) {
       alert(error.message);
     }
-    setButtonDisabled(false);
     setLoading(false);
+    setButtonDisabled(false);
   }
 
-  function onInspectionSelected(e) {
+ /*  function onReferenceSelected(e) {
     if (e.target.files.length) {
-      setInspectionFile(e.target.files[0]);
+      setReferenceFile(e.target.files[0]);
     } else {
-      setInspectionFile(null);
+      setReferenceFile(null);
     }
   }
 
-  function onCertificateSelected(e) {
+  function onResumeSelected(e) {
     if (e.target.files.length) {
-      setCertificateFile(e.target.files[0]);
+      setQualificationFiles(e.target.files[0]);
     } else {
-      setCertificateFile(null);
+      setQualificationFiles(null);
     }
-  }
+  } */
 
   return (
     <div className="real-bg-dark">
@@ -99,8 +104,9 @@ export default function SupplierRegistration() {
           alt=""
         />
         <div className="card p-5 mx-5">
-          <h1 className="mb-4">Become a Supplier</h1>
-          <form onSubmit={onFormSubmit}>
+          <h1 className="mb-3">Become a Primlancer</h1>
+
+          <form onSubmit={onFormSubmit} autoComplete="false">
             <div className="mb-3">
               <label className="form-label">Email</label>
 
@@ -126,6 +132,7 @@ export default function SupplierRegistration() {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Last Name</label>
 
@@ -138,17 +145,29 @@ export default function SupplierRegistration() {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
-
             <div className="mb-3">
-              <label className="form-label">Store Name</label>
+              <label className="form-label">Phone Number</label>
 
               <input
                 type="text"
                 className="form-control"
-                placeholder="Please enter store name"
+                placeholder="Please enter last name"
                 required
-                value={storeName}
-                onChange={(e) => setStoreName(e.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Date of Birth</label>
+
+              <input
+                type="text"
+                className="form-control"
+                placeholder="DD/MM/YYYY"
+                required
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
               />
             </div>
 
@@ -200,7 +219,6 @@ export default function SupplierRegistration() {
                 type="text"
                 className="form-control"
                 placeholder="Apartment, suite, building, unit, floor, etc."
-                required
                 value={apt}
                 onChange={(e) => setApt(e.target.value)}
               />
@@ -243,48 +261,103 @@ export default function SupplierRegistration() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Store Phone</label>
-              <input
-                type="text"
+              <label className="form-label">Employment History</label>
+
+              <textarea
                 className="form-control"
-                placeholder="Enter preferred number to contact you with"
+                placeholder="Previous employers, job titles, dates of employment, and duties"
                 required
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
+                value={employmentHistory}
+                onChange={(e) => setEmploymentHistory(e.target.value)}
+              ></textarea>
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Inspection Report</label>
+              <label className="form-label">Education</label>
+
+              <textarea
+                className="form-control"
+                placeholder="High school, college, trade schools, technical certification, or other relevant training"
+                required
+                value={education}
+                onChange={(e) => setEducation(e.target.value)}
+              ></textarea>
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label">Reference</label>
+
+              <textarea
+                className="form-control"
+                placeholder="Names, contact information, and professional relationship of reference"
+                required
+                value={reference}
+                onChange={(e) => setreference(e.target.value)}
+              ></textarea>
+            </div>
+
+            {/* <div className="mb-3">
+              <label className="form-label">
+                References (Optional to Submit File)
+              </label>
               <input
                 type="file"
                 className="form-control"
                 placeholder=""
-                onChange={onInspectionSelected}
+                onChange={onReferenceSelected}
                 multiple
               />
-            </div>
+            </div> */}
 
             <div className="mb-3">
-              <label className="form-label">Certificate</label>
+              <label className="form-label">Skills and Qualifications</label>
+
+              <textarea
+                className="form-control"
+                placeholder="Specialised skills, training, or certifications relevant to the position"
+                required
+                value={qualifications}
+                onChange={(e) => setQualifications(e.target.value)}
+              ></textarea>
+            </div>
+
+            {/* <div className="mb-3">
+              <label className="form-label">
+                Resume (Optional to Submit File)
+              </label>
               <input
                 type="file"
                 className="form-control"
                 placeholder=""
-                required
-                onChange={onCertificateSelected}
+                onChange={onResumeSelected}
                 multiple
               />
+            </div> */}
+
+            <div className="mb-3">
+              <label className="form-label">Availibility</label>
+
+              <textarea
+                className="form-control"
+                placeholder="Days and hours available to work"
+                required
+                value={availibility}
+                onChange={(e) => setAvaibility(e.target.value)}
+              ></textarea>
             </div>
 
             <div className="d-grid gap-2">
               <button
                 type="submit"
                 className="btn btn-dark mt-3"
-                id="submitBtn"
+                id="registerButton"
                 disabled={buttonDisabled}
               >
-                {loading ? <Spinner extraClass="change-size" /> : "Submit Application"}
+                {loading ? (
+                  <Spinner extraClass="change-size" />
+                ) : (
+                  "Submit Application"
+                )}
               </button>
             </div>
           </form>
