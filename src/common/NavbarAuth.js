@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function NavbarAuth() {
   return (
-    <div>
+    <div className="p-3 bg-light">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="http://localhost:3000/">
             <img
               src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
               alt=""
-              width="100"
+              width="50"
               height="50"
             />
           </a>
@@ -30,14 +30,15 @@ export default function Navbar() {
               <Link className="nav-link active" to="/">
                 Home
               </Link>
-              <Link className="nav-link active">Products</Link>
-              <Link className="nav-link active">Book Services</Link>
+              <Link className="nav-link active" to="/">Products</Link>
+              <Link className="nav-link active" to ="/">Book Services</Link>
               <Link className="nav-link active" to="/profile">
-                Profile
+                Account
               </Link>
               <Link className="nav-link active">FAQ/Customer Support</Link>
             </ul>
           </div>
+
           <form className="d-flex ms-2">
             <button className="search-button me-1" type="submit">
               <i className="bi bi-search"></i>

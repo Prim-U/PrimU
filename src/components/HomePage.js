@@ -1,11 +1,12 @@
 import React from 'react'
-import NavbarAuth from '../common/Navbar'
+import Navbar from '../common/Navbar'
+import NavbarAuth from '../common/NavbarAuth'
 import ServiceCards from './homepageCards/ServiceCards'
 
 export default function HomePage(props) {
   return (
     <div>
-      <NavbarAuth></NavbarAuth>
+        <Navbar></Navbar>
       <ServiceCards></ServiceCards>
     </div>
   )
