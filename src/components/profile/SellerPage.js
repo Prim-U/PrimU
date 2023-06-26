@@ -23,7 +23,7 @@ export default function SellerPage() {
               </div>
               <div className="row mx-auto mt-5">
                 <div className="col">
-                  <Link to="/account/seller/-registration">
+                  <Link to="/account/seller/supplier-registration">
                     <btn className="btn btn-dark seller-btn">SIGN UP HERE</btn>
                   </Link>
                 </div>
