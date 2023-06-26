@@ -25,6 +25,7 @@ import Addresses from "./components/profile/Addresses";
 import AddAddress from "./components/profile/AddAddress";
 import PaymentPage from "./components/profile/PaymentPage";
 import AddPayment from "./components/profile/AddPayment";
+import SellerPage from "./components/seller/SellerPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -59,6 +60,7 @@ function App() {
         <Route path="account/addresses/address-default" element={<AddAddress createAddress={createAddress} />}></Route>
         <Route path="/account/payment" element={<PaymentPage />}></Route>
         <Route path="/account/payment/payment-details" element={<AddPayment />}></Route>
+        <Route path="/seller" element={<SellerPage />}></Route>
 
         
         <Route path="/make-booking" element={<BookingPage />}></Route>

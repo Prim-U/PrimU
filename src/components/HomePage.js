@@ -1,5 +1,6 @@
 import React from 'react'
-import NavbarAuth from '../common/Navbar'
+import Navbar from '../common/Navbar'
+import NavbarAuth from '../common/NavbarAuth'
 import ServiceCards from './homepageCards/ServiceCards'
 import CoverCard from './homepageCards/CoverCard'
 import ForCustomersCard from './homepageCards/ForCustomersCard'
@@ -20,7 +21,6 @@ export default function HomePage(props) {
         <EventCards></EventCards>
         <ProvideServiceCard></ProvideServiceCard>
         <FAQ></FAQ>
-
 
     </div>
   )
