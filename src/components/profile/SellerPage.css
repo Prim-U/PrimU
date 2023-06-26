@@ -1,0 +1,21 @@
+.seller-btn {
+    border-radius: 30px!important;
+    width: 165px;
+    height: 40px;
+}
+
+.primlancer-card {
+    border-radius: 0;
+    height: 400px;
+    background-image: url(https://www.bagley.msstate.edu/wp-content/uploads/Remote-Work.jpg);
+    background-size: 500px 400px;
+}
+
+.supplier-card {
+    border-radius: 0;
+    height: 400px;
+    background-image: url(https://www.bagley.msstate.edu/wp-content/uploads/Remote-Work.jpg);
+    background-size: 500px 400px;
+}
+
+

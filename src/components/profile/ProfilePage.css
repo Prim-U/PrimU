@@ -1,0 +1,33 @@
+.bg {
+  background-color: #64306e;
+}
+
+#add-profile-card {
+  width: 250px;
+  height: 250px;
+}
+
+#add-profile-card:hover {
+  background-color: lightgray;
+  transition: 0.5s;
+}
+
+#profile-card {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.movie-img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.remove-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: aliceblue;
+}

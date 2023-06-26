@@ -1,5 +1,5 @@
 export class Address {
-    constructor(shipname, country, street, apt, city, state, zipcode, phone) {
+    constructor(shipname, country, street, apt, city, state, zipcode, phone, id) {
       this.street = street;
       this.shipname = shipname;
       this.apt = apt;
@@ -8,6 +8,7 @@ export class Address {
       this.state = state;
       this.zipcode = zipcode;
       this.phone = phone
+      this.id = id
     }
   
     intoJson() {
@@ -19,8 +20,14 @@ export class Address {
           city: this.city,
           state: this.state,
           zipcode: this.zipcode,
-          phone: this.phone
+          phone: this.phone,
+          // id: this.id
       }
+    }
+
+    static fromFirebase(doc) {
+      const data = doc.data();
+      return new Address(data.shipname, data.country, data.street, data.apt, data.city, data.state, data.zipcode, data.phone, doc.id)
     }
   }
   

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import NavbarAuth from "../../common/Navbar";
-import { Payment } from "../../models/Payment";
+import Spinner from "../../common/Spinner";
+import { Profile } from "../../models/Profile";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../../common/Spinner";
+import FileService from '../../services/file-service';
 
-export default function AddPayment() {
-  const [card, setCard] = useState("");
-  const [exp, setExp] = useState("");
-  const [cvv, setCVV] = useState("");
+export default function AddProfile() {
+  const [profileName, setProfileName] = useState("");
+  const [file, setFile] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
@@ -19,15 +20,27 @@ export default function AddPayment() {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      const payment = new Payment(card, exp, cvv, null);
-      await UserService.addPayment(payment);
-      alert("Payment Added! Returning to Previous Page. . .");
-      navigate("/account/payment");
+      const downloadUrl = await FileService.uploadImage(file, (progress) => {
+        console.log("Upload progress: ", progress);
+      });
+
+      const profile = new Profile(profileName, downloadUrl, null);
+      await UserService.addProfile(profile);
+      alert("Clicked!");
+      navigate("/account/profile");
     } catch (error) {
       alert(error.message);
     }
     setButtonDisabled(false);
     setLoading(false);
+  }
+
+  function onFileSelected(e) {
+    if (e.target.files.length) {
+      setFile(e.target.files[0]);
+    } else {
+      setFile(null);
+    }
   }
   return (
     <div className="bg-dark">
@@ -43,41 +56,26 @@ export default function AddPayment() {
         <div className="card p-5 mx-5">
           <form onSubmit={onFormSubmit}>
             <div className="mb-3">
-              <label className="form-label">Card Number</label>
+              <label className="form-label">Name</label>
 
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter card number"
+                placeholder="Enter name"
                 required
-                value={card}
-                onChange={(e) => setCard(e.target.value)}
+                value={profileName}
+                onChange={(e) => setProfileName(e.target.value)}
               />
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Expiration Date</label>
+              <label className="form-label">Select Profile Picture</label>
 
               <input
-                type="text"
+                onChange={onFileSelected}
+                type="file"
                 className="form-control"
-                placeholder="Enter card expiration date"
-                required
-                value={exp}
-                onChange={(e) => setExp(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">CVV</label>
-
-              <input
-                type="text"
-                className="form-control mb-1"
-                placeholder="Enter 3 digits on back of the card"
-                required
-                value={cvv}
-                onChange={(e) => setCVV(e.target.value)}
+                multiple
               />
             </div>
 
@@ -88,11 +86,7 @@ export default function AddPayment() {
                 id="updateButton"
                 disabled={buttonDisabled}
               >
-                {loading ? (
-                  <Spinner extraClass="change-size" />
-                ) : (
-                  "Add Payment Method"
-                )}
+                {loading ? <Spinner extraClass="change-size" /> : "Add Profile"}
               </button>
             </div>
           </form>

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavbarAuth from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { Address } from "../../models/AddressModel";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 
-export default function AddAddress() {
+export default function UpdateAddress(props) {
   const [loading, setLoading] = useState(false);
   const [street, setStreet] = useState("");
   const [apt, setApt] = useState("");
@@ -19,26 +19,57 @@ export default function AddAddress() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    initialLoad();
+  }, []);
+
+  async function initialLoad() {
+    try {
+      if (props.addressList) {
+        setStreet(props.addressList.street);
+        setApt(props.addressList.apt);
+        setCountry(props.addressList.country);
+        setCity(props.addressList.city);
+        setState(props.addressList.state);
+        setZipcode(props.addressList.zipcode);
+        setPhone(props.addressList.phone);
+        setShipName(props.addressList.shipname);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   async function onFormSubmit(e) {
     e.preventDefault();
 
     setButtonDisabled(true);
     setLoading(true);
     try {
-      const address = new Address(
-        shipName,
-        country,
-        street,
-        apt,
-        city,
-        state,
-        zipcode,
-        phone,
-        null
-      );
-      await UserService.addAddress(address);
-      alert("Address Added! Returning to Previous Page . . .");
-      navigate("/account/addresses");
+      if (props.addressList) {
+        setStreet(e.target.value);
+        setApt(e.target.value);
+        setCountry(e.target.value);
+        setCity(e.target.value);
+        setState(e.target.value);
+        setZipcode(e.target.value);
+        setPhone(e.target.value);
+        setShipName(e.target.value);
+        const updatedAddress = new Address(
+          shipName,
+          country,
+          street,
+          apt,
+          city,
+          state,
+          zipcode,
+          phone,
+          props.addressList.id
+        );
+        await UserService.updateAddress(updatedAddress);
+        alert("Address Updated! Returning to Previous Page. . .");
+        navigate("/account/addresses");
+      }
     } catch (error) {
       alert(error.message);
     }
@@ -160,7 +191,11 @@ export default function AddAddress() {
                 id="submitBtn"
                 disabled={buttonDisabled}
               >
-                {loading ? <Spinner extraClass="change-size" /> : "Add Address"}
+                {loading ? (
+                  <Spinner extraClass="change-size" />
+                ) : (
+                  "Update Address"
+                )}
               </button>
             </div>
           </form>

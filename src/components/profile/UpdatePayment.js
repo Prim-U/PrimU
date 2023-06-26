@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavbarAuth from "../../common/Navbar";
-import { Payment } from "../../models/Payment";
-import UserService from "../../services/user-service";
-import { useNavigate } from "react-router-dom";
 import Spinner from "../../common/Spinner";
+import UserService from "../../services/user-service";
+import { useNavigate } from "react-router";
+import { Payment } from "../../models/Payment";
 
-export default function AddPayment() {
+export default function UpdatePayment(props) {
   const [card, setCard] = useState("");
   const [exp, setExp] = useState("");
   const [cvv, setCVV] = useState("");
@@ -13,22 +13,49 @@ export default function AddPayment() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    initialLoad();
+  }, []);
+
+  async function initialLoad() {
+    try {
+      if (props.updatePayment) {
+        setCard(props.updatePayment.card);
+        setExp(props.updatePayment.date);
+        setCVV(props.updatePayment.cvv);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   async function onFormSubmit(e) {
     e.preventDefault();
 
     setButtonDisabled(true);
     setLoading(true);
     try {
-      const payment = new Payment(card, exp, cvv, null);
-      await UserService.addPayment(payment);
-      alert("Payment Added! Returning to Previous Page. . .");
-      navigate("/account/payment");
+      if (props.updatePayment) {
+        setCard(e.target.value);
+        setExp(e.target.value);
+        setCVV(e.target.value);
+        const updatedPayment = new Payment(
+          card,
+          exp,
+          cvv,
+          props.updatePayment.id
+        );
+        await UserService.updatePayment(updatedPayment);
+        alert("Payment Updated! Returning to Previous Page. . .");
+        navigate("/account/payment");
+      }
     } catch (error) {
       alert(error.message);
     }
     setButtonDisabled(false);
     setLoading(false);
   }
+
   return (
     <div className="bg-dark">
       <NavbarAuth></NavbarAuth>
@@ -91,7 +118,7 @@ export default function AddPayment() {
                 {loading ? (
                   <Spinner extraClass="change-size" />
                 ) : (
-                  "Add Payment Method"
+                  "Update Payment Method"
                 )}
               </button>
             </div>
