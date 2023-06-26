@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../common/Navbar'
-import NavbarAuth from '../common/NavbarAuth'
 import ServiceCards from './homepageCards/ServiceCards'
 import CoverCard from './homepageCards/CoverCard'
 import ForCustomersCard from './homepageCards/ForCustomersCard'
@@ -11,7 +10,7 @@ import FAQ from './homepageCards/FAQ'
 export default function HomePage(props) {
   return (
     <div>
-      <NavbarAuth></NavbarAuth>
+      <Navbar></Navbar>
 
         <CoverCard></CoverCard>
         <br></br>

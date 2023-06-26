@@ -6,7 +6,7 @@ import { auth } from "../../firebase/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 // Components
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 
 // Models
 import { User } from "../../models/Users";
@@ -57,8 +57,8 @@ export default function Register() {
   }
 
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

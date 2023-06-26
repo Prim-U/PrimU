@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import NavbarAuth from '../../common/NavbarAuth'
+import Navbar from '../../common/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebase';
@@ -35,8 +35,8 @@ export default function Login() {
   }
 
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container my-5 p-3">
         <img
           className="mx-auto d-block mb-5"

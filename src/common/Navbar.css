@@ -1,0 +1,36 @@
+.nav-link {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white!important;
+  }
+  
+  .nav-link:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 0;
+    height: 2px;
+    background-color: #d390e0;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .nav-link:hover:after {
+    width: 100%;
+  }
+  
+  .nav-link:hover {
+    color: #d390e0 !important;
+    transition: 0.3s !important;
+  }
+  
+  .navbar {
+    background-color: #24072a !important;
+  }
+  
+  #nav-padding {
+    background-color: #24072a !important;
+  }
+  

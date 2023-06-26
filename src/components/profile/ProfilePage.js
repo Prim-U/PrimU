@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserService from "../../services/user-service";
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 import "./ProfilePage.css";
 
 export default function ProfilePage() {
@@ -21,7 +21,7 @@ export default function ProfilePage() {
   }
   return (
     <div className="bg">
-      <NavbarAuth></NavbarAuth>
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <h1 className="mb-3 text-light">Manage Profiles</h1>
         <div className="d-flex flex-wrap">
