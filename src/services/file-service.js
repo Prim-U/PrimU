@@ -5,12 +5,14 @@ import {
     deleteObject,
   } from 'firebase/storage';
 
-  import { storage } from '../firebase/firebase';
+  import { auth, storage } from '../firebase/firebase';
   
   class FileService {
+    
     uploadImage(file, onUploadProgress) {
       return new Promise((resolve, reject) => {
-        const fileRef = ref(storage, 'images/' + file.name);
+        const userId = auth.currentUser.uid
+        const fileRef = ref(storage, `credentials/user ${userId}/${file.name}`);
         const uploadTask = uploadBytesResumable(fileRef, file);
   
         uploadTask.on(

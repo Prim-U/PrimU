@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // Stylesheet
 import './Navbar.css';
 
-export default function NavbarAuth() {
+export default function Navbar() {
   return (
     <div className="bg-light" id="nav-padding">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

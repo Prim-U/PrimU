@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 
 // Stylesheet
 import "./Addresses.css";
@@ -38,14 +38,14 @@ export default function Addresses(props) {
 
   return (
     <div className="bg">
-      <NavbarAuth></NavbarAuth>
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <h1 className="mb-3 text-light">Manage Addresses</h1>
 
         <div className="d-flex flex-wrap">
           <div
-            className="card p-5 me-2 mb-2 align-middle text-center"
-            id="add-card"
+            className="card p-5 me-2 mb-2 align-middle text-center add-card"
+            id="add-address-card"
           >
             <a
               href="http://localhost:3000/account/addresses/add-address"
@@ -53,7 +53,7 @@ export default function Addresses(props) {
               className="text-decoration-none text-black text-center"
             >
               <div className="row">
-                <i className="fa fa-plus fa-4x" aria-hidden="true"></i>
+                <i className="fa fa-plus fa-4x mt-4" aria-hidden="true"></i>
               </div>
 
               <div className="align-middle">

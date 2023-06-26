@@ -11,21 +11,21 @@
   transition: 0.5s;
 }
 
-#add-card:hover {
+#add-address-card:hover {
   background-color: lightgray;
   transition: 0.5s;
 }
 
-#add-card {
+#add-address-card {
   border-style: dashed;
   border-width: 4px;
   border-color: darkgray;
-  height: 250px;
+  height: 300px;
   width: 300px;
 }
 
 #address-card {
-  height: 250px;
+  height: 300px;
   width: 300px;
   position: relative;
 }
