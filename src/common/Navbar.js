@@ -1,59 +1,54 @@
 import React from "react";
-
-// Functions/methods
 import { Link } from "react-router-dom";
 
-// Stylesheet
-import './Navbar.css';
-
-export default function NavbarAuth() {
+export default function Navbar() {
   return (
-    <div className="bg-light" id="nav-padding">
+    <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="http://localhost:3000/">
             <img
               src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
               alt=""
-              width="50"
+              width="100"
               height="50"
             />
           </a>
           <button
-            className="navbar-toggler bg-light"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <i className="bi bi-list"></i>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active">Products</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to='/make-booking'>Make a Booking</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/account">
-                  My Account
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active">FAQ/Customer Support</Link>
-              </li>
+              <Link className="nav-link active" to="/">
+                Home
+              </Link>
+              <Link className="nav-link active">Products</Link>
+              <Link className="nav-link active">Book Services</Link>
+              <Link className="nav-link active" to="/profile">
+                Profile
+              </Link>
+              <Link className="nav-link active">FAQ/Customer Support</Link>
             </ul>
           </div>
-
+          <form className="d-flex ms-2">
+            <button className="search-button me-1" type="submit">
+              <i className="bi bi-search"></i>
+            </button>
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search products"
+              aria-label="Search"
+            />
+          </form>
         </div>
       </nav>
     </div>

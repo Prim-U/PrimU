@@ -25,6 +25,7 @@ import Addresses from "./components/profile/Addresses";
 import AddAddress from "./components/profile/AddAddress";
 import PaymentPage from "./components/profile/PaymentPage";
 import AddPayment from "./components/profile/AddPayment";
+
 import RequireAuth from "./common/RequireAuth";
 import Spinner from "./common/Spinner";
 import ProfilePage from "./components/profile/ProfilePage";
@@ -33,6 +34,7 @@ import UpdateAddress from "./components/profile/UpdateAddress";
 import UpdatePayment from "./components/profile/UpdatePayment";
 import SupplierRegistration from "./components/auth/SupplierRegistration";
 import SellerPage from "./components/profile/SellerPage";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -55,6 +57,7 @@ function App() {
   return (
     <BrowserRouter>
       <TopBar user={user}></TopBar>
+
       {isUserUpdated ? (
         <Routes>
           <Route path="/" element={<HomePage user={user} />}></Route>
@@ -194,6 +197,7 @@ function App() {
           <Spinner />
         </div>
       )}
+
     </BrowserRouter>
   );
 }
