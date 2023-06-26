@@ -68,3 +68,15 @@
     top: 25%;
     left: 45%;
   }
+
+.bg-pink {
+  background-color: #d0b8d5;
+}
+
+.why-sell-color {
+  color: #64306e;
+}
+
+.fee-container {
+  width: 700px!important;
+}
