@@ -207,6 +207,7 @@ class UserService {
   }
 
   // Sellers
+
   async addSeller(seller) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
@@ -216,6 +217,20 @@ class UserService {
     //const docu = await getDoc(docRef);
     //const data = docu.data();
     await setDoc(docRef, seller.sellerJson());
+  }
+
+
+
+  // Primlancers
+  async addPrimlancer(primlancer) {
+    const docId = auth.currentUser.uid;
+    const docRef = doc(
+      collection(db, this.collection, docId, "Primlancer " + docId)
+    );
+    primlancer.id = docRef.id;
+    //const docu = await getDoc(docRef);
+    //const data = docu.data();
+    await setDoc(docRef, primlancer.primlancerJson());
   }
 }
 
