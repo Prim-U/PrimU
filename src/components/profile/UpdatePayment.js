@@ -48,7 +48,7 @@ export default function UpdatePayment(props) {
           props.updatePayment.id
         );
         await UserService.updatePayment(updatedPayment);
-        alert("Payment Updated! Returning to Previous Page. . .");
+        alert("Payment Updated! Returning to Previous Page . . .");
         navigate("/account/payment");
       }
     } catch (error) {
@@ -59,14 +59,24 @@ export default function UpdatePayment(props) {
   }
 
   return (
-    <div /* className="real-bg-dark" */>
+    <div>
       <Navbar></Navbar>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">HOME</Link> / <Link to="/account" className="account-path">MY ACCOUNT</Link> /
-        <Link to="/account/payment" className="account-path">PAYMENT METHODS</Link> / UPDATE PAYMENT
+        <Link to="/" className="account-path">
+          HOME
+        </Link>{" "}
+        /{" "}
+        <Link to="/account" className="account-path">
+          MY ACCOUNT
+        </Link>{" "}
+        /{" "}
+        <Link to="/account/payment" className="account-path">
+          PAYMENT METHODS
+        </Link>{" "}
+        / UPDATE PAYMENT
       </p>
 
       <div className="row mx-3">
@@ -137,72 +147,6 @@ export default function UpdatePayment(props) {
           </div>
         </div>
       </div>
-      {/* <div className="container mt-5 p-3">
-        <img
-          className="mx-auto d-block mb-5"
-          src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
-          width="100"
-          height="80"
-          alt=""
-        />
-        <div className="card p-5 mx-5">
-          <form onSubmit={onFormSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Card Number</label>
-
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter card number"
-                required
-                value={card}
-                onChange={(e) => setCard(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">Expiration Date</label>
-
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter card expiration date"
-                required
-                value={exp}
-                onChange={(e) => setExp(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">CVV</label>
-
-              <input
-                type="text"
-                className="form-control mb-1"
-                placeholder="Enter 3 digits on back of the card"
-                required
-                value={cvv}
-                onChange={(e) => setCVV(e.target.value)}
-              />
-            </div>
-
-            <div className="d-grid gap-2">
-              <button
-                type="submit"
-                className="btn btn-dark mt-3"
-                id="updateButton"
-                disabled={buttonDisabled}
-              >
-                {loading ? (
-                  <Spinner extraClass="change-size" />
-                ) : (
-                  "Update Payment Method"
-                )}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div> */}
     </div>
   );
 }

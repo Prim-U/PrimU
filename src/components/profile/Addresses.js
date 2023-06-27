@@ -38,7 +38,7 @@ export default function Addresses(props) {
   }
 
   return (
-    <div /*className="bg"*/>
+    <div>
       <Navbar></Navbar>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
@@ -113,72 +113,6 @@ export default function Addresses(props) {
           </div>
         </div>
       </div>
-      {/* <div className="container mt-5 p-3">
-        <h1 className="mb-3 text-light">Manage Addresses</h1>
-
-        <div className="d-flex flex-wrap">
-          <div
-            className="card p-5 me-2 mb-2 align-middle text-center add-card"
-            id="add-address-card"
-          >
-            <a
-              href="http://localhost:3000/account/addresses/add-address"
-              alt="add"
-              className="text-decoration-none text-black text-center"
-            >
-              <div className="row">
-                <i className="fa fa-plus fa-4x mt-4" aria-hidden="true"></i>
-              </div>
-
-              <div className="align-middle">
-                <h2>Add Address</h2>
-              </div>
-            </a>
-          </div>
-
-          {addresses.map((address) => {
-            return (
-              <div
-                className="card p-3 me-2 mb-2"
-                id="address-card"
-                key={address.id}
-              >
-                <h5>{address.shipname}</h5>
-                <h5>
-                  {address.street} {address.apt}
-                </h5>
-                <h5>
-                  {address.city}, {address.state} {address.zipcode}
-                </h5>
-                <h5>{address.country}</h5>
-                <h5>{address.phone}</h5>
-                <div className="d-grid gap-2 d-md-flex">
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => {
-                      setAddressToRemove(address);
-                      removeAddress(address.id);
-                    }}
-                  >
-                    <i className="bi bi-trash"></i>
-                  </button>
-
-                  <Link to="/account/address/update-address">
-                    <button
-                      className="btn btn-secondary"
-                      onClick={() => {
-                        props.setAddressList(address);
-                      }}
-                    >
-                      <i className="bi bi-pencil"></i>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div> */}
     </div>
   );
 }
