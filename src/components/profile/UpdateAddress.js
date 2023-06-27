@@ -93,7 +93,7 @@ export default function UpdateAddress(props) {
           MY ACCOUNT
         </Link>{" "}
         /
-        <Link to="/account/address" className="account-path">
+        <Link to="/account/addresses" className="account-path">
           ADDRESS MANAGEMENT
         </Link>{" "}
         / UPDATE ADDRESS

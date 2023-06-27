@@ -72,7 +72,7 @@ export default function UpdatePayment(props) {
         <Link to="/account" className="account-path">
           MY ACCOUNT
         </Link>{" "}
-        /
+        /{" "}
         <Link to="/account/payment" className="account-path">
           PAYMENT METHODS
         </Link>{" "}
