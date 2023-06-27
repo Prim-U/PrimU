@@ -41,7 +41,7 @@ export class Primlancer {
     this.id = id;
   }
 
-  primlancerJson() {
+  primlancerToJson() {
     return {
       email: this.email,
       firstname: this.firstname,

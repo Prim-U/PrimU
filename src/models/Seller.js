@@ -31,7 +31,7 @@ export class Seller {
     this.id = id;
   }
 
-  sellerJson() {
+  sellerToJson() {
     return {
       email: this.email,
       firstname: this.firstname,

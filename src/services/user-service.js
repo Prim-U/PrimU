@@ -62,7 +62,7 @@ class UserService {
       )
     );
     profile.id = docRef.id;
-    await setDoc(docRef, profile.fromJson());
+    await setDoc(docRef, profile.profileToJson());
   }
 
   // Fetch Profile
@@ -97,7 +97,7 @@ class UserService {
     //const docu = await getDoc(docRef);
     //const data = docu.data();
     address.id = docRef.id;
-    await setDoc(docRef, address.intoJson());
+    await setDoc(docRef, address.addressToJson());
   }
 
   // Fetch address information
@@ -143,7 +143,7 @@ class UserService {
       "Addresses, " + docId,
       address.id
     );
-    await setDoc(docRef, address.intoJson());
+    await setDoc(docRef, address.addressToJson());
   }
 
   // Payment methods
@@ -157,7 +157,7 @@ class UserService {
     payment.id = docRef.id;
     //const docu = await getDoc(docRef);
     //const data = docu.data();
-    await setDoc(docRef, payment.forJson());
+    await setDoc(docRef, payment.paymentToJson());
   }
 
   // Fetch payment
@@ -203,7 +203,7 @@ class UserService {
       "Payment Methods, " + docId,
       payment.id
     );
-    await setDoc(docRef, payment.forJson());
+    await setDoc(docRef, payment.paymentToJson());
   }
 
   // Sellers
@@ -216,7 +216,7 @@ class UserService {
     seller.id = docRef.id;
     //const docu = await getDoc(docRef);
     //const data = docu.data();
-    await setDoc(docRef, seller.sellerJson());
+    await setDoc(docRef, seller.sellerToJson());
   }
 
 
@@ -230,7 +230,7 @@ class UserService {
     primlancer.id = docRef.id;
     //const docu = await getDoc(docRef);
     //const data = docu.data();
-    await setDoc(docRef, primlancer.primlancerJson());
+    await setDoc(docRef, primlancer.primlancerToJson());
   }
 }
 

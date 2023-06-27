@@ -11,7 +11,7 @@ export class Address {
       this.id = id
     }
   
-    intoJson() {
+    addressToJson() {
       return {
           street: this.street,
           shipname: this.shipname,
