@@ -91,7 +91,7 @@ export default function Addresses(props) {
 
                   <Link to="/account/address/update-address">
                     <button
-                      className="edit-button btn btn-secondary"
+                      className="btn btn-secondary"
                       onClick={() => {
                         props.setAddressList(address);
                       }}
