@@ -7,12 +7,12 @@ import "./Account.css";
 import { Link } from "react-router-dom";
 
 // Components
-import Navbar from "../../common/Navbar";
+import NavbarAuth from "../../common/Navbar";
 
 export default function Account() {
   return (
     <div id="account-bg">
-      <Navbar></Navbar>
+      <NavbarAuth></NavbarAuth>
       <h1 className="mt-3 text-center" id="account-management">
         Your Account
       </h1>
@@ -75,7 +75,7 @@ export default function Account() {
       <Link to="/account/seller" className="text-decoration-none d-grid gap-2 col-6 mx-auto">
         <button className="btn btn-dark mx-2 mt-2 mb-2">
           <h3 className="text-start">
-            Become a Seller <i class="bi bi-box-fill"></i>
+            Become a Seller <i className="bi bi-box-fill"></i>
           </h3>
           <p className="text-white text-start">Discover the conveneience of selling<br></br> with Prim-U as either a Supplier or Primlancer!</p>
         </button>
