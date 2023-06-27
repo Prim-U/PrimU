@@ -8,7 +8,7 @@ import UserService from "../../services/user-service";
 // Functions/methods
 import { auth } from "../../firebase/firebase";
 import { updateEmail, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../../common/Spinner";
 import AccountSideBar from "./AccountSideBar";
 
@@ -33,7 +33,7 @@ export default function Contact() {
       await UserService.updateUser(auth.currentUser);
       //await updatePhoneNumber(user, updatePhone );
       navigate("/account");
-      alert("Updated Successfully");
+      alert("Contact Details Updated. Returning to Previous Page . . .");
       window.location.reload();
     } catch (error) {
       alert(error.message);
@@ -43,13 +43,20 @@ export default function Contact() {
   }
 
   return (
-    <div /*className="real-bg-dark"*/>
+    <div>
       <Navbar></Navbar>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        HOME / MY ACCOUNT / CONTACT INFORMATION
+        <Link to="/" className="account-path">
+          HOME
+        </Link>{" "}
+        /{" "}
+        <Link to="/account" className="account-path">
+          MY ACCOUNT
+        </Link>{" "}
+        / CONTACT INFORMATION
       </p>
 
       <div className="row mx-3">
@@ -117,72 +124,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      {/* <div className="container mt-5 p-3">
-        <img
-          className="mx-auto d-block mb-5"
-          src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
-          width="100"
-          height="80"
-          alt=""
-        />
-        <div className="card p-5 mx-5">
-          <form onSubmit={onFormSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Name</label>
-              <input
-                type="name"
-                className="form-control"
-                placeholder="Name"
-                required
-                value={updateName}
-                onChange={(e) => setUpdateName(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">Phone Number</label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Phone Number"
-                //value={updatePhone}
-                //onChange={(e) => setUpdatePhone(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
-                Email address
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Email"
-                required
-                value={changeEmail}
-                onChange={(e) => setChangeEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="d-grid gap-2">
-              <button
-                type="submit"
-                className="btn btn-dark mt-3"
-                id="updateButton"
-                disabled={buttonDisabled}
-              >
-                {loading ? (
-                  <Spinner extraClass="change-size" />
-                ) : (
-                  "Update"
-                )}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div> */}
     </div>
   );
 }
