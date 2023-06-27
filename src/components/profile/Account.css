@@ -1,8 +1,106 @@
-#account-bg {
+/* #account-bg {
     background-color: #64306e;
-  }
+  } */
 
 #account-management {
-    color: white;
+    text-decoration: none;
 }
 
+.account-path {
+  color: black;
+  text-decoration: none;
+}
+
+
+.account-col {
+  border-right: 1px solid lightgray;
+}
+
+.sidebar-link {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+/* .sidebar-link:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 0;
+  height: 2px;
+  background-color: #d390e0;
+  transition: width 0.3s ease-in-out;
+} */
+
+.sidebar-link:hover:after {
+  width: 100%;
+}
+
+.sidebar-link:hover {
+  color: #d390e0;
+  transition: 0.3s !important;
+}
+
+/* Addresses */
+
+.add-address-btn {
+  background-color: #64306e;
+  border-color: #64306e;
+}
+
+.add-address-btn:hover {
+  background-color: #8e469c;
+  transition: 0.5s;
+  border-color: #8e469c;
+}
+
+.dashboard-btn {
+  background-color: #64306e;
+  border-color: #64306e;
+  border-radius: 0%;
+  width: 250px;
+}
+
+.dashboard-btn:hover {
+  background-color: #8e469c;
+  transition: 0.5s;
+  border-color: #8e469c;
+}
+
+.edit-address-btn {
+  position: absolute;
+  top: 80%;
+  left: 20%;
+}
+
+.remove-address-btn {
+  position: absolute;
+  top: 80%;
+  left: 5%;
+}
+
+/* Payment */
+
+.edit-payment-btn {
+  position: absolute;
+  top: 55%;
+  left: 25%;
+}
+
+.remove-payment-btn {
+  position: absolute;
+  top: 55%;
+  left: 5%;
+}
+
+#payment-card {
+  border-radius: 0%;
+  height: 150px;
+  width: 250px;
+  position: relative;
+}
