@@ -1,40 +1,53 @@
 import React, { useState } from "react";
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { Address } from "../../models/AddressModel";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 
-export default function AddAddress(props) {
+export default function AddAddress() {
   const [loading, setLoading] = useState(false);
   const [street, setStreet] = useState("");
   const [apt, setApt] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [zipcode, setZipcode] = useState("");  
-  const [phone, setPhone] = useState("");  
+  const [zipcode, setZipcode] = useState("");
+  const [phone, setPhone] = useState("");
   const [shipName, setShipName] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
+
+    setButtonDisabled(true);
     setLoading(true);
     try {
-      const address = new Address(shipName, country, street, apt, city, state, zipcode, phone);
-      props.createAddress(address);
+      const address = new Address(
+        shipName,
+        country,
+        street,
+        apt,
+        city,
+        state,
+        zipcode,
+        phone,
+        null
+      );
       await UserService.addAddress(address);
-      alert("Address Added! Returning to Previous Page. ..");
+      alert("Address Added! Returning to Previous Page . . .");
       navigate("/account/addresses");
     } catch (error) {
       alert(error.message);
     }
+    setButtonDisabled(false);
     setLoading(false);
   }
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
@@ -45,8 +58,7 @@ export default function AddAddress(props) {
         />
         <div className="card p-5 mx-5">
           <form onSubmit={onFormSubmit}>
-
-          <div className="mb-3">
+            <div className="mb-3">
               <label className="form-label">Name</label>
 
               <input
@@ -128,7 +140,7 @@ export default function AddAddress(props) {
                 onChange={(e) => setZipcode(e.target.value)}
               />
             </div>
-            
+
             <div className="mb-3">
               <label className="form-label">Phone Number</label>
               <input
@@ -145,7 +157,8 @@ export default function AddAddress(props) {
               <button
                 type="submit"
                 className="btn btn-dark mt-3"
-                id="updateButton"
+                id="submitBtn"
+                disabled={buttonDisabled}
               >
                 {loading ? <Spinner extraClass="change-size" /> : "Add Address"}
               </button>

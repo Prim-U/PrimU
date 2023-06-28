@@ -1,23 +1,41 @@
 .bg {
-    background-color: #64306e;
+  background-color: #64306e;
 }
 
 .fa-plus {
-    color: #64306e;
+  color: #64306e;
 }
 
 #card:hover {
-    background-color: lightgray;
-    transition: 0.5s;
+  background-color: lightgray;
+  transition: 0.5s;
 }
 
-#add-card:hover {
-    background-color: lightgray;
-    transition: 0.5s;
+#add-address-card:hover {
+  background-color: lightgray;
+  transition: 0.5s;
 }
 
-#add-card {
-    border-style: dashed;
-    border-width: 4px;
-    border-color: darkgray;
+#add-address-card {
+  border-style: dashed;
+  border-width: 4px;
+  border-color: darkgray;
+  height: 300px;
+  width: 300px;
 }
+
+#address-card {
+  height: 300px;
+  width: 300px;
+  position: relative;
+}
+
+/* .remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 50px;
+}
+ */
+

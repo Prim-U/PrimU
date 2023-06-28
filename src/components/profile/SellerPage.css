@@ -1,0 +1,82 @@
+.seller-btn {
+  border-radius: 30px !important;
+  width: 165px;
+  height: 40px;
+}
+
+.primlancer-card {
+  border-radius: 0;
+  height: 400px;
+  background-image: url(https://www.bagley.msstate.edu/wp-content/uploads/Remote-Work.jpg);
+  background-size: 500px 400px;
+}
+
+.supplier-card {
+  border-radius: 0;
+  height: 400px;
+  background-image: url(https://www.bagley.msstate.edu/wp-content/uploads/Remote-Work.jpg);
+  background-size: 500px 400px;
+}
+
+.header-seller-text {
+    color:#64306e;
+}
+
+.seller-card {
+  width: 250px;
+  height: auto;
+  position: relative;
+}
+
+.primlancer-image {
+  width: 400px;
+  height: 300px;
+  filter: brightness(50%)
+}
+
+.supplier-image {
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  filter: brightness(50%)
+}
+
+.supplier-card-text {
+  position: absolute;
+  color: white;
+  top: 25%;
+  left: 52%;
+}
+
+.seller-card-btn {
+  position: absolute;
+  top: 60%;
+  left: 53%;
+  background-color: #64306e!important;
+  border-color: #64306e;
+}
+
+.seller-card-btn:hover {
+    background-color: #8e469c!important;
+    transition: 0.5s!important;
+    border-color: #8e469c;
+}
+
+.primlancer-card-text {
+    position: absolute;
+    color: white;
+    top: 25%;
+    left: 45%;
+  }
+
+.bg-pink {
+  background-color: #d0b8d5;
+}
+
+.why-sell-color {
+  color: #64306e;
+}
+
+.fee-container {
+  width: 700px!important;
+}

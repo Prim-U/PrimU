@@ -12,8 +12,8 @@ export default function ServiceCards() {
           <span className="purple-header"> Our Services</span>
         </p>
 
-        <div class="wrap">
-          <div class="box one">
+        <div className="wrap">
+          <div className="box one">
             <a
               className="text-decoration-none"
               href="/male-grooming-service" //add male grooming link here
@@ -22,7 +22,7 @@ export default function ServiceCards() {
             </a>
           </div>
 
-          <div class="box two">
+          <div className="box two">
             <a
               className="text-decoration-none"
               href="/waxing-service" //add waxing link here
@@ -31,7 +31,7 @@ export default function ServiceCards() {
             </a>
           </div>
 
-          <div class="box three">
+          <div className="box three">
             <a
               className="text-decoration-none"
               href="/makeup-service" //add makeup link here
@@ -40,7 +40,7 @@ export default function ServiceCards() {
             </a>
           </div>
 
-          <div class="box four">
+          <div className="box four">
             <a
               className="text-decoration-none"
               href="/manicure-service" //add manicure link here
@@ -49,7 +49,7 @@ export default function ServiceCards() {
             </a>
           </div>
 
-          <div class="box five">
+          <div className="box five">
             <a
               className="text-decoration-none"
               href="/hair-service" //add hair link here
@@ -58,7 +58,7 @@ export default function ServiceCards() {
             </a>
           </div>
 
-          <div class="box six">
+          <div className="box six">
             <a
               className="text-decoration-none"
               href="/massage-service" //add massage link here

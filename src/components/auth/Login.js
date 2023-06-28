@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import NavbarAuth from '../../common/NavbarAuth'
+import Navbar from '../../common/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
-import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebase';
 import Spinner from '../../common/Spinner';
 
@@ -9,12 +9,14 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
 
   async function onFormSubmit(e) {
     e.preventDefault();
 
+    setButtonDisabled(true);
     setLoading(true);
     try {
       const userCred = await signInWithEmailAndPassword(
@@ -29,11 +31,12 @@ export default function Login() {
       alert(err.message);
     }
     setLoading(false);
+    setButtonDisabled(false);
   }
 
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container my-5 p-3">
         <img
           className="mx-auto d-block mb-5"
@@ -80,7 +83,7 @@ export default function Login() {
 
 
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-dark mt-3">
+              <button type="submit" disabled={buttonDisabled} className="btn btn-dark mt-3">
               {loading ? <Spinner extraClass="change-size" /> : 'Login'}
               </button>
             </div>

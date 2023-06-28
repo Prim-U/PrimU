@@ -23,7 +23,7 @@ export default function Account() {
       >
         <button className="btn btn-dark mx-2 mt-2">
           <h3 className="text-start">
-            Contact Info <i class="bi bi-person-fill"></i>
+            Contact Info <i className="bi bi-person-fill"></i>
           </h3>
           <p className="text-white text-start">
             Edit your preferred name, <br></br> email address, phone number, and
@@ -38,7 +38,7 @@ export default function Account() {
       >
         <button className="btn btn-dark mx-2 mt-2" id="payment-btn">
           <h3 className="text-start">
-            Payment <i class="bi bi-credit-card-2-back-fill"></i>
+            Payment <i className="bi bi-credit-card-2-back-fill"></i>
           </h3>
           <p className="text-white text-start">
             Set, change, or add payment methods here.
@@ -52,7 +52,7 @@ export default function Account() {
       >
         <button className="btn btn-dark mx-2 mt-2" id="payment-btn">
           <h3 className="text-start">
-            Addresses <i class="bi bi-house-fill"></i>
+            Addresses <i className="bi bi-house-fill"></i>
           </h3>
           <p className="text-white text-start">
             Set, edit, or remove default addresses.
@@ -60,10 +60,10 @@ export default function Account() {
         </button>
       </Link>
 
-      <Link className="text-decoration-none d-grid gap-2 col-6 mx-auto">
+      <Link to="/account/profile" className="text-decoration-none d-grid gap-2 col-6 mx-auto">
         <button className="btn btn-dark mx-2 mt-2">
           <h3 className="text-start">
-            Profiles <i class="bi bi-pencil-fill"></i>
+            Profiles <i className="bi bi-pencil-fill"></i>
           </h3>
           <p className="text-white text-start">
             Manage the user profiles on this website. <br></br>Create, delete,
@@ -72,12 +72,12 @@ export default function Account() {
         </button>
       </Link>
 
-      <Link className="text-decoration-none d-grid gap-2 col-6 mx-auto">
+      <Link to="/account/seller" className="text-decoration-none d-grid gap-2 col-6 mx-auto">
         <button className="btn btn-dark mx-2 mt-2 mb-2">
           <h3 className="text-start">
-            Settings <i class="bi bi-gear-fill"></i>
+            Become a Seller <i className="bi bi-box-fill"></i>
           </h3>
-          <p className="text-white text-start">Manage settings.</p>
+          <p className="text-white text-start">Discover the conveneience of selling<br></br> with Prim-U as either a Supplier or Primlancer!</p>
         </button>
       </Link>
     </div>

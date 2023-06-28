@@ -6,7 +6,7 @@ import { auth } from "../../firebase/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
 // Components
-import NavbarAuth from "../../common/Navbar";
+import Navbar from "../../common/Navbar";
 
 // Models
 import { User } from "../../models/Users";
@@ -15,12 +15,13 @@ import { User } from "../../models/Users";
 import UserService from "../../services/user-service";
 import Spinner from "../../common/Spinner";
 
-export default function Register(props) {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassowrd, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   // const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Register(props) {
   async function onFormSubmit(e) {
     e.preventDefault();
 
+    setButtonDisabled(true);
     setLoading(true)
     if (password === confirmPassowrd) {
       try {
@@ -43,18 +45,20 @@ export default function Register(props) {
         });
         navigate("/");
         alert("Register Successful!");
+        window.location.reload()
       } catch (err) {
         alert(err.message);
       }
     } else {
       alert("Passwords do not match.");
     }
+    setButtonDisabled(false);
     setLoading(false);
   }
 
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
@@ -128,6 +132,7 @@ export default function Register(props) {
                 type="submit"
                 className="btn btn-dark mt-3"
                 id="registerButton"
+                disabled={buttonDisabled}
               >
                 {loading ? <Spinner extraClass="change-size" /> : 'Register'}
               </button>

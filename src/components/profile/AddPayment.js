@@ -1,35 +1,37 @@
-import React, { useState } from 'react'
-import NavbarAuth from '../../common/Navbar'
-import { Payment } from '../../models/Payment';
+import React, { useState } from "react";
+import Navbar from "../../common/Navbar";
+import { Payment } from "../../models/Payment";
 import UserService from "../../services/user-service";
-import { useNavigate } from 'react-router-dom';
-import Spinner from '../../common/Spinner';
+import { useNavigate } from "react-router-dom";
+import Spinner from "../../common/Spinner";
 
 export default function AddPayment() {
-    const [card, setCard] = useState('');
-    const [exp, setExp] = useState('');
-    const [cvv, setCVV] = useState('');
-    const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
+  const [card, setCard] = useState("");
+  const [exp, setExp] = useState("");
+  const [cvv, setCVV] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    async function onFormSubmit(e) {
-        e.preventDefault();
-        setLoading(true);
+  async function onFormSubmit(e) {
+    e.preventDefault();
+
+    setButtonDisabled(true);
+    setLoading(true);
     try {
-      const payment = new Payment(card, exp, cvv);
+      const payment = new Payment(card, exp, cvv, null);
       await UserService.addPayment(payment);
-      alert("Payment Added! Returning to Previous Page. ..");
+      alert("Payment Added! Returning to Previous Page. . .");
       navigate("/account/payment");
     } catch (error) {
       alert(error.message);
     }
+    setButtonDisabled(false);
     setLoading(false);
-
-
-    }
+  }
   return (
-    <div className="bg-dark">
-      <NavbarAuth></NavbarAuth>
+    <div className="real-bg-dark">
+      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"
@@ -40,8 +42,7 @@ export default function AddPayment() {
         />
         <div className="card p-5 mx-5">
           <form onSubmit={onFormSubmit}>
-
-          <div className="mb-3">
+            <div className="mb-3">
               <label className="form-label">Card Number</label>
 
               <input
@@ -78,7 +79,6 @@ export default function AddPayment() {
                 value={cvv}
                 onChange={(e) => setCVV(e.target.value)}
               />
-              
             </div>
 
             <div className="d-grid gap-2">
@@ -86,13 +86,18 @@ export default function AddPayment() {
                 type="submit"
                 className="btn btn-dark mt-3"
                 id="updateButton"
+                disabled={buttonDisabled}
               >
-                {loading ? <Spinner extraClass="change-size" /> : "Add Address"}
+                {loading ? (
+                  <Spinner extraClass="change-size" />
+                ) : (
+                  "Add Payment Method"
+                )}
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
