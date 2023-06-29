@@ -71,7 +71,7 @@ export default function PaymentPage(props) {
               {payments.map((payment) => {
                 return (
                   <div
-                    className="card p-3 me-2"
+                    className="card p-3 me-2 mb-2"
                     id="payment-card"
                     key={payment.id}
                   >

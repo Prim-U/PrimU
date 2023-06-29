@@ -86,7 +86,7 @@ export default function UpdatePayment(props) {
         <div className="col-9">
           <div className="container p-4">
             <p className="text-black-50">
-              Edit and update payment menthod in the form below.
+              Edit and update payment method in the form below.
             </p>
 
             <form onSubmit={onFormSubmit}>

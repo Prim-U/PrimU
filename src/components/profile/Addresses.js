@@ -75,15 +75,15 @@ export default function Addresses(props) {
                     id="address-card"
                     key={address.id}
                   >
-                    <h5>{address.shipname}</h5>
-                    <h5>
+                    <div className="fs-6">{address.shipname}</div>
+                    <div className="fs-6">
                       {address.street} {address.apt}
-                    </h5>
-                    <h5>
+                    </div>
+                    <div className="fs-6">
                       {address.city}, {address.state} {address.zipcode}
-                    </h5>
-                    <h5>{address.country}</h5>
-                    <h5>{address.phone}</h5>
+                    </div>
+                    <div className="fs-6">{address.country}</div>
+                    <div className="fs-6">{address.phone}</div>
                     <div className="d-grid gap-2 d-md-flex">
                       <button
                         className="btn btn-danger remove-address-btn"

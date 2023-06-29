@@ -14,9 +14,9 @@ export class Primlancer {
     education,
     employment,
     reference,
-    // referenceUrl,
+    referenceUrl,
     qualifications,
-    // qualificationsUrl,
+    qualificationsUrl,
     availibility,
     id
   ) {
@@ -34,9 +34,9 @@ export class Primlancer {
     this.education = education;
     this.employment = employment;
     this.reference = reference;
-    // this.referenceUrl = referenceUrl;
+    this.referenceUrl = referenceUrl;
     this.qualifications = qualifications;
-    // this.qualificationsUrl = qualificationsUrl;
+    this.qualificationsUrl = qualificationsUrl;
     this.availibility = availibility;
     this.id = id;
   }
@@ -57,9 +57,9 @@ export class Primlancer {
       education: this.education,
       employment: this.employment,
       reference: this.reference,
-    //   referenceUrl: this.referenceUrl,
+      referenceUrl: this.referenceUrl,
       qualifications: this.qualifications,
-    //   qualificationsUrl: this.qualificationsUrl,
+      qualificationsUrl: this.qualificationsUrl,
       availibility: this.availibility,
       // id: this.id
     };
@@ -82,9 +82,9 @@ export class Primlancer {
       data.education,
       data.employment,
       data.reference,
-    //   data.referenceUrl,
+      data.referenceUrl,
       data.qualifications,
-    //   data.qualificationsUrl,
+      data.qualificationsUrl,
       data.availibility,
       doc.id
     );
