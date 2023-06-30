@@ -3,6 +3,7 @@ import Navbar from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { Primlancer } from "../../models/Primlancer";
 import UserService from "../../services/user-service";
+import FileService from "../../services/file-service";
 import { useNavigate } from "react-router-dom";
 
 export default function PrimlancerRegistration() {
@@ -20,9 +21,9 @@ export default function PrimlancerRegistration() {
   const [employmentHistory, setEmploymentHistory] = useState("");
   const [education, setEducation] = useState("");
   const [reference, setreference] = useState("");
-//   const [referenceFile, setReferenceFile] = useState(null);
+  const [referenceFile, setReferenceFile] = useState(null);
   const [qualifications, setQualifications] = useState("");
-//   const [qualificationFiles, setQualificationFiles] = useState(null);
+  const [qualificationFiles, setQualificationFiles] = useState(null);
   const [availibility, setAvaibility] = useState("");
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -34,7 +35,7 @@ export default function PrimlancerRegistration() {
     setLoading(true);
     setButtonDisabled(true);
     try {
-      /* const referenceUrl = await FileService.uploadImage(
+      const referenceUrl = await FileService.uploadImage(
         referenceFile,
         (progress) => {
           console.log("Upload progress: ", progress);
@@ -46,7 +47,7 @@ export default function PrimlancerRegistration() {
         (progress) => {
           console.log("Upload progress: ", progress);
         }
-      ); */
+      );
       const primlancer = new Primlancer(
         email,
         firstName,
@@ -62,7 +63,9 @@ export default function PrimlancerRegistration() {
         education,
         employmentHistory,
         reference,
+        referenceUrl,
         qualifications,
+        qualificationsUrl,
         availibility,
         null
       );
@@ -76,7 +79,7 @@ export default function PrimlancerRegistration() {
     setButtonDisabled(false);
   }
 
- /*  function onReferenceSelected(e) {
+   function onReferenceSelected(e) {
     if (e.target.files.length) {
       setReferenceFile(e.target.files[0]);
     } else {
@@ -90,7 +93,7 @@ export default function PrimlancerRegistration() {
     } else {
       setQualificationFiles(null);
     }
-  } */
+  } 
 
   return (
     <div className="real-bg-dark">
@@ -296,7 +299,7 @@ export default function PrimlancerRegistration() {
               ></textarea>
             </div>
 
-            {/* <div className="mb-3">
+            <div className="mb-3">
               <label className="form-label">
                 References (Optional to Submit File)
               </label>
@@ -307,7 +310,7 @@ export default function PrimlancerRegistration() {
                 onChange={onReferenceSelected}
                 multiple
               />
-            </div> */}
+            </div>
 
             <div className="mb-3">
               <label className="form-label">Skills and Qualifications</label>
@@ -321,7 +324,7 @@ export default function PrimlancerRegistration() {
               ></textarea>
             </div>
 
-            {/* <div className="mb-3">
+            <div className="mb-3">
               <label className="form-label">
                 Resume (Optional to Submit File)
               </label>
@@ -332,7 +335,7 @@ export default function PrimlancerRegistration() {
                 onChange={onResumeSelected}
                 multiple
               />
-            </div> */}
+            </div>
 
             <div className="mb-3">
               <label className="form-label">Availibility</label>

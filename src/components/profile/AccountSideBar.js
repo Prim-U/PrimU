@@ -10,7 +10,7 @@ export default function AccountSideBar() {
         <Link to="/account" className="sidebar-link">
           <div className="fs-6 fw-semibold">
             {" "}
-            <i class="bi bi-back"></i> Dashboard
+            <i className="bi bi-back"></i> Dashboard
           </div>
         </Link>
       </div>

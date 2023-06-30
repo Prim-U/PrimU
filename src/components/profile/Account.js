@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Stylesheet
 import "./Account.css";
 
 // Funcitons/methods
 import { Link } from "react-router-dom";
+import {auth} from '../../firebase/firebase';
 
 // Components
 import NavbarAuth from "../../common/Navbar";
 import AccountSideBar from "./AccountSideBar";
+import UserService from "../../services/user-service";
 
 export default function Account() {
+  const [primlancers, setPrimlancers] = useState([]);
+
+  useEffect(() => {
+    fetchPrimlancer();
+  }, []);
+
+  async function fetchPrimlancer() {
+    try {
+      const primlancer = await UserService.fetchPrimlancer();
+      console.log(primlancer);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div id="account-bg">
       <NavbarAuth></NavbarAuth>
@@ -74,7 +90,7 @@ export default function Account() {
               <div className="btn btn-secondary dashboard-btn p-4 mx-2 mb-2">
                 <div className="row">
                   <h1>
-                    <i class="bi bi-box-fill"></i>
+                    <i className="bi bi-box-fill"></i>
                   </h1>
                 </div>
                 <div className="row">

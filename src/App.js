@@ -35,7 +35,8 @@ import UpdatePayment from "./components/profile/UpdatePayment";
 import SupplierRegistration from "./components/auth/SupplierRegistration";
 import SellerPage from "./components/profile/SellerPage";
 import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
-
+import PostProduct from "./components/products/PostProducts";
+import ProductsPage from "./components/products/ProductsPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -97,7 +98,6 @@ function App() {
             }
           ></Route>
           <Route
-
             path="/account/seller/primlancer-registration"
             element={
               <RequireAuth user={user}>
@@ -194,6 +194,24 @@ function App() {
           ></Route>
 
           <Route
+            path="/products"
+            element={
+              <RequireAuth user={user}>
+                <ProductsPage />
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/products/post-prodcuts"
+            element={
+              <RequireAuth user={user}>
+                <PostProduct />
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
             path="/make-booking"
             element={
               // <RequireAuth user={user}>
@@ -207,7 +225,6 @@ function App() {
           <Spinner />
         </div>
       )}
-
     </BrowserRouter>
   );
 }
