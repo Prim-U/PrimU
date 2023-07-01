@@ -22,7 +22,7 @@ export default function AddPayment() {
     try {
       const payment = new Payment(card, exp, cvv, null);
       await UserService.addPayment(payment);
-      alert("Payment Added! Returning to Previous Page . . .");
+      alert("Payment Added! Returning to Previous Page. . .");
       navigate("/account/payment");
     } catch (error) {
       alert(error.message);

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "./Payment.css";
 import AccountSideBar from "./AccountSideBar";
 
-export default function PaymentPage(props) {
+export default function PaymentPage({updatePayment, setUpdatePayment}) {
   const [payments, setPayment] = useState([]);
 
   useEffect(() => {
@@ -91,8 +91,8 @@ export default function PaymentPage(props) {
                         <button
                           className="edit-payment-btn btn btn-secondary"
                           onClick={() => {
-                            props.setUpdatePayment(payment);
-                            console.log(props.updatePayment);
+                            setUpdatePayment(payment);
+                            console.log(updatePayment);
                           }}
                         >
                           <i className="bi bi-pencil"></i>

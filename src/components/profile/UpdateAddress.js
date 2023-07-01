@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import AccountSideBar from "./AccountSideBar";
 import { Link } from "react-router-dom";
 
-export default function UpdateAddress(props) {
+export default function UpdateAddress(addressList) {
   const [loading, setLoading] = useState(false);
   const [street, setStreet] = useState("");
   const [apt, setApt] = useState("");
@@ -27,15 +27,16 @@ export default function UpdateAddress(props) {
 
   async function initialLoad() {
     try {
-      if (props.addressList) {
-        setStreet(props.addressList.street);
-        setApt(props.addressList.apt);
-        setCountry(props.addressList.country);
-        setCity(props.addressList.city);
-        setState(props.addressList.state);
-        setZipcode(props.addressList.zipcode);
-        setPhone(props.addressList.phone);
-        setShipName(props.addressList.shipname);
+      if (addressList) {
+        setStreet(addressList.street);
+        setApt(addressList.apt);
+        setCountry(addressList.country);
+        setCity(addressList.city);
+        setState(addressList.state);
+        setZipcode(addressList.zipcode);
+        setPhone(addressList.phone);
+        setShipName(addressList.shipname);
+        console.log(addressList);
       }
     } catch (error) {
       alert(error.message);
@@ -48,7 +49,7 @@ export default function UpdateAddress(props) {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      if (props.addressList) {
+      if (addressList) {
         setStreet(e.target.value);
         setApt(e.target.value);
         setCountry(e.target.value);
@@ -66,10 +67,10 @@ export default function UpdateAddress(props) {
           state,
           zipcode,
           phone,
-          props.addressList.id
+          addressList.id
         );
         await UserService.updateAddress(updatedAddress);
-        alert("Address Updated! Returning to Previous Page . . .");
+        alert("Address Updated! Returning to Previous Page. . .");
         navigate("/account/addresses");
       }
     } catch (error) {

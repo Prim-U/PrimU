@@ -25,6 +25,7 @@ export default function PostProduct() {
     e.preventDefault();
     setLoading(true);
     setButtonDisabled(true);
+    alert("This might take a couple of seconds . . .");
     try {
       const productImageUrl = await FileService.uploadProduct(
         productImage,
@@ -54,7 +55,7 @@ export default function PostProduct() {
       await UserService.addProduct(product);
       await UserService.addProductsPublic(product);
       navigate("/account/seller");
-      alert("Product Added to Market. Returning to Previous Page . . .");
+      alert("Product Added to Market. Returning to Previous Page. . .");
     } catch (error) {
       alert(error.message);
     }

@@ -8,7 +8,7 @@ import UserService from "../../services/user-service";
 import { Link } from "react-router-dom";
 import AccountSideBar from "./AccountSideBar";
 
-export default function Addresses(props) {
+export default function Addresses({setAddressList}) {
   const [addresses, setAddresses] = useState([]);
   const [addressToRemove, setAddressToRemove] = useState(null);
 
@@ -99,7 +99,7 @@ export default function Addresses(props) {
                         <button
                           className="btn btn-secondary edit-address-btn ms-3"
                           onClick={() => {
-                            props.setAddressList(address);
+                            setAddressList(address);
                           }}
                         >
                           <i className="bi bi-pencil"></i>
