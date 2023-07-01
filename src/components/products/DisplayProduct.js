@@ -4,6 +4,23 @@ import { Link } from "react-router-dom";
 import "./DisplayProduct.css";
 
 export default function DisplayProduct({ displayProduct }) {
+  const [quantity, setQuantity] = useState(1);
+
+  function decrementCart() {
+    if (quantity > 1) {
+      setQuantity((prevCount) => prevCount - 1);
+    }
+  }
+
+  function incrementCart() {
+    if (quantity < 15) {
+      setQuantity((prevCount) => prevCount + 1);
+    }
+  }
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+  }
   useEffect(() => {
     initialLoad();
   }, []);
@@ -17,6 +34,7 @@ export default function DisplayProduct({ displayProduct }) {
       alert(error.message);
     }
   }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -43,9 +61,15 @@ export default function DisplayProduct({ displayProduct }) {
             {displayProduct.description}
           </div>
           <div>Is Organic? {displayProduct.status}</div>
-          <div>Type? {displayProduct.category}</div>
-          <form className="display-cart">
-            <div className="input-group mt-5">
+          <div className="mb-5">Type? {displayProduct.category}</div>
+          <form className="display-cart" onSubmit={onFormSubmit}>
+            <div className="input-group quantity-holder mb-3">
+              <button className="edit-quantity-btn btn btn-primary" onClick={decrementCart}>-</button>
+              <div className="form-control text-center">{quantity}</div>
+              <button className="edit-quantity-btn btn btn-primary" onClick={incrementCart}>+</button>
+            </div>
+            <button className="btn btn-primary submit-cart-btn" type="submit">Add to Cart</button>
+            {/* <div className="input-group mt-5">
               <button
                 className="btn btn-outline-secondary display-btn"
                 type="button"
@@ -60,7 +84,7 @@ export default function DisplayProduct({ displayProduct }) {
                 className="form-control display-input"
                 placeholder="Select Amount"
               />
-            </div>
+            </div> */}
           </form>
         </div>
         <div className="col"></div>
