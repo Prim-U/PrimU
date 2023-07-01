@@ -37,12 +37,14 @@ import SellerPage from "./components/profile/SellerPage";
 import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
 import PostProduct from "./components/products/PostProducts";
 import ProductsPage from "./components/products/ProductsPage";
+import DisplayProduct from "./components/products/DisplayProduct";
 
 function App() {
   const [user, setUser] = useState(null);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
   const [addressList, setAddressList] = useState([]);
   const [updatePayment, setUpdatePayment] = useState([]);
+  const [displayProduct, setDisplayProduct] = useState([]);
   // const [addresses, setAddresses] = useState([]);
 
   /*  function createAddress(address) {
@@ -197,7 +199,7 @@ function App() {
             path="/products"
             element={
               <RequireAuth user={user}>
-                <ProductsPage />
+                <ProductsPage setDisplayProduct={setDisplayProduct} displayProduct={displayProduct}/>
               </RequireAuth>
             }
           ></Route>
@@ -210,6 +212,16 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+          
+          <Route
+            path="/products/display-product"
+            element={
+              <RequireAuth user={user}>
+                <DisplayProduct displayProduct={displayProduct} />
+              </RequireAuth>
+            }
+          ></Route>
+          
 
           <Route
             path="/make-booking"

@@ -39,7 +39,7 @@ export default function AddAddress() {
         null
       );
       await UserService.addAddress(address);
-      alert("Address Added! Returning to Previous Page . . .");
+      alert("Address Added! Returning to Previous Page. . .");
       navigate("/account/addresses");
     } catch (error) {
       alert(error.message);

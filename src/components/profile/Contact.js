@@ -33,7 +33,7 @@ export default function Contact() {
       await UserService.updateUser(auth.currentUser);
       //await updatePhoneNumber(user, updatePhone );
       navigate("/account");
-      alert("Contact Details Updated. Returning to Previous Page . . .");
+      alert("Contact Details Updated. Returning to Previous Page. . .");
       window.location.reload();
     } catch (error) {
       alert(error.message);

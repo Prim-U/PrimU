@@ -7,7 +7,7 @@ import { Payment } from "../../models/Payment";
 import AccountSideBar from "./AccountSideBar";
 import { Link } from "react-router-dom";
 
-export default function UpdatePayment(props) {
+export default function UpdatePayment({updatePayment}) {
   const [card, setCard] = useState("");
   const [exp, setExp] = useState("");
   const [cvv, setCVV] = useState("");
@@ -21,10 +21,10 @@ export default function UpdatePayment(props) {
 
   async function initialLoad() {
     try {
-      if (props.updatePayment) {
-        setCard(props.updatePayment.card);
-        setExp(props.updatePayment.date);
-        setCVV(props.updatePayment.cvv);
+      if (updatePayment) {
+        setCard(updatePayment.card);
+        setExp(updatePayment.date);
+        setCVV(updatePayment.cvv);
       }
     } catch (error) {
       alert(error.message);
@@ -37,7 +37,7 @@ export default function UpdatePayment(props) {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      if (props.updatePayment) {
+      if (updatePayment) {
         setCard(e.target.value);
         setExp(e.target.value);
         setCVV(e.target.value);
@@ -45,10 +45,10 @@ export default function UpdatePayment(props) {
           card,
           exp,
           cvv,
-          props.updatePayment.id
+          updatePayment.id
         );
         await UserService.updatePayment(updatedPayment);
-        alert("Payment Updated! Returning to Previous Page . . .");
+        alert("Payment Updated! Returning to Previous Page. . .");
         navigate("/account/payment");
       }
     } catch (error) {
