@@ -38,6 +38,8 @@ import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
 import PostProduct from "./components/products/PostProducts";
 import ProductsPage from "./components/products/ProductsPage";
 import DisplayProduct from "./components/products/DisplayProduct";
+import Checkout from "./components/products/Checkout";
+import OrderPlaced from "./components/products/OrderPlaced";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -45,6 +47,7 @@ function App() {
   const [addressList, setAddressList] = useState([]);
   const [updatePayment, setUpdatePayment] = useState([]);
   const [displayProduct, setDisplayProduct] = useState([]);
+  const [order, setOrder] = useState([]);
   // const [addresses, setAddresses] = useState([]);
 
   /*  function createAddress(address) {
@@ -60,7 +63,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <TopBar user={user}></TopBar>
+      <TopBar user={user} order={order}></TopBar>
 
       {isUserUpdated ? (
         <Routes>
@@ -199,7 +202,10 @@ function App() {
             path="/products"
             element={
               <RequireAuth user={user}>
-                <ProductsPage setDisplayProduct={setDisplayProduct} displayProduct={displayProduct}/>
+                <ProductsPage
+                  setDisplayProduct={setDisplayProduct}
+                  displayProduct={displayProduct}
+                />
               </RequireAuth>
             }
           ></Route>
@@ -212,16 +218,33 @@ function App() {
               </RequireAuth>
             }
           ></Route>
-          
+
           <Route
             path="/products/display-product"
             element={
               <RequireAuth user={user}>
-                <DisplayProduct displayProduct={displayProduct} />
+                <DisplayProduct displayProduct={displayProduct} setOrder={setOrder} order={order}/>
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/cart"
+            element={
+              <RequireAuth user={user}>
+                <Checkout order={order}/>
               </RequireAuth>
             }
           ></Route>
           
+          <Route
+            path="/place-order"
+            element={
+              <RequireAuth user={user}>
+                <OrderPlaced order={order}/>
+              </RequireAuth>
+            }
+          ></Route>
 
           <Route
             path="/make-booking"
