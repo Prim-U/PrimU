@@ -1,13 +1,13 @@
 .cart-container {
-  margin-top: 200px;
+  margin-top: 40px;
 }
 
 .cart-table {
-  margin-top: 200px;
+  margin-top: 40px;
 }
 
 .cart-card {
-  margin-top: 200px;
+  margin-top: 40px;
   border-radius: 0%;
   border-color: black;
 }
@@ -18,19 +18,113 @@
   border-width: 3px;
 }
 
+.remove-product-btn {
+    background-color: transparent;
+    border: none;
+}
+
 .proceed-checkout-btn {
-  background-color: #64306e!important;
-  border-color: #64306e!important;
+  background-color: #64306e !important;
+  border-color: #64306e !important;
   border-radius: 0%;
-  width: 320px;
+  width: 380px;
 }
 .proceed-checkout-btn:hover {
-  background-color: #8e469c!important;
+  background-color: #8e469c !important;
   transition: 0.5s;
-  border-color: #8e469c!important;
+  border-color: #8e469c !important;
 }
 
 .checkout-path {
-    color: black!important;
-    text-decoration: none!important;
+  color: black !important;
+  text-decoration: none !important;
+}
+
+#shopping-cart-path:hover {
+  color: gray !important;
+  transition: 0.2s !important;
+}
+
+#shopping-cart-path {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black !important;
+}
+
+#shopping-cart-path:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 0;
+  height: 2px;
+  background-color: #d390e0;
+  transition: width 0.3s ease-in-out;
+}
+
+#shopping-cart-path:hover:after {
+  width: 100%;
+}
+
+#checkout-cart-path:hover {
+  color: gray !important;
+  transition: 0.2s !important;
+}
+
+#checkout-cart-path {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black !important;
+}
+
+#checkout-cart-path:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 0;
+  height: 2px;
+  background-color: #d390e0;
+  transition: width 0.3s ease-in-out;
+}
+
+#checkout-cart-path:hover:after {
+  width: 100%;
+}
+
+#order-complete-path:hover {
+  color: gray !important;
+  transition: 0.2s !important;
+}
+
+#order-complete-path {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: black !important;
+}
+
+#order-complete-path:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 0;
+  height: 2px;
+  background-color: #d390e0;
+  transition: width 0.3s ease-in-out;
+}
+
+#order-complete-path:hover:after {
+  width: 100%;
+}
+
+#order-complete-path:hover {
+  color: gray !important;
+  transition: 0.2s !important;
 }

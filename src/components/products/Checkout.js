@@ -3,17 +3,21 @@ import Navbar from "../../common/Navbar";
 import "./Checkout.css";
 import { Link } from "react-router-dom";
 
-export default function Checkout({ order }) {
+export default function Checkout({ order, setOrder }) {
   useEffect(() => {
     initialLoad();
-  }, []);
+  });
 
   async function initialLoad() {
     try {
-      console.log(order);
+      // console.log(order);
     } catch (error) {
       alert(error.message);
     }
+  }
+
+  function onProductRemove(item) {
+    setOrder(order.filter((x) => x.id !== item.id));
   }
 
   const list = [];
@@ -25,16 +29,24 @@ export default function Checkout({ order }) {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="container">
-        <h4>
-          <Link className="checkout-path" to="/cart">
-            SHOPPING CART
-          </Link>
-          <Link className="checkout-path"> CHECKOUT</Link>
-          <Link className="checkout-path"> ORDER COMPLETE</Link>
-        </h4>
-      </div>
       <div className="row">
+        <div className="text-center mt-5">
+          <h4 className="fw-bold">
+            <Link className="checkout-path" id="shopping-cart-path" to="/cart">
+              SHOPPING CART
+            </Link>{" "}
+            <i className="bi bi-arrow-right"></i>
+            <Link to="/place-order" className="checkout-path ms-2" id="checkout-cart-path">
+              {" "}
+              CHECKOUT
+            </Link>{" "}
+            <i className="bi bi-arrow-right"></i>
+            <Link className="checkout-path ms-2" id="order-complete-path">
+              {" "}
+              ORDER COMPLETE
+            </Link>
+          </h4>
+        </div>
         <div className="col-7 cart-table ">
           <form>
             <table className="table ms-2">
@@ -52,7 +64,14 @@ export default function Checkout({ order }) {
                 {order.map((item) => {
                   return (
                     <tr key={item.id}>
-                      <td></td>
+                      <td>
+                        <button
+                          className="mt-4 remove-product-btn"
+                          onClick={() => onProductRemove(item)}
+                        >
+                          <i className="bi bi-x-lg"></i>
+                        </button>
+                      </td>
                       <td>
                         <img
                           src={item.image}
@@ -61,10 +80,18 @@ export default function Checkout({ order }) {
                           alt={item.productName}
                         ></img>
                       </td>
-                      <td>{item.productName}</td>
-                      <td>R{item.price}</td>
-                      <td>x{item.qty}</td>
-                      <td>R{item.subtotal}</td>
+                      <td>
+                        <div className="mt-4">{item.productName}</div>
+                      </td>
+                      <td>
+                        <div className="mt-4">R{item.price}</div>
+                      </td>
+                      <td>
+                        <div className="mt-4">x{item.qty}</div>
+                      </td>
+                      <td>
+                        <div className="mt-4">R{item.subtotal}</div>
+                      </td>
                     </tr>
                   );
                 })}
@@ -77,7 +104,7 @@ export default function Checkout({ order }) {
         <div className="col-5 cart-card">
           {" "}
           <div>
-            <div className="card p-5 m-3 checkout-cart">
+            <div className="card p-4 m-3 checkout-cart">
               <h4 className="fw-bold">CART TOTALS</h4>
               <table className="table">
                 <tbody>
@@ -96,7 +123,7 @@ export default function Checkout({ order }) {
                   <tr>
                     <th className="fw-bold">Total</th>
                     <td>
-                      <span>R{total}</span>
+                      <span className="fw-bold">R{total}</span>
                     </td>
                   </tr>
                 </tbody>

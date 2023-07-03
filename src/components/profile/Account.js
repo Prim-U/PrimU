@@ -5,7 +5,6 @@ import "./Account.css";
 
 // Funcitons/methods
 import { Link } from "react-router-dom";
-import {auth} from '../../firebase/firebase';
 
 // Components
 import NavbarAuth from "../../common/Navbar";
@@ -22,9 +21,9 @@ export default function Account() {
   async function fetchPrimlancer() {
     try {
       const primlancer = await UserService.fetchPrimlancer();
-      console.log(primlancer);
+      // console.log(primlancer);
     } catch (err) {
-      console.log(err);
+      alert(err.message);
     }
   }
   return (

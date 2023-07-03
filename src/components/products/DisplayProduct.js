@@ -22,15 +22,15 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
   function onFormSubmit(e) {
     e.preventDefault();
     const subtotal = displayProduct.price * quantity;
-    console.log(quantity)
     const item = new ProductData(displayProduct.productName, displayProduct.price, quantity, subtotal, displayProduct.productImageUrl, displayProduct.id);
     setOrder(orderList => [...orderList, item])
-    console.log(order)
-    console.log(item);
+    /* console.log(order)
+    console.log(item); */
+    alert('Items Added to Cart.')
   }
   useEffect(() => {
     initialLoad();
-  }, []);
+  });
 
   async function initialLoad() {
     try {
