@@ -40,7 +40,8 @@ import PostProduct from "./components/products/PostProducts";
 import ProductsPage from "./components/products/ProductsPage";
 import DisplayProduct from "./components/products/DisplayProduct";
 import Checkout from "./components/products/Checkout";
-import OrderPlaced from "./components/products/OrderPlaced";
+import OrderPlaced from "./components/products/OrderPlaced";import TreatmentServices from "./components/profile/TreatmentServices";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -264,6 +265,14 @@ function App() {
               // <RequireAuth user={user}>
               <GroupBookingForm />
               // </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/treatment-services"
+            element={
+              <RequireAuth user={user}>
+              <TreatmentServices/>
+              </RequireAuth>
             }
           ></Route>
         </Routes>
