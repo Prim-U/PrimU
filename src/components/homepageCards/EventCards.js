@@ -27,7 +27,8 @@ export default function EventCards() {
               at that crucial time where it really matters the most. The first
               step would be to download the Prim-U App.
             </p>
-            <button className="btn card-btn-outline-primary">Make a Booking</button>
+            {/* <button className="btn card-btn-outline-primary">Make a Booking</button> */}
+            <a href='/make-booking/group-booking' className="btn card-btn-outline-primary">Make a Booking</a>
           </div>
         </div>
       </div>
@@ -48,7 +49,8 @@ export default function EventCards() {
               The Prim-U App will connect you to the right Prim-U Lancers and
               businesses to get you ready.
             </p>
-            <button className="btn card-btn-outline-primary">Make a Booking</button>
+            {/* <button className="btn card-btn-outline-primary">Make a Booking</button> */}
+            <a href='/make-booking/group-booking' className="btn card-btn-outline-primary">Make a Booking</a>
           </div>
         </div>
       </div>
@@ -69,7 +71,8 @@ export default function EventCards() {
               getting ready to Fashion shows, to spoiling your mom and her
               sisters . We connect U.
             </p>
-            <button className="btn card-btn-outline-primary">Make a Booking</button>
+            {/* <button className="btn card-btn-outline-primary">Make a Booking</button> */}
+            <a href='/make-booking/group-booking' className="btn card-btn-outline-primary">Make a Booking</a>
           </div>
         </div>
       </div>

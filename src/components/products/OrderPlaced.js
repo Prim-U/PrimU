@@ -43,6 +43,7 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
     try {
       const pendingOrder = new PendingOrder(
         order,
+        user.uid,
         total,
         shippingAddress.shipname,
         user.email,

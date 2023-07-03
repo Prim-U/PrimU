@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Functions/methods
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile} from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -38,13 +38,15 @@ export default function Register() {
           email,
           password
         );
+        await sendEmailVerification(userCred.user)
+
         const newUser = new User(name, email, userCred.user.uid);
         await UserService.addUser(newUser);
         updateProfile(userCred.user, {
           displayName: name,
         });
         navigate("/");
-        alert("Register Successful!");
+        alert("Register Successful! Check Email for Verification Message.");
         window.location.reload()
       } catch (err) {
         alert(err.message);

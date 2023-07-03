@@ -25,6 +25,7 @@ import Addresses from "./components/profile/Addresses";
 import AddAddress from "./components/profile/AddAddress";
 import PaymentPage from "./components/profile/PaymentPage";
 import AddPayment from "./components/profile/AddPayment";
+import GroupBookingForm from "./components/homepageCards/GroupBookingForm";
 
 import RequireAuth from "./common/RequireAuth";
 import Spinner from "./common/Spinner";
@@ -39,7 +40,8 @@ import PostProduct from "./components/products/PostProducts";
 import ProductsPage from "./components/products/ProductsPage";
 import DisplayProduct from "./components/products/DisplayProduct";
 import Checkout from "./components/products/Checkout";
-import OrderPlaced from "./components/products/OrderPlaced";
+import OrderPlaced from "./components/products/OrderPlaced";import TreatmentServices from "./components/profile/TreatmentServices";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -69,9 +71,9 @@ function App() {
 
       {isUserUpdated ? (
         <Routes>
-          <Route path="/" element={<HomePage user={user} />}></Route>
+          <Route path="/" element={<HomePage user={user} setUser={setUser}/>}></Route>
 
-          <Route path="/register" element={<Register user={user} />}></Route>
+          <Route path="/register" element={<Register setUser={setUser} user={user} />}></Route>
           <Route path="/login" element={<Login user={user} />}></Route>
           <Route
             path="/login/reset-password"
@@ -255,6 +257,22 @@ function App() {
               // <RequireAuth user={user}>
               <BookingPage />
               // </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/make-booking/group-booking"
+            element={
+              // <RequireAuth user={user}>
+              <GroupBookingForm />
+              // </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/treatment-services"
+            element={
+              <RequireAuth user={user}>
+              <TreatmentServices/>
+              </RequireAuth>
             }
           ></Route>
         </Routes>
