@@ -27,7 +27,6 @@
   background-color: #64306e !important;
   border-color: #64306e !important;
   border-radius: 0%;
-  width: 380px;
 }
 .proceed-checkout-btn:hover {
   background-color: #8e469c !important;
@@ -127,4 +126,8 @@
 #order-complete-path:hover {
   color: gray !important;
   transition: 0.2s !important;
+}
+
+#proceed-checkout-path {
+  text-decoration: none;
 }

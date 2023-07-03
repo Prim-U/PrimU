@@ -22,11 +22,18 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
   function onFormSubmit(e) {
     e.preventDefault();
     const subtotal = displayProduct.price * quantity;
-    const item = new ProductData(displayProduct.productName, displayProduct.price, quantity, subtotal, displayProduct.productImageUrl, displayProduct.id);
-    setOrder(orderList => [...orderList, item])
+    const item = new ProductData(
+      displayProduct.productName,
+      displayProduct.price,
+      quantity,
+      subtotal,
+      displayProduct.productImageUrl,
+      displayProduct.id
+    );
+    setOrder((orderList) => [...orderList, item]);
     /* console.log(order)
     console.log(item); */
-    alert('Items Added to Cart.')
+    alert("Items Added to Cart.");
   }
   useEffect(() => {
     initialLoad();
@@ -45,8 +52,7 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="row">
-        
+      <div className="row mb-2">
         <div className="col mt-5">
           <img
             src={displayProduct.productImageUrl}
@@ -55,9 +61,9 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
             height="340"
           ></img>
         </div>
-        
+
         <div className="col ms-5">
-          <div className="mt-5 mb-3">
+          <div className="mt-5 mb-4">
             {" "}
             <Link className="account-path" to="/">
               Home
@@ -71,7 +77,6 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
           </div>
           <div>Is Organic? {displayProduct.status}</div>
           <div className="mb-5">Type? {displayProduct.category}</div>
-          
           <div className="input-group quantity-holder mb-3">
             <button
               className="edit-quantity-btn btn btn-primary"
@@ -96,6 +101,32 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
           </button>
         </div>
         <div className="col"></div>
+      </div>
+      <hr className="mt-3"></hr>
+
+      <div className="text-start container mt-3">
+        <div className="row mt-2">
+          <div className="col">
+            {" "}
+            <h3 className="info-labels text-center mt-3 mb-3">DESCRIPTION</h3>
+            <h4 className="text-cenetr">{displayProduct.description}</h4>
+          </div>
+        </div>
+        <hr></hr>
+        <div className="row">
+          <div className="col text-center">
+            {" "}
+            <h3 className="info-labels mt-3 mb-3">PRODUCT LABEL</h3>
+            <img
+              src={displayProduct.productLabelUrl}
+              alt={displayProduct.productName}
+              width="700"
+              height="473"
+              className="mx-auto"
+            ></img>
+          </div>
+            
+        </div>
       </div>
     </div>
   );
