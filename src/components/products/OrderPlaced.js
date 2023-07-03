@@ -10,14 +10,12 @@ import UserService from "../../services/user-service";
 import { auth } from "../../firebase/firebase";
 
 export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
-  
   const [shippingAddress, setShippingAddress] = useState([]);
   const [billingDetails, setBillingDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const user = auth.currentUser;
   const navigate = useNavigate();
-
 
   // useEffect(() => {
   //   initialLoad();
@@ -62,7 +60,7 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
       );
       setSendOrder((orderList) => [...orderList, pendingOrder]);
       await UserService.addOrder(pendingOrder);
-      navigate('/');
+      navigate("/");
       alert("Order Placed!");
     } catch (error) {
       alert(error.message);
@@ -99,15 +97,16 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
       <div className="row p-3">
         <div className="col-6 p-4">
           <form onSubmit={onFormSubmit}>
-            
-            <AddressOrder setShippingAddress={setShippingAddress}></AddressOrder>
+            <AddressOrder
+              setShippingAddress={setShippingAddress}
+            ></AddressOrder>
             <PaymentOrder setBillingDetails={setBillingDetails}></PaymentOrder>
 
             <div className="d-grid gap-2">
               <button
                 type="submit"
-                className="btn btn-dark mt-3"
-                id="submitBtn"
+                className="btn btn-primary mt-3"
+                id="place-order-btn"
                 disabled={buttonDisabled}
               >
                 {loading ? <Spinner extraClass="change-size" /> : "PLACE ORDER"}
@@ -140,6 +139,14 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
                   })}
                 </tbody>
                 <tfoot>
+                  <tr>
+                    <th>Shipping Fee</th>
+                    <td>
+                      <span>
+                        <bdi>R100</bdi>
+                      </span>
+                    </td>
+                  </tr>
                   <tr>
                     <th>
                       <h3>Total</h3>
