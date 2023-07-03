@@ -59,7 +59,7 @@
 .seller-card-btn:hover {
     background-color: #8e469c!important;
     transition: 0.5s!important;
-    border-color: #8e469c;
+    border-color: #8e469c!important;
 }
 
 .primlancer-card-text {

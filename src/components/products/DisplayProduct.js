@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../common/Navbar";
+import { ProductData } from "../../models/ProductData";
 import { Link } from "react-router-dom";
 import "./DisplayProduct.css";
 
-export default function DisplayProduct({ displayProduct }) {
+export default function DisplayProduct({ setOrder, displayProduct, order }) {
   const [quantity, setQuantity] = useState(1);
 
   function decrementCart() {
@@ -20,6 +21,12 @@ export default function DisplayProduct({ displayProduct }) {
 
   function onFormSubmit(e) {
     e.preventDefault();
+    const subtotal = displayProduct.price * quantity;
+    console.log(quantity)
+    const item = new ProductData(displayProduct.productName, displayProduct.price, quantity, subtotal, displayProduct.productImageUrl, displayProduct.id);
+    setOrder(orderList => [...orderList, item])
+    console.log(order)
+    console.log(item);
   }
   useEffect(() => {
     initialLoad();
@@ -39,6 +46,7 @@ export default function DisplayProduct({ displayProduct }) {
     <div>
       <Navbar></Navbar>
       <div className="row">
+        
         <div className="col mt-5">
           <img
             src={displayProduct.productImageUrl}
@@ -47,6 +55,7 @@ export default function DisplayProduct({ displayProduct }) {
             height="340"
           ></img>
         </div>
+        
         <div className="col ms-5">
           <div className="mt-5 mb-3">
             {" "}
@@ -62,30 +71,29 @@ export default function DisplayProduct({ displayProduct }) {
           </div>
           <div>Is Organic? {displayProduct.status}</div>
           <div className="mb-5">Type? {displayProduct.category}</div>
-          <form className="display-cart" onSubmit={onFormSubmit}>
-            <div className="input-group quantity-holder mb-3">
-              <button className="edit-quantity-btn btn btn-primary" onClick={decrementCart}>-</button>
-              <div className="form-control text-center">{quantity}</div>
-              <button className="edit-quantity-btn btn btn-primary" onClick={incrementCart}>+</button>
-            </div>
-            <button className="btn btn-primary submit-cart-btn" type="submit">Add to Cart</button>
-            {/* <div className="input-group mt-5">
-              <button
-                className="btn btn-outline-secondary display-btn"
-                type="button"
-                id="button-addon1"
-              >
-                Add to Cart
-              </button>
-              <input
-                type="number"
-                step="1"
-                min="1"
-                className="form-control display-input"
-                placeholder="Select Amount"
-              />
-            </div> */}
-          </form>
+          
+          <div className="input-group quantity-holder mb-3">
+            <button
+              className="edit-quantity-btn btn btn-primary"
+              onClick={decrementCart}
+            >
+              -
+            </button>
+            <div className="form-control text-center">{quantity}</div>
+            <button
+              className="edit-quantity-btn btn btn-primary"
+              onClick={incrementCart}
+            >
+              +
+            </button>
+          </div>
+          <button
+            className="btn btn-primary submit-cart-btn"
+            type="submit"
+            onClick={onFormSubmit}
+          >
+            Add to Cart
+          </button>
         </div>
         <div className="col"></div>
       </div>
