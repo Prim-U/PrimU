@@ -5,7 +5,7 @@ export class Profile {
       this.id = id;
     }
   
-    fromJson() {
+    profileToJson() {
       return {
         name: this.name,
         imageUrl: this.imageUrl

@@ -16,7 +16,7 @@ export default function SellerPage() {
         </h1>
         <div className="row">
           <div className="col">
-            <div className="seller-card">
+            <div className="seller-card mb-3">
               <img
                 className="supplier-image"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOq8uLc7g5srAEEZn0QLsJ4M1ZUVLYJY_FXQ&usqp=CAU"
@@ -26,8 +26,12 @@ export default function SellerPage() {
                 <h2 className="fw-bolder">SUPPLIER</h2>
               </div>
               <Link to="/account/seller/supplier-registration">
-                <div className="btn btn-dark seller-card-btn">SIGN UP HERE</div>
+                <div className="btn btn-dark seller-card-btn mb-5">SIGN UP HERE</div>
               </Link>
+              <Link to="/products/post-prodcuts">
+                <div className="btn btn-dark seller-card-btn mt-5">POST PRODUCTS</div>
+              </Link>
+              
             </div>
           </div>
 
@@ -36,13 +40,16 @@ export default function SellerPage() {
               <img
                 className="primlancer-image"
                 src="https://www.bagley.msstate.edu/wp-content/uploads/Remote-Work.jpg"
-                alt="Become Supplier"
+                alt="Become a Primlancer"
               ></img>
               <div className="primlancer-card-text mx-auto">
                 <h2 className="fw-bolder">PRIMLANCER</h2>
               </div>
               <Link to="/account/seller/primlancer-registration">
                 <div className="btn btn-dark seller-card-btn">SIGN UP HERE</div>
+              </Link>
+              <Link to="/products/add-services">
+                <div className="btn btn-dark seller-card-btn mt-5">START SELLING</div>
               </Link>
             </div>
           </div>

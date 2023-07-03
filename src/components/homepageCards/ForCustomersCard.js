@@ -12,7 +12,9 @@ export default function ForCustomersCard() {
         />
         <div className="card-img-overlay">
           <h5 className="card-title-for-cust">For Customers</h5>
-          <p className="card-text-for-cust">Enjoy beauty treatments wherever U are</p>
+          <p className="card-text-for-cust">
+            Enjoy beauty treatments wherever U are
+          </p>
           <br></br>
 
           <div className="p-button">
@@ -23,7 +25,12 @@ export default function ForCustomersCard() {
               expert primlancer closest to U. Simply click, pick a treatment and
               we'll come to U.
             </p>
-            <button className="btn card-btn-outline-primary">Make a Booking</button>
+            <a
+              href="/make-booking/group-booking"
+              className="btn card-btn-outline-primary text-decoration-none"
+            >
+              Make a Booking
+            </a>
           </div>
         </div>
       </div>

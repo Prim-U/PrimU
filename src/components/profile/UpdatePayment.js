@@ -4,8 +4,10 @@ import Spinner from "../../common/Spinner";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 import { Payment } from "../../models/Payment";
+import AccountSideBar from "./AccountSideBar";
+import { Link } from "react-router-dom";
 
-export default function UpdatePayment(props) {
+export default function UpdatePayment({updatePayment}) {
   const [card, setCard] = useState("");
   const [exp, setExp] = useState("");
   const [cvv, setCVV] = useState("");
@@ -19,10 +21,10 @@ export default function UpdatePayment(props) {
 
   async function initialLoad() {
     try {
-      if (props.updatePayment) {
-        setCard(props.updatePayment.card);
-        setExp(props.updatePayment.date);
-        setCVV(props.updatePayment.cvv);
+      if (updatePayment) {
+        setCard(updatePayment.card);
+        setExp(updatePayment.date);
+        setCVV(updatePayment.cvv);
       }
     } catch (error) {
       alert(error.message);
@@ -35,7 +37,7 @@ export default function UpdatePayment(props) {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      if (props.updatePayment) {
+      if (updatePayment) {
         setCard(e.target.value);
         setExp(e.target.value);
         setCVV(e.target.value);
@@ -43,7 +45,7 @@ export default function UpdatePayment(props) {
           card,
           exp,
           cvv,
-          props.updatePayment.id
+          updatePayment.id
         );
         await UserService.updatePayment(updatedPayment);
         alert("Payment Updated! Returning to Previous Page. . .");
@@ -57,72 +59,92 @@ export default function UpdatePayment(props) {
   }
 
   return (
-    <div className="real-bg-dark">
+    <div>
       <Navbar></Navbar>
-      <div className="container mt-5 p-3">
-        <img
-          className="mx-auto d-block mb-5"
-          src="https://prim-u.store/wp-content/uploads/2023/02/Prim-U-01-1.svg"
-          width="100"
-          height="80"
-          alt=""
-        />
-        <div className="card p-5 mx-5">
-          <form onSubmit={onFormSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Card Number</label>
+      <h1 className="mt-3 text-center" id="account-management">
+        My Account
+      </h1>
+      <p className="text-center mt-2" id="account-management">
+        <Link to="/" className="account-path">
+          HOME
+        </Link>{" "}
+        /{" "}
+        <Link to="/account" className="account-path">
+          MY ACCOUNT
+        </Link>{" "}
+        /{" "}
+        <Link to="/account/payment" className="account-path">
+          PAYMENT METHODS
+        </Link>{" "}
+        / UPDATE PAYMENT
+      </p>
 
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter card number"
-                required
-                value={card}
-                onChange={(e) => setCard(e.target.value)}
-              />
-            </div>
+      <div className="row mx-3">
+        <div className="col-3 p-3 account-col">
+          <AccountSideBar></AccountSideBar>
+        </div>
+        <div className="col-9">
+          <div className="container p-4">
+            <p className="text-black-50">
+              Edit and update payment method in the form below.
+            </p>
 
-            <div className="mb-3">
-              <label className="form-label">Expiration Date</label>
+            <form onSubmit={onFormSubmit}>
+              <div className="mb-3">
+                <label className="form-label">Card Number</label>
 
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter card expiration date"
-                required
-                value={exp}
-                onChange={(e) => setExp(e.target.value)}
-              />
-            </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter card number"
+                  required
+                  value={card}
+                  onChange={(e) => setCard(e.target.value)}
+                />
+              </div>
 
-            <div className="mb-3">
-              <label className="form-label">CVV</label>
+              <div className="mb-3">
+                <label className="form-label">Expiration Date</label>
 
-              <input
-                type="text"
-                className="form-control mb-1"
-                placeholder="Enter 3 digits on back of the card"
-                required
-                value={cvv}
-                onChange={(e) => setCVV(e.target.value)}
-              />
-            </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter card expiration date"
+                  required
+                  value={exp}
+                  onChange={(e) => setExp(e.target.value)}
+                />
+              </div>
 
-            <div className="d-grid gap-2">
-              <button
-                type="submit"
-                className="btn btn-dark mt-3"
-                id="updateButton"
-                disabled={buttonDisabled}
-              >
-                {loading ? (
-                  <Spinner extraClass="change-size" />
-                ) : (
-                  "Update Payment Method"
-                )}
-              </button>
-            </div>
-          </form>
+              <div className="mb-3">
+                <label className="form-label">CVV</label>
+
+                <input
+                  type="text"
+                  className="form-control mb-1"
+                  placeholder="Enter 3 digits on back of the card"
+                  required
+                  value={cvv}
+                  onChange={(e) => setCVV(e.target.value)}
+                />
+              </div>
+
+              <div className="d-grid gap-2">
+                <button
+                  type="submit"
+                  className="btn btn-dark mt-3"
+                  id="updateButton"
+                  disabled={buttonDisabled}
+                >
+                  {loading ? (
+                    <Spinner extraClass="change-size" />
+                  ) : (
+                    "Update Payment Method"
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ export class Payment {
     this.id = id;
   }
 
-  forJson() {
+  paymentToJson() {
     return {
       card: this.card,
       date: this.date,

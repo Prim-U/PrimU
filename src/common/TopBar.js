@@ -21,7 +21,8 @@ export default function TopBar(props) {
             <>
               <div className="align-middle me-auto">
                 <p className="align-middle">
-                  <i className="bi bi-person-fill"></i> Welcome {user.displayName}!
+                  <i className="bi bi-person-fill"></i> Welcome{" "}
+                  {user.displayName}!
                 </p>
               </div>
               <button className="btn btn-dark" onClick={onLogoutClicked}>
@@ -59,10 +60,13 @@ export default function TopBar(props) {
               aria-label="Search"
             />
           </form>
-
-          <button className="bag-button me-3" id="bag-btn">
-            <i className="bi bi-bag"></i>
-          </button>
+          <Link to="/cart">
+            <button className="bag-button me-3 mt-2" id="bag-btn">
+              <i className="bi bi-bag fs-4">
+              </i>
+              <span className="bag-counter">{props.order.length}</span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

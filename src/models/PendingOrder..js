@@ -1,9 +1,9 @@
-export class Seller {
+export class PendingOrder {
   constructor(
+    products,
+    total,
+    shipname,
     email,
-    firstname,
-    lastname,
-    storename,
     country,
     street,
     apt,
@@ -11,52 +11,55 @@ export class Seller {
     state,
     zipcode,
     phone,
-    inspection,
-    certificate,
+    card,
+    date,
+    cvv,
     id
   ) {
-    this.email = email;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.storename = storename;
+    this.products = products;
+    this.total = total;
     this.street = street;
+    this.shipname = shipname;
+    this.email = email;
     this.apt = apt;
     this.country = country;
     this.city = city;
     this.state = state;
     this.zipcode = zipcode;
     this.phone = phone;
-    this.inspection = inspection;
-    this.certificate = certificate;
+    this.card = card;
+    this.date = date;
+    this.cvv = cvv;
     this.id = id;
   }
 
-  sellerToJson() {
+  pendingOrderToJson(order) {
+    const products = order.products.map((obj) => {return Object.assign({}, obj)})
     return {
-      email: this.email,
-      firstname: this.firstname,
-      lastname: this.lastname,
-      storename: this.storename,
+      products: products,
       street: this.street,
+      shipname: this.shipname,
+      email: this.email,
       apt: this.apt,
       country: this.country,
       city: this.city,
       state: this.state,
       zipcode: this.zipcode,
       phone: this.phone,
-      inspection: this.inspection,
-      certificate: this.certificate
-      // id: this.id
+      card: this.card,
+      date: this.date,
+      cvv: this.cvv,
+      total: "R" + this.total,
     };
   }
 
   static fromFirebase(doc) {
     const data = doc.data();
-    return new Seller(
+    return new PendingOrder(
+      data.product,
+      data.total,
+      data.shipname,
       data.email,
-      data.firstname,
-      data.lastname,
-      data.storename,
       data.country,
       data.street,
       data.apt,
@@ -64,9 +67,10 @@ export class Seller {
       data.state,
       data.zipcode,
       data.phone,
-      data.inspection,
-      data.certificate,
-      doc.id
+      data.card,
+      data.date,
+      data.cvv,
+      data.id
     );
   }
 }

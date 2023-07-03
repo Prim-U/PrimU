@@ -38,18 +38,18 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active">Products</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to='/make-booking'>Make a Booking</Link>
-              </li>
-              <li className="nav-item">
                 <Link className="nav-link active" to="/account">
                   My Account
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active">FAQ/Customer Support</Link>
+                <Link to="/products"className="nav-link active">Products</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to='/make-booking'>Make a Booking</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/account/seller">Become a Seller</Link>
               </li>
             </ul>
           </div>

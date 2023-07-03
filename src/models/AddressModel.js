@@ -7,11 +7,11 @@ export class Address {
       this.city = city;
       this.state = state;
       this.zipcode = zipcode;
-      this.phone = phone
+      this.phone = phone;
       this.id = id
     }
   
-    intoJson() {
+    addressToJson() {
       return {
           street: this.street,
           shipname: this.shipname,

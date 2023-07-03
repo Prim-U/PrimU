@@ -25,6 +25,7 @@ import Addresses from "./components/profile/Addresses";
 import AddAddress from "./components/profile/AddAddress";
 import PaymentPage from "./components/profile/PaymentPage";
 import AddPayment from "./components/profile/AddPayment";
+import GroupBookingForm from "./components/homepageCards/GroupBookingForm";
 
 import RequireAuth from "./common/RequireAuth";
 import Spinner from "./common/Spinner";
@@ -35,7 +36,11 @@ import UpdatePayment from "./components/profile/UpdatePayment";
 import SupplierRegistration from "./components/auth/SupplierRegistration";
 import SellerPage from "./components/profile/SellerPage";
 import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
-import TreatmentServices from "./components/profile/TreatmentServices";
+import PostProduct from "./components/products/PostProducts";
+import ProductsPage from "./components/products/ProductsPage";
+import DisplayProduct from "./components/products/DisplayProduct";
+import Checkout from "./components/products/Checkout";
+import OrderPlaced from "./components/products/OrderPlaced";import TreatmentServices from "./components/profile/TreatmentServices";
 
 
 function App() {
@@ -43,6 +48,10 @@ function App() {
   const [isUserUpdated, setIsUserUpdated] = useState(false);
   const [addressList, setAddressList] = useState([]);
   const [updatePayment, setUpdatePayment] = useState([]);
+  const [displayProduct, setDisplayProduct] = useState([]);
+  const [order, setOrder] = useState([]);
+  const [sendOrder, setSendOrder] = useState([]);
+
   // const [addresses, setAddresses] = useState([]);
 
   /*  function createAddress(address) {
@@ -58,7 +67,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <TopBar user={user}></TopBar>
+      <TopBar user={user} order={order}></TopBar>
 
       {isUserUpdated ? (
         <Routes>
@@ -98,7 +107,6 @@ function App() {
             }
           ></Route>
           <Route
-
             path="/account/seller/primlancer-registration"
             element={
               <RequireAuth user={user}>
@@ -195,10 +203,67 @@ function App() {
           ></Route>
 
           <Route
+            path="/products"
+            element={
+              <RequireAuth user={user}>
+                <ProductsPage
+                  setDisplayProduct={setDisplayProduct}
+                  displayProduct={displayProduct}
+                  sendOrder={sendOrder}
+                />
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/products/post-prodcuts"
+            element={
+              <RequireAuth user={user}>
+                <PostProduct />
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/products/display-product"
+            element={
+              <RequireAuth user={user}>
+                <DisplayProduct displayProduct={displayProduct} setOrder={setOrder} order={order}/>
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
+            path="/cart"
+            element={
+              <RequireAuth user={user}>
+                <Checkout order={order} setOrder={setOrder}/>
+              </RequireAuth>
+            }
+          ></Route>
+          
+          <Route
+            path="/place-order"
+            element={
+              <RequireAuth user={user}>
+                <OrderPlaced order={order} sendOrder={sendOrder} setSendOrder={setSendOrder}/>
+              </RequireAuth>
+            }
+          ></Route>
+
+          <Route
             path="/make-booking"
             element={
               // <RequireAuth user={user}>
               <BookingPage />
+              // </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/make-booking/group-booking"
+            element={
+              // <RequireAuth user={user}>
+              <GroupBookingForm />
               // </RequireAuth>
             }
           ></Route>
@@ -216,7 +281,6 @@ function App() {
           <Spinner />
         </div>
       )}
-
     </BrowserRouter>
   );
 }
