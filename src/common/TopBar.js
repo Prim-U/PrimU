@@ -62,10 +62,11 @@ export default function TopBar(props) {
           </form>
           <Link to="/cart">
             <button className="bag-button me-3 mt-2" id="bag-btn">
-              <i className="bi bi-bag"></i>
+              <i className="bi bi-bag fs-4">
+              </i>
+              <span className="bag-counter">{props.order.length}</span>
             </button>
           </Link>
-          <span className="bag-counter">{props.order.length}</span>
         </div>
       </div>
     </div>

@@ -4,18 +4,19 @@ import { Link } from "react-router-dom";
 import UserService from "../../services/user-service";
 import "./ProductsPage.css";
 
-export default function ProductsPage({setDisplayProduct}) {
+export default function ProductsPage({ setDisplayProduct, sendOrder }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  });
 
   async function fetchProducts() {
     try {
       const product = await UserService.fetchProducts();
       setProducts(product);
-      console.log(product);
+      /* console.log(product);
+      console.log(sendOrder); */
     } catch (err) {
       console.log(err);
     }
@@ -40,9 +41,18 @@ export default function ProductsPage({setDisplayProduct}) {
                 className="card p-3 me-2 mb-2 product-holder"
                 key={product.id}
               >
-                <button className="btn btn-primary add-cart-btn">
-                  <i className="bi bi-bag-plus-fill"></i>
-                </button>
+                <Link
+                  to="/products/display-product"
+                  onClick={() => {
+                    setDisplayProduct(product);
+                    console.log(product);
+                  }}
+                >
+                  <button className="btn btn-primary add-cart-btn">
+                    <i className="bi bi-bag-plus-fill"></i>
+                  </button>
+                </Link>
+
                 <Link
                   to="/products/display-product"
                   onClick={() => {

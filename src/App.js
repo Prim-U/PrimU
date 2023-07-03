@@ -48,6 +48,8 @@ function App() {
   const [updatePayment, setUpdatePayment] = useState([]);
   const [displayProduct, setDisplayProduct] = useState([]);
   const [order, setOrder] = useState([]);
+  const [sendOrder, setSendOrder] = useState([]);
+
   // const [addresses, setAddresses] = useState([]);
 
   /*  function createAddress(address) {
@@ -205,6 +207,7 @@ function App() {
                 <ProductsPage
                   setDisplayProduct={setDisplayProduct}
                   displayProduct={displayProduct}
+                  sendOrder={sendOrder}
                 />
               </RequireAuth>
             }
@@ -232,7 +235,7 @@ function App() {
             path="/cart"
             element={
               <RequireAuth user={user}>
-                <Checkout order={order}/>
+                <Checkout order={order} setOrder={setOrder}/>
               </RequireAuth>
             }
           ></Route>
@@ -241,7 +244,7 @@ function App() {
             path="/place-order"
             element={
               <RequireAuth user={user}>
-                <OrderPlaced order={order}/>
+                <OrderPlaced order={order} sendOrder={sendOrder} setSendOrder={setSendOrder}/>
               </RequireAuth>
             }
           ></Route>

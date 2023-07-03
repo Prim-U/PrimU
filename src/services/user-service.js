@@ -26,7 +26,8 @@ import { Primlancer } from "../models/Primlancer";
 class UserService {
   constructor() {
     this.collection = "users";
-    this.productColleciton = "products"
+    this.productColleciton = "products";
+    this.orderCollection = "orders";
   }
 
   // Users, registration, login, contact info
@@ -294,6 +295,16 @@ class UserService {
   // Delete Products
   async deleteProducts() {
     
+  }
+
+  // Add Orders
+  async addOrder(order) {
+    const collectionRef = collection(db, this.orderCollection);
+    // const products = order.products.map((obj) => {return Object.assign({}, obj)})
+    const docRef = await addDoc(collectionRef, order.pendingOrderToJson(order));
+
+    order.id = docRef.id;
+    console.log(order.id)
   }
 }
 

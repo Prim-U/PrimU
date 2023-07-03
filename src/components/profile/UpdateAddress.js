@@ -23,7 +23,7 @@ export default function UpdateAddress(addressList) {
 
   useEffect(() => {
     initialLoad();
-  }, []);
+  });
 
   async function initialLoad() {
     try {
