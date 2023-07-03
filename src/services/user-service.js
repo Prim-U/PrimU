@@ -7,6 +7,7 @@ import {
   query,
   deleteDoc,
   getDoc,
+  addDoc
 } from "@firebase/firestore";
 
 import { db, auth } from "../firebase/firebase";
@@ -19,9 +20,14 @@ import { User } from "../models/Users";
 
 import { Profile } from "../models/Profile";
 
+import { Product } from "../models/Product";
+import { Primlancer } from "../models/Primlancer";
+
 class UserService {
   constructor() {
     this.collection = "users";
+    this.productColleciton = "products";
+    this.orderCollection = "orders";
   }
 
   // Users, registration, login, contact info
@@ -62,7 +68,7 @@ class UserService {
       )
     );
     profile.id = docRef.id;
-    await setDoc(docRef, profile.fromJson());
+    await setDoc(docRef, profile.profileToJson());
   }
 
   // Fetch Profile
@@ -92,12 +98,12 @@ class UserService {
   async addAddress(address) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "Addresses, " + docId)
+      collection(db, this.collection, docId, "Addresses")
     );
     //const docu = await getDoc(docRef);
     //const data = docu.data();
     address.id = docRef.id;
-    await setDoc(docRef, address.intoJson());
+    await setDoc(docRef, address.addressToJson());
   }
 
   // Fetch address information
@@ -107,7 +113,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "Addresses, " + docId
+      "Addresses"
     );
     const querySnapshot = await getDocs(query(collectionRef));
 
@@ -127,7 +133,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "Addresses, " + docId,
+      "Addresses",
       addressId
     );
     await deleteDoc(docRef);
@@ -140,10 +146,10 @@ class UserService {
       db,
       this.collection,
       docId,
-      "Addresses, " + docId,
+      "Addresses",
       address.id
     );
-    await setDoc(docRef, address.intoJson());
+    await setDoc(docRef, address.addressToJson());
   }
 
   // Payment methods
@@ -152,12 +158,12 @@ class UserService {
   async addPayment(payment) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "Payment Methods, " + docId)
+      collection(db, this.collection, docId, "Payment Methods")
     );
     payment.id = docRef.id;
     //const docu = await getDoc(docRef);
     //const data = docu.data();
-    await setDoc(docRef, payment.forJson());
+    await setDoc(docRef, payment.paymentToJson());
   }
 
   // Fetch payment
@@ -167,7 +173,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "Payment Methods, " + docId
+      "Payment Methods"
     );
     const querySnapshot = await getDocs(query(collectionRef));
 
@@ -187,7 +193,7 @@ class UserService {
       db,
       this.collection,
       docId,
-      "Payment Methods, " + docId,
+      "Payment Methods",
       paymentId
     );
     await deleteDoc(docRef);
@@ -200,10 +206,10 @@ class UserService {
       db,
       this.collection,
       docId,
-      "Payment Methods, " + docId,
+      "Payment Methods",
       payment.id
     );
-    await setDoc(docRef, payment.forJson());
+    await setDoc(docRef, payment.paymentToJson());
   }
 
   // Sellers
@@ -211,12 +217,12 @@ class UserService {
   async addSeller(seller) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "Seller " + docId)
+      collection(db, this.collection, docId, "Seller Accounts")
     );
     seller.id = docRef.id;
     //const docu = await getDoc(docRef);
     //const data = docu.data();
-    await setDoc(docRef, seller.sellerJson());
+    await setDoc(docRef, seller.sellerToJson());
   }
 
 
@@ -225,12 +231,80 @@ class UserService {
   async addPrimlancer(primlancer) {
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "Primlancer " + docId)
+      collection(db, this.collection, docId, "Primlancer Accounts")
     );
     primlancer.id = docRef.id;
     //const docu = await getDoc(docRef);
     //const data = docu.data();
-    await setDoc(docRef, primlancer.primlancerJson());
+    await setDoc(docRef, primlancer.primlancerToJson());
+  }
+
+  // Fetch Primlancers 
+  async fetchPrimlancer() {
+    const docId = auth.currentUser.uid;
+    const collectionRef = collection(
+      db,
+      this.collection,
+      docId,
+      "Primlancer Accounts"
+    );
+    const querySnapshot = await getDocs(query(collectionRef));
+
+    const primlancers = [];
+
+    querySnapshot.forEach((doc) => {
+      primlancers.push(Primlancer.fromFirebase(doc));
+    });
+
+    return primlancers;
+  }
+
+
+  // Prodcuts
+
+  // Create Products
+  async addProduct(product) {
+    const docId = auth.currentUser.uid;
+    const docRef = doc( collection(db, this.collection, docId, "Products"))
+    product.id = docRef.id
+    await setDoc(docRef, product.productToJson())
+  }
+
+  async addProductsPublic(product) {
+    const collectionRef = collection(db, this.productColleciton);
+    await addDoc(collectionRef, product.publicProductToJson());
+  }
+
+  // Fetch Products
+  async fetchProducts() {
+    const collectionRef = collection(
+      db,
+      this.productColleciton
+    );
+    const querySnapshot = await getDocs(query(collectionRef));
+
+    const products = [];
+
+    querySnapshot.forEach((doc) => {
+      products.push(Product.fromFirebase(doc));
+    });
+
+    return products;
+  }
+
+  // Delete Products
+  async deleteProducts() {
+    
+  }
+
+  // Add Orders
+  async addOrder(order) {
+    const collectionRef = collection(db, this.orderCollection);
+    // const products = order.products.map((obj) => {return Object.assign({}, obj)})
+    const docRef = await addDoc(collectionRef, order.pendingOrderToJson(order));
+
+    order.id = docRef.id;
+    console.log(order.id)
   }
 }
 

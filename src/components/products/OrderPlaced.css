@@ -1,0 +1,9 @@
+.place-order-card {
+    border-radius: 0%;
+    border-color: transparent;
+}
+
+#outer-checkout-card {
+    background-color: #f7f7f7;
+    border-color: none;
+}

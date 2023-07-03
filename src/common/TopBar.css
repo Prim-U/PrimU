@@ -4,13 +4,14 @@
 }
 
 .search-button:hover {
-    color: #d390e0;
-    transition: 0.3s;
+  color: #d390e0;
+  transition: 0.3s;
 }
 
 #bag-btn {
   border: none;
   background-color: transparent;
+  position: relative;
 }
 
 #bag-btn:hover {
@@ -28,4 +29,10 @@
   padding: 10px;
   background: white;
   color: black;
+}
+
+.bag-counter {
+  position: absolute;
+  top: 25%;
+  right: 38%;
 }
