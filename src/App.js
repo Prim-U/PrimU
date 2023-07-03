@@ -25,6 +25,7 @@ import Addresses from "./components/profile/Addresses";
 import AddAddress from "./components/profile/AddAddress";
 import PaymentPage from "./components/profile/PaymentPage";
 import AddPayment from "./components/profile/AddPayment";
+import GroupBookingForm from "./components/homepageCards/GroupBookingForm";
 
 import RequireAuth from "./common/RequireAuth";
 import Spinner from "./common/Spinner";
@@ -254,6 +255,14 @@ function App() {
             element={
               // <RequireAuth user={user}>
               <BookingPage />
+              // </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/make-booking/group-booking"
+            element={
+              // <RequireAuth user={user}>
+              <GroupBookingForm />
               // </RequireAuth>
             }
           ></Route>
