@@ -28,6 +28,7 @@ class UserService {
     this.collection = "users";
     this.productColleciton = "products";
     this.orderCollection = "orders";
+    this.bookingCollection = "group bookings"
   }
 
   // Users, registration, login, contact info
@@ -305,6 +306,38 @@ class UserService {
 
     order.id = docRef.id;
     console.log(order.id)
+  }
+
+  //Bookings
+  async addBooking(booking) {
+    const collectionRef = collection(db, this.bookingCollection);
+    const docRef = await addDoc(collectionRef, {
+      firstName: booking.firstName,
+      lastName: booking.lastName,
+      email: booking.email,
+      phone: booking.phone,
+      addressOne: booking.addressOne,
+      addressTwo: booking.addressTwo,
+      city: booking.city,
+      state: booking.state,
+      zipCode: booking.zipCode,
+      country: booking.country,
+      company: booking.company,
+      groupType: booking.groupType,
+      date: booking.date,
+      startTime: booking.startTime,
+      numGuests: booking.numGuests,
+      mainContact: booking.mainContact,
+      creditCard: booking.creditCard,
+      allGuests: booking.allGuests,
+      additionalInfo: booking.additionalInfo,
+      termsConditions: booking.termsConditions,
+      informGroup: booking.informGroup,
+      uid: booking.uid,
+    })
+    booking.id = docRef.id;
+    console.log(booking.id)
+    return booking;
   }
 }
 

@@ -16,7 +16,7 @@ export default function ServiceCards() {
           <div className="box one">
             <a
               className="text-decoration-none"
-              href="/male-grooming-service" //add male grooming link here
+              href="/treatment-services" //add male grooming link here
             >
               <h1>Male Grooming</h1>
             </a>
@@ -25,7 +25,7 @@ export default function ServiceCards() {
           <div className="box two">
             <a
               className="text-decoration-none"
-              href="/waxing-service" //add waxing link here
+              href="/treatment-services" //add waxing link here
             >
               <h1>Waxing</h1>
             </a>
@@ -34,7 +34,7 @@ export default function ServiceCards() {
           <div className="box three">
             <a
               className="text-decoration-none"
-              href="/makeup-service" //add makeup link here
+              href="/treatment-services" //add makeup link here
             >
               <h1>Makeup</h1>
             </a>
@@ -43,7 +43,7 @@ export default function ServiceCards() {
           <div className="box four">
             <a
               className="text-decoration-none"
-              href="/manicure-service" //add manicure link here
+              href="/treatment-services" //add manicure link here
             >
               <h1>Manicure</h1>
             </a>
@@ -52,7 +52,7 @@ export default function ServiceCards() {
           <div className="box five">
             <a
               className="text-decoration-none"
-              href="/hair-service" //add hair link here
+              href="/treatment-services" //add hair link here
             >
               <h1>Hair</h1>
             </a>
@@ -61,7 +61,7 @@ export default function ServiceCards() {
           <div className="box six">
             <a
               className="text-decoration-none"
-              href="/massage-service" //add massage link here
+              href="/treatment-services" //add massage link here
             >
               <h1>Massage</h1>
             </a>

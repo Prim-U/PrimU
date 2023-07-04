@@ -3,6 +3,8 @@ import Navbar from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { useNavigate } from "react-router";
 import { GroupBooking } from "../../models/GroupBooking";
+import UserService from "../../services/user-service";
+import { auth } from "../../firebase/firebase";
 
 export default function GroupBookingForm() {
   const [loading, setLoading] = useState(false);
@@ -17,6 +19,7 @@ export default function GroupBookingForm() {
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [country, setCountry] = useState("");
+  const [company, setCompany] = useState("");
   const [groupType, setGroupType] = useState("");
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -36,31 +39,33 @@ export default function GroupBookingForm() {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      //   const booking = new GroupBooking(
-      //     firstName,
-      //     lastName,
-      //     email,
-      //     phone,
-      //     addressOne,
-      //     addressTwo,
-      //     city,
-      //     state,
-      //     zipCode,
-      //     country,
-      //     groupType,
-      //     date,
-      //     startTime,
-      //     numGuests,
-      //     mainContact,
-      //     creditCard,
-      //     allGuests,
-      //     termsConditions,
-      //     informGroup,
-      //     additionalInfo,
-      //     null
-      //   );
-      //   await UserService.addAddress(address);
-      alert("Booking Submitted! Returning to Previous Page . . .");
+      const uid = auth.currentUser.uid;
+      const booking = new GroupBooking(
+        firstName,
+        lastName,
+        email,
+        phone,
+        addressOne,
+        addressTwo,
+        city,
+        state,
+        zipCode,
+        country,
+        company,
+        groupType,
+        date,
+        startTime,
+        numGuests,
+        mainContact,
+        creditCard,
+        allGuests,
+        additionalInfo,
+        termsConditions,
+        informGroup,
+        uid
+      );
+      await UserService.addBooking(booking);
+      alert("Booking Submitted, you'll hear back from us soon! Returning to Previous Page . . .");
       navigate("/");
     } catch (error) {
       alert(error.message);
@@ -90,10 +95,10 @@ export default function GroupBookingForm() {
             alt=""
           />
           <div className="card p-5 mx-5">
+            <h1 className="text-center">Group Booking Request Form</h1>
             <form onSubmit={onFormSubmit}>
               <div className="mb-3">
                 <label className="form-label">First Name</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -103,9 +108,9 @@ export default function GroupBookingForm() {
                   onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Last Name</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -118,7 +123,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">Email Address</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -131,7 +135,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">Phone Number</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -144,7 +147,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">Address 1</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -157,7 +159,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">Address 2</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -170,7 +171,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">City</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -183,7 +183,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">State</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -196,7 +195,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">ZipCode / Postal Code</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -209,7 +207,6 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">Country/Region</label>
-
                 <input
                   type="text"
                   className="form-control"
@@ -221,14 +218,25 @@ export default function GroupBookingForm() {
               </div>
 
               <div className="mb-3">
+                <label className="form-label">Company or Group Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Company or Group Name"
+                  required
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </div>
+
+              <div className="mb-3">
                 <label className="form-label">
                   Type of group (bridal, birthday, etc.)
                 </label>
-
                 <input
                   type="text"
                   className="form-control mb-1"
-                  placeholder="Type of group (bridal, birthday, etc.)"
+                  placeholder="Type of group"
                   required
                   value={groupType}
                   onChange={(e) => setGroupType(e.target.value)}
@@ -237,12 +245,11 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">
-                  Your ideal date for the spa group event:
+                  Your ideal date and start time for the group event:
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   className="form-control"
-                  placeholder="Your ideal date for the spa group event:"
                   required
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
@@ -251,10 +258,10 @@ export default function GroupBookingForm() {
 
               <div className="mb-3">
                 <label className="form-label">
-                  Ideal start time for the group:
+                  Ideal start time for the group (local time):
                 </label>
                 <input
-                  type="text"
+                  type="time"
                   className="form-control"
                   placeholder="Ideal start time for the group:"
                   required
@@ -270,7 +277,7 @@ export default function GroupBookingForm() {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Number of guests in your group:"
+                  placeholder="Number of guests"
                   required
                   value={numGuests}
                   onChange={(e) => setNumGuests(e.target.value)}
@@ -284,7 +291,7 @@ export default function GroupBookingForm() {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Main contact name & phone number:"
+                  placeholder="Main contact name & phone number"
                   required
                   value={mainContact}
                   onChange={(e) => setMainContact(e.target.value)}
@@ -298,27 +305,47 @@ export default function GroupBookingForm() {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Credit Card Number (to hold reservation):"
+                  placeholder="Credit Card Number"
                   required
                   value={creditCard}
                   onChange={(e) => setCreditCard(e.target.value)}
                 />
               </div>
+
               <div className="mb-3">
-                <label className="form-label">
+                <label className="form-label" for="allGuests">
                   Please enter the first and last name of EVERY guest, a phone
                   number for each guest and which services they would like to
                   receive:
                 </label>
+                <textarea
+                  className="form-control"
+                  required
+                  cols="40"
+                  id="allGuests"
+                  value={allGuests}
+                  name="allGuests"
+                  rows="10"
+                  onChange={(e) => setAllGuests(e.target.value)}
+                ></textarea>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">
+                  Thank you! If there is any other information please include it
+                  below. Once you select submit your form will be sent to our
+                  Group Booking Coordinator. If you require assistance call us
+                  at +27-060-070-3045 or email info@prim-u.com
+                </label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="first and last name of EVERY guest, a phone number for each guest and which service they would like:"
-                  required
-                  value={allGuests}
-                  onChange={(e) => setAllGuests(e.target.value)}
+                  placeholder="Additional Information"
+                  value={additionalInfo}
+                  onChange={(e) => setAdditionalInfo(e.target.value)}
                 />
               </div>
+              <br></br>
 
               <div className="mb-3">
                 <label className="form-label">
@@ -335,6 +362,7 @@ export default function GroupBookingForm() {
                 </label>
 
                 <input
+                  className="m-2"
                   type="checkbox"
                   id="termsConditions"
                   name="termsConditions"
@@ -349,6 +377,7 @@ export default function GroupBookingForm() {
                 <br></br>
 
                 <input
+                  className="m-2"
                   type="checkbox"
                   id="informGroup"
                   name="informGroup"
@@ -359,23 +388,6 @@ export default function GroupBookingForm() {
                 <label for="informGroup" className="form-label">
                   I agree to inform all members of my group of the terms.
                 </label>
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">
-                  Thank you! If there is any other information please include it
-                  below. Once you select submit your form will be sent to our
-                  Group Booking Coordinator. If you require assistance call us
-                  at +27-060-070-3045 or email info@prim-u.com
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Additional Information"
-                  required
-                  value={additionalInfo}
-                  onChange={(e) => setAdditionalInfo(e.target.value)}
-                />
               </div>
 
               <div className="d-grid gap-2">
