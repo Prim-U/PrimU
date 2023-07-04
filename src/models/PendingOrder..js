@@ -1,6 +1,7 @@
 export class PendingOrder {
   constructor(
     products,
+    uid,
     total,
     shipname,
     email,
@@ -17,6 +18,7 @@ export class PendingOrder {
     id
   ) {
     this.products = products;
+    this.uid = uid;
     this.total = total;
     this.street = street;
     this.shipname = shipname;
@@ -37,6 +39,7 @@ export class PendingOrder {
     const products = order.products.map((obj) => {return Object.assign({}, obj)})
     return {
       products: products,
+      userId: this.uid,
       street: this.street,
       shipname: this.shipname,
       email: this.email,
@@ -57,6 +60,7 @@ export class PendingOrder {
     const data = doc.data();
     return new PendingOrder(
       data.product,
+      data.uid,
       data.total,
       data.shipname,
       data.email,

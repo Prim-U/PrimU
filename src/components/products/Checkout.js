@@ -77,7 +77,17 @@ export default function Checkout({ order, setOrder }) {
                   {order.map((item) => {
                     return (
                       <tr key={item.id}>
-                        <td></td>
+                        <td>
+                          <button
+                            className="remove-product-btn mt-3"
+                            type="button"
+                            onClick={() => {
+                              onProductRemove(item);
+                            }}
+                          >
+                            <i className="bi bi-x-lg"></i>
+                          </button>
+                        </td>
                         <td>
                           <img
                             src={item.image}

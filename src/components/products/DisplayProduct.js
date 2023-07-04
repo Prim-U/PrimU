@@ -67,8 +67,8 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
             {" "}
             <Link className="account-path" to="/">
               Home
-            </Link>{" "}
-            / {displayProduct.category} / {displayProduct.productName}{" "}
+            </Link>{" "} / <Link className="account-path me-1" to="/products">Shop</Link>
+             / {displayProduct.category} / {displayProduct.productName}{" "}
           </div>{" "}
           <h2 className="mb-3">{displayProduct.productName}</h2>
           <h4 className="mb-3 display-price">Price: R{displayProduct.price}</h4>
@@ -122,7 +122,7 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
               alt={displayProduct.productName}
               width="700"
               height="473"
-              className="mx-auto"
+              className="mx-auto mb-4"
             ></img>
           </div>
             

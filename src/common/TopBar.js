@@ -3,15 +3,18 @@ import React from "react";
 // Functions/methods
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Stylesheet
 import "./TopBar.css";
 
 export default function TopBar(props) {
+  const navigate = useNavigate()
   const user = auth.currentUser;
   async function onLogoutClicked() {
     await signOut(auth);
+    window.location.reload();
+    navigate('/');
   }
   return (
     <div>

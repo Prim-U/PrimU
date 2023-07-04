@@ -36,7 +36,7 @@ export default function Contact() {
       alert("Contact Details Updated. Returning to Previous Page. . .");
       window.location.reload();
     } catch (error) {
-      alert(error.message);
+      alert('Login Required. Please Logout and Login Again.');
     }
     setButtonDisabled(false);
     setLoading(false);

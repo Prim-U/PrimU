@@ -71,9 +71,9 @@ function App() {
 
       {isUserUpdated ? (
         <Routes>
-          <Route path="/" element={<HomePage user={user} />}></Route>
+          <Route path="/" element={<HomePage user={user} setUser={setUser}/>}></Route>
 
-          <Route path="/register" element={<Register user={user} />}></Route>
+          <Route path="/register" element={<Register setUser={setUser} user={user} />}></Route>
           <Route path="/login" element={<Login user={user} />}></Route>
           <Route
             path="/login/reset-password"

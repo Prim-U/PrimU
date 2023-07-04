@@ -48,8 +48,8 @@ export default function SellerPage() {
               <Link to="/account/seller/primlancer-registration">
                 <div className="btn btn-dark seller-card-btn">SIGN UP HERE</div>
               </Link>
-              <Link to="/products/add-services">
-                <div className="btn btn-dark seller-card-btn mt-5">START SELLING</div>
+              <Link to="/treatment-services">
+                <div className="btn btn-dark seller-card-btn mt-5">POST SERVICES</div>
               </Link>
             </div>
           </div>

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import NavbarAuth from "../../common/Navbar";
 import AccountSideBar from "./AccountSideBar";
 import UserService from "../../services/user-service";
+import { auth } from "../../firebase/firebase";
 
 export default function Account() {
   const [primlancers, setPrimlancers] = useState([]);
@@ -21,6 +22,7 @@ export default function Account() {
   async function fetchPrimlancer() {
     try {
       const primlancer = await UserService.fetchPrimlancer();
+      console.log(auth.currentUser)
       // console.log(primlancer);
     } catch (err) {
       alert(err.message);
