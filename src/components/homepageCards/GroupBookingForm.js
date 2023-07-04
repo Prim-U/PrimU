@@ -95,7 +95,7 @@ export default function GroupBookingForm() {
             alt=""
           />
           <div className="card p-5 mx-5">
-            <h1 className="text-center">Group Booking Request Form</h1>
+            <h1>Group Booking Request Form</h1>
             <form onSubmit={onFormSubmit}>
               <div className="mb-3">
                 <label className="form-label">First Name</label>

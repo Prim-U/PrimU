@@ -57,7 +57,6 @@
     position: relative;
     cursor: pointer;
     text-transform: uppercase;
-    text-align: center;
     font-family: "Roboto Condensed", sans-serif;
     font-style: normal;
     font-weight: bolder;
@@ -65,9 +64,10 @@
     line-height: 28px;
     width: 175px;
     height: 60px;
-    place-items: center;
     border-radius: 10px;
-    margin-top:5%
+    margin-top:5%;
+    /* text-align: center; */
+    place-items: center;
 }
 
 .prov-serv-btn-outline-primary:hover {

@@ -21,7 +21,8 @@ export default function ProvideServiceCard() {
 
               <div className="prov-serv-overlay">
                 <h2 className="prov-serv-text-overlay">For Freelancers</h2>
-                <button className="btn prov-serv-btn-outline-primary">Sign Up</button>
+                <a href='/account/seller/primlancer-registration'><button className="btn prov-serv-btn-outline-primary" >Sign Up</button></a>
+                {/* <button className="btn prov-serv-btn-outline-primary" >Sign Up</button> */}
               </div>
 
               <div className="card-body-prov-serv">
@@ -48,7 +49,9 @@ export default function ProvideServiceCard() {
               
               <div className="prov-serv-overlay">
                 <h2 className="prov-serv-text-overlay">For Salons / Spas</h2>
-                <button className="btn prov-serv-btn-outline-primary">Sign Up</button>
+                <a href="/account/seller/supplier-registration"><button className="btn prov-serv-btn-outline-primary">Sign Up</button></a>
+                {/* <button className="btn prov-serv-btn-outline-primary">Sign Up</button> */}
+                {/* <a className="btn prov-serv-btn-outline-primary" href="/account/seller/supplier-registration">Sign Up</a> */}
               </div>
 
               <div className="card-body-prov-serv">
