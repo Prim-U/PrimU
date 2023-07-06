@@ -67,7 +67,7 @@ export default function FAQ() {
         <span className="purple-header"> Questions </span>
       </p>
       <h3 className="faq-title">For Customers</h3>
-      <div>
+      <div className="mb-4">
         <Accordion items={customerFAQ} />
       </div>
     </div>
