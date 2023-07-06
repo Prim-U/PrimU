@@ -58,11 +58,11 @@ export default function AddAddress() {
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         /
-        <Link to="/account/addresses" className="account-path">
+        <Link to="/account/addresses" className="account-path" id="account-addresses-path">
           ADDRESS MANAGEMENT
         </Link>{" "}
         / ADD ADDRESS

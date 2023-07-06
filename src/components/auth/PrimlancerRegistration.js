@@ -21,7 +21,6 @@ export default function PrimlancerRegistration() {
   const [employmentHistory, setEmploymentHistory] = useState("");
   const [education, setEducation] = useState("");
   const [reference, setreference] = useState("");
-  const [referenceFile, setReferenceFile] = useState(null);
   const [qualifications, setQualifications] = useState("");
   const [qualificationFiles, setQualificationFiles] = useState(null);
   const [availibility, setAvaibility] = useState("");
@@ -34,14 +33,8 @@ export default function PrimlancerRegistration() {
     e.preventDefault();
     setLoading(true);
     setButtonDisabled(true);
+    alert("This might take a couple of seconds . . .");
     try {
-      const referenceUrl = await FileService.uploadImage(
-        referenceFile,
-        (progress) => {
-          console.log("Upload progress: ", progress);
-        }
-      );
-
       const qualificationsUrl = await FileService.uploadImage(
         qualificationFiles,
         (progress) => {
@@ -63,14 +56,14 @@ export default function PrimlancerRegistration() {
         education,
         employmentHistory,
         reference,
-        referenceUrl,
         qualifications,
         qualificationsUrl,
         availibility,
         null
       );
       await UserService.addPrimlancer(primlancer);
-      navigate("/");
+      await UserService.nowPrimlancer();
+      navigate("/account/seller");
       alert("Your application has been submitted, thank you!");
     } catch (error) {
       alert(error.message);
@@ -79,21 +72,13 @@ export default function PrimlancerRegistration() {
     setButtonDisabled(false);
   }
 
-   function onReferenceSelected(e) {
-    if (e.target.files.length) {
-      setReferenceFile(e.target.files[0]);
-    } else {
-      setReferenceFile(null);
-    }
-  }
-
   function onResumeSelected(e) {
     if (e.target.files.length) {
       setQualificationFiles(e.target.files[0]);
     } else {
       setQualificationFiles(null);
     }
-  } 
+  }
 
   return (
     <div className="real-bg-dark">
@@ -300,19 +285,6 @@ export default function PrimlancerRegistration() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">
-                References (Optional to Submit File)
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                placeholder=""
-                onChange={onReferenceSelected}
-                multiple
-              />
-            </div>
-
-            <div className="mb-3">
               <label className="form-label">Skills and Qualifications</label>
 
               <textarea
@@ -325,9 +297,7 @@ export default function PrimlancerRegistration() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">
-                Resume (Optional to Submit File)
-              </label>
+              <label className="form-label">Resume</label>
               <input
                 type="file"
                 className="form-control"

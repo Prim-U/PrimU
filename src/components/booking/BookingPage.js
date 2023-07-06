@@ -120,13 +120,13 @@ export default function BookingPage() {
 
           <div className="col">
             <div className="card p-3" id="offer-card">
-              <Link to="/become-seller" className="text-decoration-none text-black">
+              <Link to="/booking/become-seller" className="text-decoration-none text-black">
                 <div className="row">
                   <div className="col-4">
                     <i className="fa fa-shopping-basket fa-5x" aria-hidden="true"></i>
                   </div>
                   <div className="col-8">
-                    <h5 className="text-start">Become Seller</h5>
+                    <h5 className="text-start">Become Supplier</h5>
                     <div className="text-black-50 text-start fs-6 text">
                       Become a registered seller with us and use this platform to spread your business.
                     </div>

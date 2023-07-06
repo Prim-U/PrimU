@@ -40,7 +40,10 @@ import PostProduct from "./components/products/PostProducts";
 import ProductsPage from "./components/products/ProductsPage";
 import DisplayProduct from "./components/products/DisplayProduct";
 import Checkout from "./components/products/Checkout";
+
 import OrderPlaced from "./components/products/OrderPlaced";import TreatmentServices from "./components/profile/TreatmentServices";
+import BookingRegistration from "./components/auth/BookingRegistration";
+
 
 
 function App() {
@@ -51,12 +54,6 @@ function App() {
   const [displayProduct, setDisplayProduct] = useState([]);
   const [order, setOrder] = useState([]);
   const [sendOrder, setSendOrder] = useState([]);
-
-  // const [addresses, setAddresses] = useState([]);
-
-  /*  function createAddress(address) {
-    setAddresses([...addresses, address]);
-  } */
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -71,9 +68,15 @@ function App() {
 
       {isUserUpdated ? (
         <Routes>
-          <Route path="/" element={<HomePage user={user} />}></Route>
+          <Route
+            path="/"
+            element={<HomePage user={user} setUser={setUser} />}
+          ></Route>
 
-          <Route path="/register" element={<Register user={user} />}></Route>
+          <Route
+            path="/register"
+            element={<Register setUser={setUser} user={user} />}
+          ></Route>
           <Route path="/login" element={<Login user={user} />}></Route>
           <Route
             path="/login/reset-password"
@@ -114,6 +117,14 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+          <Route
+            path="/booking/become-seller"
+            element={
+              <RequireAuth user={user}>
+                <SellerPage user={user} />
+              </RequireAuth>
+            }
+          ></Route>
 
           <Route
             path="/account/contact-info"
@@ -128,9 +139,8 @@ function App() {
             element={
               <RequireAuth user={user}>
                 <Addresses
-                  setAddressList={
-                    setAddressList
-                  } /* addressList={addressList}  addresses={addresses} */
+                  setAddressList={setAddressList}
+                  addressList={addressList}
                 />
               </RequireAuth>
             }
@@ -216,10 +226,10 @@ function App() {
           ></Route>
 
           <Route
-            path="/products/post-prodcuts"
+            path="/products/post-products"
             element={
               <RequireAuth user={user}>
-                <PostProduct />
+                <PostProduct></PostProduct>
               </RequireAuth>
             }
           ></Route>
@@ -228,7 +238,11 @@ function App() {
             path="/products/display-product"
             element={
               <RequireAuth user={user}>
-                <DisplayProduct displayProduct={displayProduct} setOrder={setOrder} order={order}/>
+                <DisplayProduct
+                  displayProduct={displayProduct}
+                  setOrder={setOrder}
+                  order={order}
+                />
               </RequireAuth>
             }
           ></Route>
@@ -237,16 +251,21 @@ function App() {
             path="/cart"
             element={
               <RequireAuth user={user}>
-                <Checkout order={order} setOrder={setOrder}/>
+                <Checkout order={order} setOrder={setOrder} />
               </RequireAuth>
             }
           ></Route>
-          
+
           <Route
             path="/place-order"
             element={
               <RequireAuth user={user}>
-                <OrderPlaced order={order} sendOrder={sendOrder} setSendOrder={setSendOrder}/>
+                <OrderPlaced
+                  order={order}
+                  sendOrder={sendOrder}
+                  setSendOrder={setSendOrder}
+                  setOrder={setOrder}
+                />
               </RequireAuth>
             }
           ></Route>
@@ -271,10 +290,19 @@ function App() {
             path="/treatment-services"
             element={
               <RequireAuth user={user}>
-              <TreatmentServices/>
+                <TreatmentServices />
               </RequireAuth>
             }
           ></Route>
+          <Route
+            path="/account/treatment-services/booking"
+            element={
+              <RequireAuth user={user}>
+              <BookingRegistration/>
+              </RequireAuth>
+            }
+          ></Route>
+
         </Routes>
       ) : (
         <div className="mt-5 text-center">

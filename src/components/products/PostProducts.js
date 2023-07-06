@@ -8,6 +8,7 @@ import UserService from "../../services/user-service";
 import { Product } from "../../models/Product";
 import Navbar from "../../common/Navbar";
 import { auth } from "../../firebase/firebase";
+import { useEffect } from "react";
 
 export default function PostProduct() {
   const [productName, setProductName] = useState("");
@@ -17,9 +18,26 @@ export default function PostProduct() {
   const [productImage, setProductImage] = useState(null);
   const [productLabel, setProductLabel] = useState(null);
   const [description, setDescription] = useState("");
+  const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchUser();
+  });
+
+  async function fetchUser() {
+    try {
+      const user = await UserService.fetchUser();
+      if (user.isSupplier !== "yes") {
+        alert('You must be a registered seller to post products.')
+        navigate('/account/seller/supplier-registration')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function onFormSubmit(e) {
     e.preventDefault();
@@ -46,6 +64,7 @@ export default function PostProduct() {
         price,
         category,
         status,
+        summary,
         description,
         productImageUrl,
         productLabelUrl,
@@ -153,12 +172,25 @@ export default function PostProduct() {
           </div>
 
           <div className="mb-3">
+            <label className="form-label">Brief Summary</label>
+
+            <textarea
+              type="text"
+              className="form-control mb-1"
+              placeholder="Enter 1-2 lines that describe your product."
+              required
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+            ></textarea>
+          </div>
+
+          <div className="mb-3">
             <label className="form-label">Product Description</label>
 
             <textarea
               type="text"
               className="form-control mb-1"
-              placeholder="Enter product description"
+              placeholder="Enter a more in-depth description of your product"
               required
               value={description}
               onChange={(e) => setDescription(e.target.value)}

@@ -7,7 +7,7 @@ import HairTrimming from "./HairTrimming.jpeg";
 export default function TreatmentServices() {
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
 
       <div className="image-container mb-3">
         <img
@@ -30,12 +30,14 @@ export default function TreatmentServices() {
             and confidence with Prim-U.
           </p>
           <div className="button-container">
+          <Link to="/account/treatment-services/booking"> 
             <button
               className="btn btn-primary centered-text paragraph-box"
               type="button"
             >
               Book Now
             </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -63,9 +65,14 @@ export default function TreatmentServices() {
           hello to flexibility and ease.
         </p>
         <div className="text-right">
-          <button className="btn btn-lg btn-light custom-button" type="button">
-            Signup Now
-          </button>
+          <Link to="/account/seller/primlancer-registration">
+            <button
+              className="btn btn-lg btn-light custom-button"
+              type="button"
+            >
+              Signup Now
+            </button>
+          </Link>
         </div>
 
         <div className="row t-row">
@@ -143,12 +150,14 @@ export default function TreatmentServices() {
             businesses helping <br />
             small businesses gain even bigger opportunities. It’s a win-win.
           </p>
+          <Link to="/account/seller/primlancer-registration">
           <button
             className="btn btn-lg btn-light custom-button-container mb-3"
             type="button"
           >
             Signup Now
           </button>
+          </Link>
           <img
             src="https://prim-u.app/wp-content/uploads/2023/01/brushes.png"
             alt="brush image"
@@ -173,20 +182,24 @@ export default function TreatmentServices() {
               that Prim-U will always find you the best prices in your area
               because they do not take any commission on the services you use.
             </p>
+            <Link to="/account/treatment-services/booking">
             <button
-            className="btn btn-lg btn-light custom-button-container mb-3"
-            type="button"
-          >
-            Book Now
-          </button>
+              className="btn btn-lg btn-light custom-button-container mb-3"
+              type="button"
+            >
+              Book Now
+            </button>
+            </Link>
           </div>
         </div>
       </div>
       <div className="container-fluid bg-light">
-      <div className="subheader-container">
-        <h2 className="service-sub-headers">SERVICE CATEGORIES</h2>
-
-      </div>
+        <div className="subheader-container" style={{ marginTop: "25px" }}>
+          <h2 className="service-sub-headers mb-2">SERVICE CATEGORIES</h2>
+          <p className="paragraph-box-two" style={{ textAlign: "center" }}>
+            Treat yourself with our services.
+          </p>
+        </div>
       </div>
     </div>
   );

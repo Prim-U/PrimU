@@ -1,3 +1,5 @@
+import { auth } from "../firebase/firebase";
+
 export class Primlancer {
   constructor(
     email,
@@ -14,7 +16,6 @@ export class Primlancer {
     education,
     employment,
     reference,
-    referenceUrl,
     qualifications,
     qualificationsUrl,
     availibility,
@@ -34,7 +35,6 @@ export class Primlancer {
     this.education = education;
     this.employment = employment;
     this.reference = reference;
-    this.referenceUrl = referenceUrl;
     this.qualifications = qualifications;
     this.qualificationsUrl = qualificationsUrl;
     this.availibility = availibility;
@@ -57,11 +57,33 @@ export class Primlancer {
       education: this.education,
       employment: this.employment,
       reference: this.reference,
-      referenceUrl: this.referenceUrl,
       qualifications: this.qualifications,
       qualificationsUrl: this.qualificationsUrl,
       availibility: this.availibility,
       // id: this.id
+    };
+  }
+
+  publicPrimlancerToJson() {
+    return {
+      email: this.email,
+      firstname: this.firstname,
+      lastname: this.lastname,
+      dob: this.dob,
+      street: this.street,
+      apt: this.apt,
+      country: this.country,
+      city: this.city,
+      state: this.state,
+      zipcode: this.zipcode,
+      phone: this.phone,
+      education: this.education,
+      employment: this.employment,
+      reference: this.reference,
+      qualifications: this.qualifications,
+      qualificationsUrl: this.qualificationsUrl,
+      availibility: this.availibility,
+      uid: auth.currentUser.uid
     };
   }
 
@@ -82,7 +104,6 @@ export class Primlancer {
       data.education,
       data.employment,
       data.reference,
-      data.referenceUrl,
       data.qualifications,
       data.qualificationsUrl,
       data.availibility,

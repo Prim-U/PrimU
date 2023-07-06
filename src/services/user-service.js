@@ -7,7 +7,7 @@ import {
   query,
   deleteDoc,
   getDoc,
-  addDoc
+  addDoc,
 } from "@firebase/firestore";
 
 import { db, auth } from "../firebase/firebase";
@@ -21,6 +21,8 @@ import { User } from "../models/Users";
 import { Profile } from "../models/Profile";
 
 import { Product } from "../models/Product";
+
+import { Booking } from "../models/Booking";
 import { Primlancer } from "../models/Primlancer";
 
 class UserService {
@@ -29,6 +31,12 @@ class UserService {
     this.productColleciton = "products";
     this.orderCollection = "orders";
     this.bookingCollection = "group bookings"
+
+    this.supplierCollection = "suppliers";
+    this.primlancerCollection = "primlancers";
+
+    this.bookingCollection = "bookings";
+
   }
 
   // Users, registration, login, contact info
@@ -40,19 +48,32 @@ class UserService {
     const docRef = doc(db, this.collection, user.uid);
     await updateDoc(docRef, {
       email: user.email,
-      name: user.displayName,
+      name: user.displayName
+    });
+  }
+
+  async nowSupplier() {
+    const docId = auth.currentUser.uid
+    const docRef = doc(db, this.collection, docId);
+    await updateDoc(docRef, {
+      isSupplier: 'yes'
+    });
+  }
+
+  async nowPrimlancer() {
+    const docId = auth.currentUser.uid;
+    const docRef = doc(db, this.collection, docId);
+    await updateDoc(docRef, {
+      isPrimlancer: 'yes'
     });
   }
 
   async fetchUser() {
-    const collectionRef = collection(db, this.collection);
-    const querySnapshot = getDoc(query(collectionRef));
-    const users = [];
-    querySnapshot.forEach((doc) => {
-      users.push(User.fromFirebase(doc));
-    });
-
-    return users;
+    const docId = auth.currentUser.uid;
+    const docRef = doc(db, this.collection, docId);
+    const docFound = await getDoc(docRef);
+    const user = User.fromFirebase(docFound);
+    return user;
   }
 
   // Profiles
@@ -72,35 +93,12 @@ class UserService {
     await setDoc(docRef, profile.profileToJson());
   }
 
-  // Fetch Profile
-  async fetchProfile() {
-    const name = auth.currentUser.displayName;
-    const docId = auth.currentUser.uid;
-    const collectionRef = collection(
-      db,
-      this.collection,
-      docId,
-      name + "'s Profiles"
-    );
-    const querySnapshot = await getDocs(query(collectionRef));
-
-    const profiles = [];
-
-    querySnapshot.forEach((doc) => {
-      profiles.push(Profile.fromFirebase(doc));
-    });
-
-    return profiles;
-  }
-
   // Addresses
 
   // Add address information
   async addAddress(address) {
     const docId = auth.currentUser.uid;
-    const docRef = doc(
-      collection(db, this.collection, docId, "Addresses")
-    );
+    const docRef = doc(collection(db, this.collection, docId, "Addresses"));
     //const docu = await getDoc(docRef);
     //const data = docu.data();
     address.id = docRef.id;
@@ -110,12 +108,7 @@ class UserService {
   // Fetch address information
   async fetchAddress() {
     const docId = auth.currentUser.uid;
-    const collectionRef = collection(
-      db,
-      this.collection,
-      docId,
-      "Addresses"
-    );
+    const collectionRef = collection(db, this.collection, docId, "Addresses");
     const querySnapshot = await getDocs(query(collectionRef));
 
     const addresses = [];
@@ -130,26 +123,14 @@ class UserService {
   // Delete address
   async deleteAddress(addressId) {
     const docId = auth.currentUser.uid;
-    const docRef = doc(
-      db,
-      this.collection,
-      docId,
-      "Addresses",
-      addressId
-    );
+    const docRef = doc(db, this.collection, docId, "Addresses", addressId);
     await deleteDoc(docRef);
   }
 
   // Update address
   async updateAddress(address) {
     const docId = auth.currentUser.uid;
-    const docRef = doc(
-      db,
-      this.collection,
-      docId,
-      "Addresses",
-      address.id
-    );
+    const docRef = doc(db, this.collection, docId, "Addresses", address.id);
     await setDoc(docRef, address.addressToJson());
   }
 
@@ -213,34 +194,40 @@ class UserService {
     await setDoc(docRef, payment.paymentToJson());
   }
 
-  // Sellers
+  // Suppliers
 
-  async addSeller(seller) {
+  async addSupplier(supplier) {
+
+    // Add supplier to subcollection in user document
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "Seller Accounts")
+      collection(db, this.collection, docId, "Supplier Accounts")
     );
-    seller.id = docRef.id;
-    //const docu = await getDoc(docRef);
-    //const data = docu.data();
-    await setDoc(docRef, seller.sellerToJson());
+    await setDoc(docRef, supplier.supplierToJson());
+    
+    // Add supplier to Supplier collection
+    const collectionRef = collection(db, this.supplierCollection);
+    const docReference = await addDoc(collectionRef, supplier.publicSupplierToJson());
+    supplier.id = docReference.id;
   }
-
-
 
   // Primlancers
   async addPrimlancer(primlancer) {
+
+    // Add primlancer to subcollection in unique user document
     const docId = auth.currentUser.uid;
     const docRef = doc(
       collection(db, this.collection, docId, "Primlancer Accounts")
     );
     primlancer.id = docRef.id;
-    //const docu = await getDoc(docRef);
-    //const data = docu.data();
     await setDoc(docRef, primlancer.primlancerToJson());
+
+    // Add primlancer to Primlancer collection
+    const collectionRef = collection(db, this.primlancerCollection);
+    await addDoc(collectionRef, primlancer.publicPrimlancerToJson());
   }
 
-  // Fetch Primlancers 
+  // Fetch Primlancers
   async fetchPrimlancer() {
     const docId = auth.currentUser.uid;
     const collectionRef = collection(
@@ -260,15 +247,14 @@ class UserService {
     return primlancers;
   }
 
-
   // Prodcuts
 
   // Create Products
   async addProduct(product) {
     const docId = auth.currentUser.uid;
-    const docRef = doc( collection(db, this.collection, docId, "Products"))
-    product.id = docRef.id
-    await setDoc(docRef, product.productToJson())
+    const docRef = doc(collection(db, this.collection, docId, "Products"));
+    product.id = docRef.id;
+    await setDoc(docRef, product.productToJson());
   }
 
   async addProductsPublic(product) {
@@ -278,10 +264,7 @@ class UserService {
 
   // Fetch Products
   async fetchProducts() {
-    const collectionRef = collection(
-      db,
-      this.productColleciton
-    );
+    const collectionRef = collection(db, this.productColleciton);
     const querySnapshot = await getDocs(query(collectionRef));
 
     const products = [];
@@ -294,8 +277,25 @@ class UserService {
   }
 
   // Delete Products
-  async deleteProducts() {
-    
+  async deleteProducts() {}
+  //Create Booking
+  async addBooking(booking) {
+    const docRef = doc(collection(db, this.bookingCollection)); 
+    await setDoc(docRef, booking.BookingToJson());
+  }
+  //fetch booking information
+  async fetchBookings() {
+    const collectionRef = collection(db, this.bookingCollection,);
+    const querySnapshot = await getDocs(query(collectionRef));
+    const Bookings = [];
+    querySnapshot.forEach((doc) => {
+      Bookings.push(Booking.fromFirebase(doc));
+    });
+    return Bookings;
+  }
+  async deleteBooking(bookingId) {
+    const docRef = doc(db, this.bookingCollection, bookingId); 
+    await deleteDoc(docRef);
   }
 
   // Add Orders
@@ -305,7 +305,7 @@ class UserService {
     const docRef = await addDoc(collectionRef, order.pendingOrderToJson(order));
 
     order.id = docRef.id;
-    console.log(order.id)
+    console.log(order.id);
   }
 
   //Bookings

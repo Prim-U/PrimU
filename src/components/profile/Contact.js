@@ -36,7 +36,7 @@ export default function Contact() {
       alert("Contact Details Updated. Returning to Previous Page. . .");
       window.location.reload();
     } catch (error) {
-      alert(error.message);
+      alert('Login Required. Please Logout and Login Again.');
     }
     setButtonDisabled(false);
     setLoading(false);
@@ -49,11 +49,11 @@ export default function Contact() {
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         / CONTACT INFORMATION
