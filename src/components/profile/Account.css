@@ -103,3 +103,23 @@
   width: 250px;
   position: relative;
 }
+
+#home-path:hover {
+  color: #d390e0!important;
+  transition: 0.3s!important;
+}
+
+#account-path:hover {
+  color: #d390e0!important;
+  transition: 0.3s!important;
+}
+
+#payment-methods-path:hover {
+  color: #d390e0!important;
+  transition: 0.3s!important;
+}
+#account-addresses-path:hover {
+  color: #d390e0!important;
+  transition: 0.3s!important;
+}
+

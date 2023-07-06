@@ -2,8 +2,24 @@ import React from "react";
 import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
 import "./SellerPage.css";
+import { useEffect } from "react";
+import UserService from "../../services/user-service";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom/dist";
 
 export default function SellerPage() {
+  const navigate = useNavigate(); 
+
+  async function handleOnClick() {
+    try {
+      const user = await UserService.fetchUser();
+      if (user.isSupplier !== "yes") {
+        navigate('/account/seller/supplier-registration');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <div /*id="account-bg"*/>
       <Navbar></Navbar>
@@ -26,12 +42,18 @@ export default function SellerPage() {
                 <h2 className="fw-bolder">SUPPLIER</h2>
               </div>
               <Link to="/account/seller/supplier-registration">
-                <div className="btn btn-dark seller-card-btn mb-5">SIGN UP HERE</div>
+                <div className="btn btn-dark seller-card-btn mb-5">
+                  SIGN UP HERE
+                </div>
               </Link>
-              <Link to="/products/post-prodcuts">
-                <div className="btn btn-dark seller-card-btn mt-5">POST PRODUCTS</div>
+              <Link to="/products/post-products">
+                <div
+                  className="btn btn-dark seller-card-btn mt-5"
+                  // onClick={() => handleOnClick()}
+                >
+                  POST PRODUCTS
+                </div>
               </Link>
-              
             </div>
           </div>
 
@@ -48,8 +70,10 @@ export default function SellerPage() {
               <Link to="/account/seller/primlancer-registration">
                 <div className="btn btn-dark seller-card-btn">SIGN UP HERE</div>
               </Link>
-              <Link to="/products/add-services">
-                <div className="btn btn-dark seller-card-btn mt-5">START SELLING</div>
+              <Link to="/treatment-services">
+                <div className="btn btn-dark seller-card-btn mt-5">
+                  POST SERVICES
+                </div>
               </Link>
             </div>
           </div>

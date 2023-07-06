@@ -33,19 +33,19 @@ export default function AddPayment() {
   return (
     <div>
       <Navbar></Navbar>
-      <h1 className="mt-3 text-center" id="account-management">
+      <h1 className="mt-3 text-center" id="account-management" >
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         /{" "}
-        <Link to="/account/payment" className="account-path">
+        <Link to="/account/payment" className="account-path" id="payment-methods-path">
           PAYMENT METHODS
         </Link>{" "}
         / ADD PAYMENT

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Spinner from "../../common/Spinner";
 import Navbar from "../../common/Navbar";
-import { Seller } from "../../models/Seller";
+import { Supplier } from "../../models/Supplier";
 import UserService from "../../services/user-service";
 import FileService from "../../services/file-service";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,8 @@ export default function SupplierRegistration() {
         }
       );
 
-      const seller = new Seller(
+      const newSupplier = new Supplier(
+        'supplier',
         email,
         firstName,
         lastName,
@@ -61,8 +62,9 @@ export default function SupplierRegistration() {
         certificateUrl,
         null
       );
-      await UserService.addSeller(seller);
-      navigate("/");
+      await UserService.addSupplier(newSupplier);
+      await UserService.nowSupplier();
+      navigate("/account/seller");
       alert("Your application has been submitted, thank you!");
     } catch (error) {
       alert(error.message);
@@ -262,6 +264,7 @@ export default function SupplierRegistration() {
                 placeholder=""
                 onChange={onInspectionSelected}
                 multiple
+                required
               />
             </div>
 
@@ -271,9 +274,9 @@ export default function SupplierRegistration() {
                 type="file"
                 className="form-control"
                 placeholder=""
-                required
                 onChange={onCertificateSelected}
                 multiple
+                required
               />
             </div>
 
