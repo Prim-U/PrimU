@@ -40,8 +40,11 @@ import PostProduct from "./components/products/PostProducts";
 import ProductsPage from "./components/products/ProductsPage";
 import DisplayProduct from "./components/products/DisplayProduct";
 import Checkout from "./components/products/Checkout";
-import OrderPlaced from "./components/products/OrderPlaced";
-import TreatmentServices from "./components/profile/TreatmentServices";
+
+import OrderPlaced from "./components/products/OrderPlaced";import TreatmentServices from "./components/profile/TreatmentServices";
+import BookingRegistration from "./components/auth/BookingRegistration";
+
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -111,6 +114,14 @@ function App() {
             element={
               <RequireAuth user={user}>
                 <PrimlancerRegistration user={user} />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="/booking/become-seller"
+            element={
+              <RequireAuth user={user}>
+                <SellerPage user={user} />
               </RequireAuth>
             }
           ></Route>
@@ -283,6 +294,15 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+          <Route
+            path="/account/treatment-services/booking"
+            element={
+              <RequireAuth user={user}>
+              <BookingRegistration/>
+              </RequireAuth>
+            }
+          ></Route>
+
         </Routes>
       ) : (
         <div className="mt-5 text-center">
