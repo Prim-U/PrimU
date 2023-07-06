@@ -1,6 +1,5 @@
 
 import React from "react";
-import React, { useEffect } from "react";
 
 import Navbar from "../common/Navbar";
 import ServiceCards from "./homepageCards/ServiceCards";
