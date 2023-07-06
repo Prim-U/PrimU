@@ -49,7 +49,11 @@
     text-transform: uppercase;
     font-weight: bolder;
 }
+.iframe {
+    border-radius:10px;
+    margin-left:20%
 
+}
 .prov-serv-btn-outline-primary{
     color: rgb(104, 61, 131);
     border-color:white;
