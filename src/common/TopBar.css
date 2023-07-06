@@ -36,3 +36,8 @@
   top: 25%;
   right: 38%;
 }
+
+.email-link:hover {
+  color: #d390e0!important;
+  transition: 0.3s!important;
+}

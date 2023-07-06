@@ -22,6 +22,7 @@ export default function UpdatePayment({updatePayment}) {
   async function initialLoad() {
     try {
       if (updatePayment) {
+        console.log(updatePayment)
         setCard(updatePayment.card);
         setExp(updatePayment.date);
         setCVV(updatePayment.cvv);
@@ -65,15 +66,15 @@ export default function UpdatePayment({updatePayment}) {
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         /{" "}
-        <Link to="/account/payment" className="account-path">
+        <Link to="/account/payment" className="account-path" id="payment-methods-path">
           PAYMENT METHODS
         </Link>{" "}
         / UPDATE PAYMENT

@@ -21,6 +21,7 @@ import { User } from "../models/Users";
 import { Profile } from "../models/Profile";
 
 import { Product } from "../models/Product";
+
 import { Primlancer } from "../models/Primlancer";
 
 class UserService {
@@ -28,6 +29,8 @@ class UserService {
     this.collection = "users";
     this.productColleciton = "products";
     this.orderCollection = "orders";
+    this.supplierCollection = "suppliers";
+    this.primlancerCollection = "primlancers";
   }
 
   // Users, registration, login, contact info
@@ -39,19 +42,32 @@ class UserService {
     const docRef = doc(db, this.collection, user.uid);
     await updateDoc(docRef, {
       email: user.email,
-      name: user.displayName,
+      name: user.displayName
+    });
+  }
+
+  async nowSupplier() {
+    const docId = auth.currentUser.uid
+    const docRef = doc(db, this.collection, docId);
+    await updateDoc(docRef, {
+      isSupplier: 'yes'
+    });
+  }
+
+  async nowPrimlancer() {
+    const docId = auth.currentUser.uid;
+    const docRef = doc(db, this.collection, docId);
+    await updateDoc(docRef, {
+      isPrimlancer: 'yes'
     });
   }
 
   async fetchUser() {
-    const collectionRef = collection(db, this.collection);
-    const querySnapshot = getDoc(query(collectionRef));
-    const users = [];
-    querySnapshot.forEach((doc) => {
-      users.push(User.fromFirebase(doc));
-    });
-
-    return users;
+    const docId = auth.currentUser.uid;
+    const docRef = doc(db, this.collection, docId);
+    const docFound = await getDoc(docRef);
+    const user = User.fromFirebase(docFound);
+    return user;
   }
 
   // Profiles
@@ -69,27 +85,6 @@ class UserService {
     );
     profile.id = docRef.id;
     await setDoc(docRef, profile.profileToJson());
-  }
-
-  // Fetch Profile
-  async fetchProfile() {
-    const name = auth.currentUser.displayName;
-    const docId = auth.currentUser.uid;
-    const collectionRef = collection(
-      db,
-      this.collection,
-      docId,
-      name + "'s Profiles"
-    );
-    const querySnapshot = await getDocs(query(collectionRef));
-
-    const profiles = [];
-
-    querySnapshot.forEach((doc) => {
-      profiles.push(Profile.fromFirebase(doc));
-    });
-
-    return profiles;
   }
 
   // Addresses
@@ -212,31 +207,39 @@ class UserService {
     await setDoc(docRef, payment.paymentToJson());
   }
 
-  // Sellers
+  // Suppliers
 
-  async addSeller(seller) {
+  async addSupplier(supplier) {
+
+    // Add supplier to subcollection in user document
     const docId = auth.currentUser.uid;
     const docRef = doc(
-      collection(db, this.collection, docId, "Seller Accounts")
+      collection(db, this.collection, docId, "Supplier Accounts")
     );
-    seller.id = docRef.id;
-    //const docu = await getDoc(docRef);
-    //const data = docu.data();
-    await setDoc(docRef, seller.sellerToJson());
+    await setDoc(docRef, supplier.supplierToJson());
+    
+    // Add supplier to Supplier collection
+    const collectionRef = collection(db, this.supplierCollection);
+    const docReference = await addDoc(collectionRef, supplier.publicSupplierToJson());
+    supplier.id = docReference.id;
   }
 
 
 
   // Primlancers
   async addPrimlancer(primlancer) {
+
+    // Add primlancer to subcollection in unique user document
     const docId = auth.currentUser.uid;
     const docRef = doc(
       collection(db, this.collection, docId, "Primlancer Accounts")
     );
     primlancer.id = docRef.id;
-    //const docu = await getDoc(docRef);
-    //const data = docu.data();
     await setDoc(docRef, primlancer.primlancerToJson());
+
+    // Add primlancer to Primlancer collection
+    const collectionRef = collection(db, this.primlancerCollection);
+    await addDoc(collectionRef, primlancer.publicPrimlancerToJson());
   }
 
   // Fetch Primlancers 

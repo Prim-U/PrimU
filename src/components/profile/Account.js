@@ -11,17 +11,19 @@ import NavbarAuth from "../../common/Navbar";
 import AccountSideBar from "./AccountSideBar";
 import UserService from "../../services/user-service";
 import { auth } from "../../firebase/firebase";
+import { User } from "../../models/Users";
 
 export default function Account() {
   const [primlancers, setPrimlancers] = useState([]);
 
   useEffect(() => {
-    fetchPrimlancer();
+    fetchUser();
   }, []);
 
-  async function fetchPrimlancer() {
+  async function fetchUser() {
     try {
-      const primlancer = await UserService.fetchPrimlancer();
+      const user = await UserService.fetchUser();
+      console.log(user.isSupplier);
       console.log(auth.currentUser)
       // console.log(primlancer);
     } catch (err) {
@@ -35,7 +37,7 @@ export default function Account() {
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         / MY ACCOUNT

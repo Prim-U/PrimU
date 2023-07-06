@@ -9,7 +9,7 @@ import PaymentOrder from "./PaymentOrder";
 import UserService from "../../services/user-service";
 import { auth } from "../../firebase/firebase";
 
-export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
+export default function OrderPlaced({ order, sendOrder, setSendOrder, setOrder }) {
   const [shippingAddress, setShippingAddress] = useState([]);
   const [billingDetails, setBillingDetails] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -66,6 +66,7 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
     } catch (error) {
       alert(error.message);
     }
+    setOrder([]);
     setButtonDisabled(false);
     setLoading(false);
   }
@@ -87,11 +88,7 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder }) {
             {" "}
             CHECKOUT
           </Link>{" "}
-          <i className="bi bi-arrow-right"></i>
-          <Link className="checkout-path ms-2" id="order-complete-path">
-            {" "}
-            ORDER COMPLETE
-          </Link>
+          
         </h4>
       </div>
 

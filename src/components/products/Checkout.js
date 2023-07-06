@@ -20,6 +20,17 @@ export default function Checkout({ order, setOrder }) {
     }
   }
 
+  function onItemIncrement(itemId) {
+    const itemToIncrement = order.find((item) => item.id === itemId);
+    itemToIncrement.qty++;
+  }
+
+  function onItemDecrement(itemId) {
+    const itemToDecrement = order.find((item) => item.id === itemId);
+    itemToDecrement.qty--;
+    setOrder(order);
+  }
+
   function onProductRemove(item) {
     setOrder(order.filter((x) => x.id !== item.id));
   }
@@ -37,6 +48,10 @@ export default function Checkout({ order, setOrder }) {
         <div className="row">
           <div className="text-center mt-5">
             <h4 className="fw-bold">
+              <Link className="checkout-path" id="product-path" to="/products">
+                PRODUCTS
+              </Link>{" "}
+              <i className="bi bi-arrow-right"></i>{" "}
               <Link
                 className="checkout-path"
                 id="shopping-cart-path"
@@ -53,11 +68,6 @@ export default function Checkout({ order, setOrder }) {
                 {" "}
                 CHECKOUT
               </Link>{" "}
-              <i className="bi bi-arrow-right"></i>
-              <Link className="checkout-path ms-2" id="order-complete-path">
-                {" "}
-                ORDER COMPLETE
-              </Link>
             </h4>
           </div>
           <div className="col-7 cart-table ">
@@ -103,23 +113,7 @@ export default function Checkout({ order, setOrder }) {
                           <div className="mt-4">R{item.price}</div>
                         </td>
                         <td>
-                          <div className="input-group quantity-holder mt-3 me-4">
-                            <button
-                              type="button"
-                              className="edit-quantity-btn btn btn-primary"
-                            >
-                              -
-                            </button>
-                            <div className="form-control text-center">
-                              {item.qty}
-                            </div>
-                            <button
-                              type="button"
-                              className="edit-quantity-btn btn btn-primary"
-                            >
-                              +
-                            </button>
-                          </div>
+                          <div className="mt-4">x{item.qty}</div>
                         </td>
                         <td>
                           <div className="mt-4">R{item.subtotal}</div>

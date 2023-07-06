@@ -49,11 +49,11 @@ export default function Contact() {
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         / CONTACT INFORMATION

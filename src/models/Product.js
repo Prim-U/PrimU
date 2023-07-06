@@ -1,9 +1,10 @@
 export class Product {
-    constructor(productName, price, category, status, description, productImageUrl, productLabelUrl, uid, id) {
+    constructor(productName, price, category, status, summary, description, productImageUrl, productLabelUrl, uid, id) {
       this.productName = productName;
       this.price = price;
       this.category = category;
       this.status = status;
+      this.summary = summary;
       this.description = description;
       this.productImageUrl = productImageUrl;
       this.productLabelUrl = productLabelUrl;
@@ -17,6 +18,7 @@ export class Product {
         price: this.price,
         category: this.category,
         status: this.status,
+        summary: this.summary,
         description: this.description,
         productImageUrl: this.productImageUrl,
         productLabelUrl: this.productLabelUrl,
@@ -29,6 +31,7 @@ export class Product {
         price: this.price,
         category: this.category,
         status: this.status,
+        summary: this.summary,
         description: this.description,
         productImageUrl: this.productImageUrl,
         productLabelUrl: this.productLabelUrl,
@@ -44,6 +47,7 @@ export class Product {
         data.price, 
         data.category,
         data.status,
+        data.summary,
         data.description,
         data.productImageUrl,
         data.productLabelUrl,

@@ -95,12 +95,12 @@
   width: 100%;
 }
 
-#order-complete-path:hover {
+#product-path:hover {
   color: gray !important;
   transition: 0.2s !important;
 }
 
-#order-complete-path {
+#product-path {
   position: relative;
   display: inline-block;
   text-transform: uppercase;
@@ -108,7 +108,7 @@
   color: black !important;
 }
 
-#order-complete-path:after {
+#product-path:after {
   content: "";
   position: absolute;
   left: 0;
@@ -119,11 +119,11 @@
   transition: width 0.3s ease-in-out;
 }
 
-#order-complete-path:hover:after {
+#product-path:hover:after {
   width: 100%;
 }
 
-#order-complete-path:hover {
+#product-path:hover {
   color: gray !important;
   transition: 0.2s !important;
 }

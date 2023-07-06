@@ -1,5 +1,8 @@
-export class Seller {
+import { auth } from "../firebase/firebase";
+
+export class Supplier {
   constructor(
+    role,
     email,
     firstname,
     lastname,
@@ -15,6 +18,7 @@ export class Seller {
     certificate,
     id
   ) {
+    this.role = role;
     this.email = email;
     this.firstname = firstname;
     this.lastname = lastname;
@@ -31,8 +35,9 @@ export class Seller {
     this.id = id;
   }
 
-  sellerToJson() {
+  supplierToJson() {
     return {
+      role: this.role,
       email: this.email,
       firstname: this.firstname,
       lastname: this.lastname,
@@ -45,14 +50,35 @@ export class Seller {
       zipcode: this.zipcode,
       phone: this.phone,
       inspection: this.inspection,
-      certificate: this.certificate
+      certificate: this.certificate,
       // id: this.id
+    };
+  }
+
+  publicSupplierToJson() {
+    return {
+      role: this.role,
+      email: this.email,
+      firstname: this.firstname,
+      lastname: this.lastname,
+      storename: this.storename,
+      street: this.street,
+      apt: this.apt,
+      country: this.country,
+      city: this.city,
+      state: this.state,
+      zipcode: this.zipcode,
+      phone: this.phone,
+      inspection: this.inspection,
+      certificate: this.certificate,
+      uid: auth.currentUser.uid
     };
   }
 
   static fromFirebase(doc) {
     const data = doc.data();
-    return new Seller(
+    return new Supplier(
+      data.role,
       data.email,
       data.firstname,
       data.lastname,

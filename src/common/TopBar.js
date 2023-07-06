@@ -9,12 +9,12 @@ import { Link, useNavigate } from "react-router-dom";
 import "./TopBar.css";
 
 export default function TopBar(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const user = auth.currentUser;
   async function onLogoutClicked() {
     await signOut(auth);
     window.location.reload();
-    navigate('/');
+    navigate("/");
   }
   return (
     <div>
@@ -52,21 +52,19 @@ export default function TopBar(props) {
 
       <div className="middle-bar">
         <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-          <form className="d-flex ms-2">
-            <button className="search-button me-1" type="submit">
-              <i className="bi bi-search"></i>
-            </button>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search products"
-              aria-label="Search"
-            />
-          </form>
+          <div className="me-auto mt-2">+27-0600703045</div>
+          <div className="mt-2">
+            Got questions? Email us at{" "}
+            <a
+              className="text-decoration-none text-black-50 email-link"
+              href="mailto:info@prim-u.com"
+            >
+              info@prim-u.com
+            </a>
+          </div>
           <Link to="/cart">
-            <button className="bag-button me-3 mt-2" id="bag-btn">
-              <i className="bi bi-bag fs-4">
-              </i>
+            <button className="bag-button me-3" id="bag-btn">
+              <i className="bi bi-bag fs-4"></i>
               <span className="bag-counter">{props.order.length}</span>
             </button>
           </Link>

@@ -23,21 +23,19 @@ export default function UpdateAddress(addressList) {
 
   useEffect(() => {
     initialLoad();
-  });
+  }, []);
 
   async function initialLoad() {
     try {
-      if (addressList) {
-        setStreet(addressList.street);
-        setApt(addressList.apt);
-        setCountry(addressList.country);
-        setCity(addressList.city);
-        setState(addressList.state);
-        setZipcode(addressList.zipcode);
-        setPhone(addressList.phone);
-        setShipName(addressList.shipname);
-        console.log(addressList);
-      }
+      console.log(addressList);
+      setStreet(addressList.addressList.street);
+      setApt(addressList.addressList.apt);
+      setCountry(addressList.addressList.country);
+      setCity(addressList.addressList.city);
+      setState(addressList.addressList.state);
+      setZipcode(addressList.addressList.zipcode);
+      setPhone(addressList.addressList.phone);
+      setShipName(addressList.addressList.shipname);
     } catch (error) {
       alert(error.message);
     }
@@ -49,30 +47,28 @@ export default function UpdateAddress(addressList) {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      if (addressList) {
-        setStreet(e.target.value);
-        setApt(e.target.value);
-        setCountry(e.target.value);
-        setCity(e.target.value);
-        setState(e.target.value);
-        setZipcode(e.target.value);
-        setPhone(e.target.value);
-        setShipName(e.target.value);
-        const updatedAddress = new Address(
-          shipName,
-          country,
-          street,
-          apt,
-          city,
-          state,
-          zipcode,
-          phone,
-          addressList.id
-        );
-        await UserService.updateAddress(updatedAddress);
-        alert("Address Updated! Returning to Previous Page. . .");
-        navigate("/account/addresses");
-      }
+      setStreet(e.target.value);
+      setApt(e.target.value);
+      setCountry(e.target.value);
+      setCity(e.target.value);
+      setState(e.target.value);
+      setZipcode(e.target.value);
+      setPhone(e.target.value);
+      setShipName(e.target.value);
+      const updatedAddress = new Address(
+        shipName,
+        country,
+        street,
+        apt,
+        city,
+        state,
+        zipcode,
+        phone,
+        addressList.addressList.id
+      );
+      await UserService.updateAddress(updatedAddress);
+      alert("Address Updated! Returning to Previous Page. . .");
+      navigate("/account/addresses");
     } catch (error) {
       alert(error.message);
     }
@@ -86,15 +82,19 @@ export default function UpdateAddress(addressList) {
         My Account
       </h1>
       <p className="text-center mt-2" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         /
-        <Link to="/account/addresses" className="account-path">
+        <Link
+          to="/account/addresses"
+          className="account-path"
+          id="account-addresses-path"
+        >
           ADDRESS MANAGEMENT
         </Link>{" "}
         / UPDATE ADDRESS

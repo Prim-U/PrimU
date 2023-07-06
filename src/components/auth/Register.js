@@ -40,7 +40,7 @@ export default function Register() {
         );
         await sendEmailVerification(userCred.user)
 
-        const newUser = new User(name, email, userCred.user.uid);
+        const newUser = new User(name, email, userCred.user.uid, 'no', 'no');
         await UserService.addUser(newUser);
         updateProfile(userCred.user, {
           displayName: name,

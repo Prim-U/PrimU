@@ -8,9 +8,8 @@ import UserService from "../../services/user-service";
 import { Link } from "react-router-dom";
 import AccountSideBar from "./AccountSideBar";
 
-export default function Addresses({setAddressList}) {
+export default function Addresses({setAddressList, addressList}) {
   const [addresses, setAddresses] = useState([]);
-  const [addressToRemove, setAddressToRemove] = useState(null);
 
   useEffect(() => {
     fetchAddress();
@@ -44,11 +43,11 @@ export default function Addresses({setAddressList}) {
         My Account
       </h1>
       <p className="text-center mt-2 account-path" id="account-management">
-        <Link to="/" className="account-path">
+        <Link to="/" className="account-path" id="home-path">
           HOME
         </Link>{" "}
         /{" "}
-        <Link to="/account" className="account-path">
+        <Link to="/account" className="account-path" id="account-path">
           MY ACCOUNT
         </Link>{" "}
         / ADDRESS MANAGEMENT
@@ -88,7 +87,6 @@ export default function Addresses({setAddressList}) {
                       <button
                         className="btn btn-danger remove-address-btn"
                         onClick={() => {
-                          setAddressToRemove(address);
                           removeAddress(address.id);
                         }}
                       >
@@ -100,6 +98,7 @@ export default function Addresses({setAddressList}) {
                           className="btn btn-secondary edit-address-btn ms-3"
                           onClick={() => {
                             setAddressList(address);
+                            console.log(addressList)
                           }}
                         >
                           <i className="bi bi-pencil"></i>

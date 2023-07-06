@@ -67,13 +67,17 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
             {" "}
             <Link className="account-path" to="/">
               Home
-            </Link>{" "} / <Link className="account-path me-1" to="/products">Shop</Link>
-             / {displayProduct.category} / {displayProduct.productName}{" "}
+            </Link>{" "}
+            /{" "}
+            <Link className="account-path me-1" to="/products">
+              Shop
+            </Link>
+            / {displayProduct.category} / {displayProduct.productName}{" "}
           </div>{" "}
           <h2 className="mb-3">{displayProduct.productName}</h2>
           <h4 className="mb-3 display-price">Price: R{displayProduct.price}</h4>
           <div className="mb-3 display-description">
-            {displayProduct.description}
+            {displayProduct.summary}
           </div>
           <div>Is Organic? {displayProduct.status}</div>
           <div className="mb-5">Type? {displayProduct.category}</div>
@@ -99,6 +103,9 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
           >
             Add to Cart
           </button>
+          <Link to="/cart">
+            <button className="btn btn-primary ms-3 submit-cart-btn">Go To Cart</button>
+          </Link>
         </div>
         <div className="col"></div>
       </div>
@@ -125,7 +132,6 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
               className="mx-auto mb-4"
             ></img>
           </div>
-            
         </div>
       </div>
     </div>
