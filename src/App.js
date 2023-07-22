@@ -1,5 +1,3 @@
-// Push to main
-
 // Dependencies
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,54 +5,75 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "font-awesome/css/font-awesome.min.css";
 
 // Compenents
+
+// HomePage
 import HomePage from "./components/HomePage";
-import Register from "./components/auth/Register";
+
+// Common
+import Spinner from "./common/Spinner";
 import TopBar from "./common/TopBar";
+import Navbar from "./common/Navbar";
+
+// Auth
 import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import ResetPassword from "./components/auth/ResetPassword";
+import RequireAuth from "./common/RequireAuth";
+
+// Account Management
 import Account from "./components/profile/Account";
 import Contact from "./components/profile/Contact";
+import Addresses from "./components/profile/Addresses";
+import AddAddress from "./components/profile/AddAddress";
+import UpdateAddress from "./components/profile/UpdateAddress";
+import PaymentPage from "./components/profile/PaymentPage";
+import AddPayment from "./components/profile/AddPayment";
+import UpdatePayment from "./components/profile/UpdatePayment";
+
+// Suppliers/Primlancers
+import SellerPage from "./components/profile/SellerPage";
+import SupplierRegistration from "./components/auth/SupplierRegistration";
+import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
+
+// Product Management/Order
+import PostProduct from "./components/products/PostProducts";
+import ProductsPage from "./components/products/ProductsPage";
+import DisplayProduct from "./components/products/DisplayProduct";
+import Checkout from "./components/products/Checkout";
+import PlaceOrderPage from "./components/products/PlaceOrderPage";
+
+// Bookings
+import TreatmentServices from "./components/profile/TreatmentServices";
+import BookingRegistration from "./components/auth/BookingRegistration";
 import BookingPage from "./components/booking/BookingPage";
+import GroupBookingForm from "./components/homepageCards/GroupBookingForm";
 
 // Import functions/methods
 import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ResetPassword from "./components/auth/ResetPassword";
-import Addresses from "./components/profile/Addresses";
-import AddAddress from "./components/profile/AddAddress";
-import PaymentPage from "./components/profile/PaymentPage";
-import AddPayment from "./components/profile/AddPayment";
-import GroupBookingForm from "./components/homepageCards/GroupBookingForm";
-
-import RequireAuth from "./common/RequireAuth";
-import Spinner from "./common/Spinner";
-import ProfilePage from "./components/profile/ProfilePage";
-import AddProfile from "./components/profile/AddProfile";
-import UpdateAddress from "./components/profile/UpdateAddress";
-import UpdatePayment from "./components/profile/UpdatePayment";
-import SupplierRegistration from "./components/auth/SupplierRegistration";
-import SellerPage from "./components/profile/SellerPage";
-import PrimlancerRegistration from "./components/auth/PrimlancerRegistration";
-import PostProduct from "./components/products/PostProducts";
-import ProductsPage from "./components/products/ProductsPage";
-import DisplayProduct from "./components/products/DisplayProduct";
-import Checkout from "./components/products/Checkout";
-
-import OrderPlaced from "./components/products/OrderPlaced";import TreatmentServices from "./components/profile/TreatmentServices";
-import BookingRegistration from "./components/auth/BookingRegistration";
-
-
 
 function App() {
   const [user, setUser] = useState(null);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
-  const [addressList, setAddressList] = useState([]);
+
+  // An array for the address that the user wants to update
+  const [updateAddress, setUpdateAddress] = useState([]);
+
+  // An array for the payment that the user wants to update
   const [updatePayment, setUpdatePayment] = useState([]);
+
+  // An array for the product being displayed on DisplayProduct
   const [displayProduct, setDisplayProduct] = useState([]);
+
+  // An array for the items that the user wants to purchase
   const [order, setOrder] = useState([]);
+
+  // An array for the order being placed by the user
   const [sendOrder, setSendOrder] = useState([]);
 
+  // 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -65,6 +84,7 @@ function App() {
   return (
     <BrowserRouter>
       <TopBar user={user} order={order}></TopBar>
+      <Navbar></Navbar>
 
       {isUserUpdated ? (
         <Routes>
@@ -139,8 +159,8 @@ function App() {
             element={
               <RequireAuth user={user}>
                 <Addresses
-                  setAddressList={setAddressList}
-                  addressList={addressList}
+                  setUpdateAddress={setUpdateAddress}
+                  updateAddress={updateAddress}
                 />
               </RequireAuth>
             }
@@ -159,7 +179,7 @@ function App() {
             path="account/address/update-address"
             element={
               <RequireAuth user={user}>
-                <UpdateAddress addressList={addressList} />
+                <UpdateAddress updateAddress={updateAddress} />
               </RequireAuth>
             }
           ></Route>
@@ -190,24 +210,6 @@ function App() {
             element={
               <RequireAuth user={user}>
                 <UpdatePayment updatePayment={updatePayment} />
-              </RequireAuth>
-            }
-          ></Route>
-
-          <Route
-            path="/account/profile"
-            element={
-              <RequireAuth user={user}>
-                <ProfilePage />
-              </RequireAuth>
-            }
-          ></Route>
-
-          <Route
-            path="/account/profile/add-profile"
-            element={
-              <RequireAuth user={user}>
-                <AddProfile />
               </RequireAuth>
             }
           ></Route>
@@ -260,7 +262,7 @@ function App() {
             path="/place-order"
             element={
               <RequireAuth user={user}>
-                <OrderPlaced
+                <PlaceOrderPage
                   order={order}
                   sendOrder={sendOrder}
                   setSendOrder={setSendOrder}
@@ -298,11 +300,10 @@ function App() {
             path="/account/treatment-services/booking"
             element={
               <RequireAuth user={user}>
-              <BookingRegistration/>
+                <BookingRegistration />
               </RequireAuth>
             }
           ></Route>
-
         </Routes>
       ) : (
         <div className="mt-5 text-center">

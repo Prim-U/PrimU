@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../../common/Navbar";
 import Spinner from "../../common/Spinner";
 import { Booking } from "../../models/Booking";
 import UserService from "../../services/user-service";
@@ -51,7 +50,6 @@ export default function BookingRegistration() {
 
   return (
     <div className="real-bg-dark">
-      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

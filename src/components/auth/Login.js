@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Navbar from '../../common/Navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase/firebase';
@@ -19,12 +18,11 @@ export default function Login() {
     setButtonDisabled(true);
     setLoading(true);
     try {
-      const userCred = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-      console.log(userCred);
       navigate('/');
       alert('Login Successful!');
     } catch (err) {
@@ -36,7 +34,6 @@ export default function Login() {
 
   return (
     <div className="real-bg-dark">
-      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

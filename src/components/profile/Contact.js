@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import "./Contact.css";
 
 // Components
-import Navbar from "../../common/Navbar";
+
 import UserService from "../../services/user-service";
 
 // Functions/methods
 import { auth } from "../../firebase/firebase";
 import { updateEmail, updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
-import Spinner from "../../common/Spinner";
-import AccountSideBar from "./AccountSideBar";
+import Spinner from "../../common/Spinner";import AccountSideBar from "./AccountSideBar";
 
 export default function Contact() {
   const [changeEmail, setChangeEmail] = useState("");
@@ -44,7 +43,7 @@ export default function Contact() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>

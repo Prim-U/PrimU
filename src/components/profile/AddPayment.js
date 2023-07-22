@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import Navbar from "../../common/Navbar";
+
 import { Payment } from "../../models/Payment";
 import UserService from "../../services/user-service";
 import { Link, useNavigate } from "react-router-dom";
-import Spinner from "../../common/Spinner";
-import AccountSideBar from "./AccountSideBar";
+import Spinner from "../../common/Spinner";import AccountSideBar from "./AccountSideBar";
 
 export default function AddPayment() {
   const [card, setCard] = useState("");
@@ -32,7 +31,7 @@ export default function AddPayment() {
   }
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management" >
         My Account
       </h1>

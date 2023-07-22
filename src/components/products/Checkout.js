@@ -1,35 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+
 import "./Checkout.css";
 import { Link } from "react-router-dom";
 
 export default function Checkout({ order, setOrder }) {
-  useEffect(() => {
-    initialLoad();
-  });
-
-  /*  function quantityList() {
-    for ()
-  }
- */
-  async function initialLoad() {
-    try {
-      // console.log(order);
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  function onItemIncrement(itemId) {
-    const itemToIncrement = order.find((item) => item.id === itemId);
-    itemToIncrement.qty++;
-  }
-
-  function onItemDecrement(itemId) {
-    const itemToDecrement = order.find((item) => item.id === itemId);
-    itemToDecrement.qty--;
-    setOrder(order);
-  }
 
   function onProductRemove(item) {
     setOrder(order.filter((x) => x.id !== item.id));
@@ -43,7 +17,7 @@ export default function Checkout({ order, setOrder }) {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <div className="container-fluid">
         <div className="row">
           <div className="text-center mt-5">

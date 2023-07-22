@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../../common/Navbar";
 import { Link } from "react-router-dom";
 import "./TreatmentServices.css";
 import HairTrimming from "./HairTrimming.jpeg";
@@ -7,7 +6,6 @@ import HairTrimming from "./HairTrimming.jpeg";
 export default function TreatmentServices() {
   return (
     <div>
-      <Navbar />
 
       <div className="image-container mb-3">
         <img
@@ -30,13 +28,13 @@ export default function TreatmentServices() {
             and confidence with Prim-U.
           </p>
           <div className="button-container">
-          <Link to="/account/treatment-services/booking"> 
-            <button
-              className="btn btn-primary centered-text paragraph-box"
-              type="button"
-            >
-              Book Now
-            </button>
+            <Link to="/account/treatment-services/booking">
+              <button
+                className="btn btn-primary centered-text paragraph-box"
+                type="button"
+              >
+                Book Now
+              </button>
             </Link>
           </div>
         </div>
@@ -151,12 +149,12 @@ export default function TreatmentServices() {
             small businesses gain even bigger opportunities. It’s a win-win.
           </p>
           <Link to="/account/seller/primlancer-registration">
-          <button
-            className="btn btn-lg btn-light custom-button-container mb-3"
-            type="button"
-          >
-            Signup Now
-          </button>
+            <button
+              className="btn btn-lg btn-light custom-button-container mb-3"
+              type="button"
+            >
+              Signup Now
+            </button>
           </Link>
           <img
             src="https://prim-u.app/wp-content/uploads/2023/01/brushes.png"
@@ -183,12 +181,12 @@ export default function TreatmentServices() {
               because they do not take any commission on the services you use.
             </p>
             <Link to="/account/treatment-services/booking">
-            <button
-              className="btn btn-lg btn-light custom-button-container mb-3"
-              type="button"
-            >
-              Book Now
-            </button>
+              <button
+                className="btn btn-lg btn-light custom-button-container mb-3"
+                type="button"
+              >
+                Book Now
+              </button>
             </Link>
           </div>
         </div>

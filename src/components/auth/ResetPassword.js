@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../../common/Navbar";
-import Spinner from "../../common/Spinner";
-import { Link, useNavigate } from "react-router-dom";
+import Spinner from "../../common/Spinner";import { Link, useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "@firebase/auth";
 import { auth } from "../../firebase/firebase";
 
@@ -25,7 +23,6 @@ export default function ResetPassword() {
   }
   return (
     <div className="real-bg-dark">
-      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

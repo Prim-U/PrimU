@@ -28,6 +28,14 @@
   position: relative;
 }
 
+.primlancer-card {
+  margin-left: 10%;
+}
+
+.supplier-card {
+  margin-left: 30%;
+}
+
 .primlancer-image {
   width: 400px;
   height: 300px;

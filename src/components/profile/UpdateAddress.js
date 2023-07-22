@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
-import Spinner from "../../common/Spinner";
-import { Address } from "../../models/AddressModel";
+
+import Spinner from "../../common/Spinner";import { Address } from "../../models/AddressModel";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 import AccountSideBar from "./AccountSideBar";
 import { Link } from "react-router-dom";
 
-export default function UpdateAddress(addressList) {
+export default function UpdateAddress(updateAddress) {
   const [loading, setLoading] = useState(false);
   const [street, setStreet] = useState("");
   const [apt, setApt] = useState("");
@@ -27,15 +26,14 @@ export default function UpdateAddress(addressList) {
 
   async function initialLoad() {
     try {
-      console.log(addressList);
-      setStreet(addressList.addressList.street);
-      setApt(addressList.addressList.apt);
-      setCountry(addressList.addressList.country);
-      setCity(addressList.addressList.city);
-      setState(addressList.addressList.state);
-      setZipcode(addressList.addressList.zipcode);
-      setPhone(addressList.addressList.phone);
-      setShipName(addressList.addressList.shipname);
+      setStreet(updateAddress.updateAddress.street);
+      setApt(updateAddress.updateAddress.apt);
+      setCountry(updateAddress.updateAddress.country);
+      setCity(updateAddress.updateAddress.city);
+      setState(updateAddress.updateAddress.state);
+      setZipcode(updateAddress.updateAddress.zipcode);
+      setPhone(updateAddress.updateAddress.phone);
+      setShipName(updateAddress.updateAddress.shipname);
     } catch (error) {
       alert(error.message);
     }
@@ -64,7 +62,7 @@ export default function UpdateAddress(addressList) {
         state,
         zipcode,
         phone,
-        addressList.addressList.id
+        updateAddress.updateAddress.id
       );
       await UserService.updateAddress(updatedAddress);
       alert("Address Updated! Returning to Previous Page. . .");
@@ -77,7 +75,7 @@ export default function UpdateAddress(addressList) {
   }
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>
