@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+
 
 // Stylesheet
 import "./Addresses.css";
@@ -8,7 +8,7 @@ import UserService from "../../services/user-service";
 import { Link } from "react-router-dom";
 import AccountSideBar from "./AccountSideBar";
 
-export default function Addresses({setAddressList, addressList}) {
+export default function Addresses({setUpdateAddress, updateAddress}) {
   const [addresses, setAddresses] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,6 @@ export default function Addresses({setAddressList, addressList}) {
     try {
       const addresses = await UserService.fetchAddress();
       setAddresses(addresses);
-      console.log(addresses);
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +37,7 @@ export default function Addresses({setAddressList, addressList}) {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>
@@ -97,8 +96,7 @@ export default function Addresses({setAddressList, addressList}) {
                         <button
                           className="btn btn-secondary edit-address-btn ms-3"
                           onClick={() => {
-                            setAddressList(address);
-                            console.log(addressList)
+                            setUpdateAddress(address);
                           }}
                         >
                           <i className="bi bi-pencil"></i>

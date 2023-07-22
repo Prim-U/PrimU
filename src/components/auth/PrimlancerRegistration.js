@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../../common/Navbar";
-import Spinner from "../../common/Spinner";
-import { Primlancer } from "../../models/Primlancer";
+import Spinner from "../../common/Spinner";import { Primlancer } from "../../models/Primlancer";
 import UserService from "../../services/user-service";
 import FileService from "../../services/file-service";
 import { useNavigate } from "react-router-dom";
@@ -82,7 +80,6 @@ export default function PrimlancerRegistration() {
 
   return (
     <div className="real-bg-dark">
-      <Navbar></Navbar>
       <div className="container mt-5 p-3">
         <img
           className="mx-auto d-block mb-5"

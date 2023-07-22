@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+
 import { Link, useNavigate } from "react-router-dom";
-import Spinner from "../../common/Spinner";
-import { PendingOrder } from "../../models/PendingOrder.";
-import "./OrderPlaced.css";
+import Spinner from "../../common/Spinner";import { PendingOrder } from "../../models/PendingOrder.";
+import "./PlaceOrderPage.css";
 import AddressOrder from "./AddressOrder";
 import PaymentOrder from "./PaymentOrder";
 import UserService from "../../services/user-service";
 import { auth } from "../../firebase/firebase";
 
-export default function OrderPlaced({ order, sendOrder, setSendOrder, setOrder }) {
+export default function PlaceOrderPage({ order, sendOrder, setSendOrder, setOrder }) {
   const [shippingAddress, setShippingAddress] = useState([]);
   const [billingDetails, setBillingDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const user = auth.currentUser;
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   initialLoad();
-  // });
-
-  // async function initialLoad() {
-  //   try {
-  //     console.log(order);
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // }
 
   const list = [];
   order.forEach((item) => list.push(item.subtotal));
@@ -73,7 +60,7 @@ export default function OrderPlaced({ order, sendOrder, setSendOrder, setOrder }
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <div className="text-center mt-5">
         <h4 className="fw-bold">
           <Link className="checkout-path" id="shopping-cart-path" to="/cart">

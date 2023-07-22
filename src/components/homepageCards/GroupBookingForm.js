@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "../../common/Navbar";
-import Spinner from "../../common/Spinner";
-import { useNavigate } from "react-router";
+
+import Spinner from "../../common/Spinner";import { useNavigate } from "react-router";
 import { GroupBooking } from "../../models/GroupBooking";
 import UserService from "../../services/user-service";
 import { auth } from "../../firebase/firebase";
@@ -64,7 +63,7 @@ export default function GroupBookingForm() {
         informGroup,
         uid
       );
-      await UserService.addBooking(booking);
+      await UserService.addGroupBooking(booking);
       alert("Booking Submitted, you'll hear back from us soon! Returning to Previous Page . . .");
       navigate("/");
     } catch (error) {
@@ -85,7 +84,7 @@ export default function GroupBookingForm() {
   return (
     <div>
       <div className="real-bg-dark">
-        <Navbar></Navbar>
+        <></>
         <div className="container mt-5 p-3">
           <img
             className="mx-auto d-block mb-5"

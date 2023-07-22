@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 // Stylesheet
 import "./Account.css";
@@ -7,17 +7,15 @@ import "./Account.css";
 import { Link } from "react-router-dom";
 
 // Components
-import NavbarAuth from "../../common/Navbar";
 import AccountSideBar from "./AccountSideBar";
 import UserService from "../../services/user-service";
 import { auth } from "../../firebase/firebase";
-import { User } from "../../models/Users";
 
 export default function Account() {
-  const [primlancers, setPrimlancers] = useState([]);
 
   useEffect(() => {
     fetchUser();
+    console.log(auth.currentUser);
   }, []);
 
   async function fetchUser() {
@@ -25,14 +23,13 @@ export default function Account() {
       const user = await UserService.fetchUser();
       console.log(user.isSupplier);
       console.log(auth.currentUser)
-      // console.log(primlancer);
+      console.log(user);
     } catch (err) {
       alert(err.message);
     }
   }
   return (
     <div id="account-bg">
-      <NavbarAuth></NavbarAuth>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>

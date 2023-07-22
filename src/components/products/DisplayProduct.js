@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+import React, { useState } from "react";
 import { ProductData } from "../../models/ProductData";
 import { Link } from "react-router-dom";
 import "./DisplayProduct.css";
@@ -31,27 +30,11 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
       displayProduct.id
     );
     setOrder((orderList) => [...orderList, item]);
-    /* console.log(order)
-    console.log(item); */
     alert("Items Added to Cart.");
-  }
-  useEffect(() => {
-    initialLoad();
-  });
-
-  async function initialLoad() {
-    try {
-      if (displayProduct) {
-        console.log(displayProduct);
-      }
-    } catch (error) {
-      alert(error.message);
-    }
   }
 
   return (
     <div>
-      <Navbar></Navbar>
       <div className="row mb-2">
         <div className="col mt-5">
           <img
@@ -104,7 +87,9 @@ export default function DisplayProduct({ setOrder, displayProduct, order }) {
             Add to Cart
           </button>
           <Link to="/cart">
-            <button className="btn btn-primary ms-3 submit-cart-btn">Go To Cart</button>
+            <button className="btn btn-primary ms-3 submit-cart-btn">
+              Go To Cart
+            </button>
           </Link>
         </div>
         <div className="col"></div>

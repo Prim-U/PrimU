@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+
 
 import UserService from "../../services/user-service";
 import "./Addresses.css";
@@ -18,7 +18,6 @@ export default function PaymentPage({updatePayment, setUpdatePayment}) {
     try {
       const payments = await UserService.fetchPayment();
       setPayment(payments);
-      console.log(payments);
     } catch (error) {
       alert(error.message);
     }
@@ -37,7 +36,7 @@ export default function PaymentPage({updatePayment, setUpdatePayment}) {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>
@@ -92,7 +91,6 @@ export default function PaymentPage({updatePayment, setUpdatePayment}) {
                           className="edit-payment-btn btn btn-secondary"
                           onClick={() => {
                             setUpdatePayment(payment);
-                            console.log(updatePayment);
                           }}
                         >
                           <i className="bi bi-pencil"></i>

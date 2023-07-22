@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Navbar from "../../common/Navbar";
-import Spinner from "../../common/Spinner";
-import { Address } from "../../models/AddressModel";
+
+import Spinner from "../../common/Spinner";import { Address } from "../../models/AddressModel";
 import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 import AccountSideBar from "./AccountSideBar";
@@ -49,7 +48,7 @@ export default function AddAddress() {
   }
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>

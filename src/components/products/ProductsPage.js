@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
+
 import { Link } from "react-router-dom";
 import UserService from "../../services/user-service";
 import "./ProductsPage.css";
@@ -15,15 +15,13 @@ export default function ProductsPage({ setDisplayProduct, sendOrder }) {
     try {
       const product = await UserService.fetchProducts();
       setProducts(product);
-      /* console.log(product);
-      console.log(sendOrder); */
     } catch (err) {
       console.log(err);
     }
   }
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="text-center mt-5 fw-bolder">Shop</h1>
       <div className="container">
         <div className="text-start">
@@ -45,7 +43,6 @@ export default function ProductsPage({ setDisplayProduct, sendOrder }) {
                   to="/products/display-product"
                   onClick={() => {
                     setDisplayProduct(product);
-                    console.log(product);
                   }}
                 >
                   <button className="btn btn-primary add-cart-btn">
@@ -57,7 +54,6 @@ export default function ProductsPage({ setDisplayProduct, sendOrder }) {
                   to="/products/display-product"
                   onClick={() => {
                     setDisplayProduct(product);
-                    console.log(product);
                   }}
                 >
                   <img
@@ -73,7 +69,6 @@ export default function ProductsPage({ setDisplayProduct, sendOrder }) {
                     className="fw-medium product-name text-start me-2"
                     onClick={() => {
                       setDisplayProduct(product);
-                      console.log(product);
                     }}
                   >
                     {product.productName}

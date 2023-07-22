@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  position: relative;
 }
 
 .page-image {
   width: 100%;
   height: 630px;
   object-fit: cover;
-  background: rgba(0, 0, 0, 2.0);
+  background: rgba(0, 0, 0, 2);
+  filter: brightness(50%)
 }
 
 .text-container {
@@ -17,7 +19,7 @@
   right: 0;
   text-align: center;
   padding: 20px;
-  top: 70%;
+  top: 60%;
   transform: translateY(-50%);
   left: 10%;
 }
@@ -37,7 +39,6 @@
 .button-container {
   text-align: left;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
-  
 }
 
 .button-container button {
@@ -50,7 +51,7 @@
 }
 
 .button-container button:hover {
-  background-color:rgba(128, 0, 128, 0.697);
+  background-color: rgba(128, 0, 128, 0.697);
 }
 
 .sub-headers {
@@ -69,11 +70,11 @@
 .custom-button {
   background-color: white;
   border-color: #460046;
-  border-width:2px;
+  border-width: 2px;
   color: #460046;
   position: relative;
-  top: -150px;
-  left: -150px;
+  top: -175px;
+  left: 40px;
   padding: 10px 35px; /* Increase the padding to make the button bigger */
   font-size: 22px; /* Increase the font size for the button text */
   font-family: "Poppins", Arial, Helvetica, sans-serif;
@@ -92,20 +93,20 @@
   margin-right: 50px;
 }
 
-.icon-paragraph-box{
+.icon-paragraph-box {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: lighter;
   text-align: center;
 }
-.icon-sub-header{
+.icon-sub-header {
   color: #000000;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 26px;
   text-align: center;
 }
-.small-image{
+.small-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -117,11 +118,11 @@
   margin-top: 65px; /* Adjust the value as needed */
   margin-left: 120px;
 }
-.custom-button-container{
-  background-color:#64306E;
-  border-color: #64306E;
-  border-width:2px;
-  color:  #fff;
+.custom-button-container {
+  background-color: #64306e;
+  border-color: #64306e;
+  border-width: 2px;
+  color: #fff;
   position: relative;
   padding: 10px 35px; /* Increase the padding to make the button bigger */
   font-size: 22px; /* Increase the font size for the button text */
@@ -129,8 +130,8 @@
   border-bottom-right-radius: 5px;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
-.custom-button-container:hover{
-  background-color: #64306E;
+.custom-button-container:hover {
+  background-color: #64306e;
   color: white;
 }
 .subheader-container {
@@ -139,20 +140,20 @@
 
 .brush-image {
   position: absolute;
-  top: 50%;
-  left: calc(70% + 30px); 
+  top: 45%;
+  left: calc(70% + 80px);
   transform: translate(-50%, -50%);
-  max-width: 720px; 
+  max-width: 720px;
   max-height: 300px;
 }
 .content-container {
   position: absolute;
   top: 50%;
-  left: 65%;
+  left: 75%;
   transform: translate(-50%, -50%);
 }
 
-.haircut-image{
+.haircut-image {
   width: 580px;
   height: 400px;
 }
@@ -173,4 +174,3 @@
   font-size: 30px;
   text-align: center;
 }
-

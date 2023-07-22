@@ -2,11 +2,10 @@ import React, { useState } from "react";
 
 // Functions/methods
 import { Link, useNavigate } from "react-router-dom";
-import Spinner from "../../common/Spinner";
-import FileService from "../../services/file-service";
+import Spinner from "../../common/Spinner";import FileService from "../../services/file-service";
 import UserService from "../../services/user-service";
 import { Product } from "../../models/Product";
-import Navbar from "../../common/Navbar";
+
 import { auth } from "../../firebase/firebase";
 import { useEffect } from "react";
 
@@ -100,7 +99,7 @@ export default function PostProduct() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <div className="p-5">
         <h1 className="mb-4 text-start" id="account-management">
           Post Products

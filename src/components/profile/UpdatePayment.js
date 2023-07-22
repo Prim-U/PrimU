@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../common/Navbar";
-import Spinner from "../../common/Spinner";
-import UserService from "../../services/user-service";
+
+import Spinner from "../../common/Spinner";import UserService from "../../services/user-service";
 import { useNavigate } from "react-router";
 import { Payment } from "../../models/Payment";
 import AccountSideBar from "./AccountSideBar";
@@ -22,7 +21,6 @@ export default function UpdatePayment({updatePayment}) {
   async function initialLoad() {
     try {
       if (updatePayment) {
-        console.log(updatePayment)
         setCard(updatePayment.card);
         setExp(updatePayment.date);
         setCVV(updatePayment.cvv);
@@ -61,7 +59,7 @@ export default function UpdatePayment({updatePayment}) {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <></>
       <h1 className="mt-3 text-center" id="account-management">
         My Account
       </h1>

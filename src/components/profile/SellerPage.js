@@ -22,7 +22,6 @@ export default function SellerPage() {
   }
   return (
     <div /*id="account-bg"*/>
-      <Navbar></Navbar>
 
       <div className="container p-3">
         <h1
@@ -32,7 +31,7 @@ export default function SellerPage() {
         </h1>
         <div className="row">
           <div className="col">
-            <div className="seller-card mb-3">
+            <div className="seller-card supplier-card">
               <img
                 className="supplier-image"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOq8uLc7g5srAEEZn0QLsJ4M1ZUVLYJY_FXQ&usqp=CAU"
@@ -58,7 +57,7 @@ export default function SellerPage() {
           </div>
 
           <div className="col">
-            <div className="seller-card">
+            <div className="seller-card primlancer-card">
               <img
                 className="primlancer-image"
                 src="https://www.bagley.msstate.edu/wp-content/uploads/Remote-Work.jpg"
